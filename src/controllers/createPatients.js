@@ -9,7 +9,7 @@ async function patientRegister(request, response) {
       birthplace: request.body.birthplace,
       emergencyContact: request.body.emergencyContact,
       alergiesList: request.body.alergiesList,
-      specific_cares: request.body.specific_cares,
+      specificCares: request.body.specificCares,
       healthInsurance: request.body.healthInsurance,
       insuranceNumber: request.body.insuranceNumber,
       insuranceVality: request.body.insuranceVality,
@@ -38,19 +38,19 @@ async function patientRegister(request, response) {
 // depois lógica para pegar o user_id e em complemento a ele, cadastrar um paciente
 
 const patientDataDb = {
-    birth: request.body.birth,
-    maritalStatus: request.body.maritalStatus,
-    rg: request.body.rg,
-    birthplace: request.body.birthplace,
-    emergencyContact: request.body.emergencyContact,
-    alergiesList: request.body.alergiesList,
-    specific_cares: request.body.specific_cares,
-    healthInsurance: request.body.healthInsurance,
-    insuranceNumber: request.body.insuranceNumber,
-    insuranceVality: request.body.insuranceVality,
-    adress: request.body.adress,
-    
-  };
+    birth: data.birth,
+    /*userid: user.id*/
+    maritalStatus: data.maritalStatus,
+    rg: data.rg,
+    birthplace: data.birthplace,
+    emergencyContact: data.emergencyContact,
+    alergiesList: data.alergiesList,
+    specificCares: data.specific_cares,
+    healthInsurance: data.healthInsurance,
+    insuranceNumber: data.insuranceNumber,
+    insuranceVality: data.insuranceVality,
+    adress: data.adress,
+      };
 
     const patient = await Patient.create(patientDataDb);
 

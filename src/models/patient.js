@@ -43,7 +43,7 @@ const Patient = connection.define('patient', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    specific_cares: {
+    specificCares: {
         type: Sequelize.STRING,
         allowNull: false,
     },
