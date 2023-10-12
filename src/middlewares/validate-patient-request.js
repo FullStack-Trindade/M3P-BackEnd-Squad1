@@ -1,5 +1,16 @@
 const yup = require("yup");
 
+const enderecoSchema = yup.object().shape({
+    Cep: yup.string().required("CEP é obrigatório."),
+    Cidade: yup.string().required("Cidade é obrigatória."),
+    Estado: yup.string().required("Estado é obrigatório."),
+    Logradouro: yup.string().required("Logradouro é obrigatório."),
+    Numero: yup.string().required("Número é obrigatório."),
+    Complemento: yup.string().required("Complemento é obrigatório."),
+    Bairro: yup.string().required("Bairro é obrigatório."),
+    'Ponto de Referencia': yup.string(),
+  });
+
 const validation = yup.object().shape({
   idUser: yup
     .number("ID do usuário é obrigatório.")
@@ -14,22 +25,25 @@ const validation = yup.object().shape({
     .string()
     .oneOf(
       [
-        "Solteiro(a)",
-        "Casado(a)/ União Estável",
-        "Viúvo(a)",
-        "Separado(a)",
-        "Divorciado(a)",
+        "SOLTEIRO(A)",
+        "CASADO(A)",
+        "DIVORCIADO(A)",
+        "VIUVO(A)",
+        "SEPARADO(A)",
+        "UNIAO_ESTAVEL",
       ],
-      "Selecione uma opção válida"
-    ),
+      "Selecione um Estado Civil válido"
+    )
+    .required("Este campo é obrigatório"),
   rg: yup
     .string()
+    /*lógica para validar órgão expedidor*/
     .max(20, "Este campo deve ter no máximo 20 caracteres")
     .required("Este campo é obrigatório"),
   birthplace: yup
     .string()
-    .min(5, "Este campo deve ter pelo menos 5 caracteres")
-    .max(50, "Este campo deve ter no máximo 50 caracteres")
+    .min(8, "Este campo deve ter pelo menos 5 caracteres")
+    .max(64, "Este campo deve ter no máximo 50 caracteres")
     .required("Este campo é obrigatório"),
   emergencyContact: yup
     .string()
@@ -39,15 +53,14 @@ const validation = yup.object().shape({
     )
     .required("Este campo é obrigatório"),
   allergiesList: yup
-    .string()
-    .max(200, "Este campo deve ter no máximo 200 caracteres"),
-  specificCares: yup
-    .string()
-    .max(200, "Este campo deve ter no máximo 200 caracteres"),
+    .string(),
+     specificCares: yup
+    .string(),
   healthInsurance: yup.string(),
   insuranceNumber: yup.string(),
-  insuranceVality: yup.string(),
-  adress: yup.string().min(50, "Este campo deve ter no mínimo 50 caracteres"),
+  insuranceVality: yup
+  .date("Data de nascimento deve estar em formato de data 1990-02-25"),
+  adress: enderecoSchema,
 });
 
 function validatePatientRequest(request, response, next) {

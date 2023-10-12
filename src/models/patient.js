@@ -59,11 +59,11 @@ const Patient = connection.define('patient', {
         type: Sequelize.STRING,
         allowNull: false,
     },
-    adress: {
-        type: Sequelize.STRING,
+   adress: {
+        type: Sequelize.JSONB,
         allowNull: false,
     },
- 
+  
 });
 
 /*
