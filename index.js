@@ -14,3 +14,4 @@ app.listen(3000)
 connection.authenticate();
 connection.sync({ alter: true });
 
+// teste criação da branch develop e 1st commit
