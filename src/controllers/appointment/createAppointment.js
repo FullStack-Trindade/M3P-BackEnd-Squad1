@@ -7,6 +7,14 @@ async function createAppointment (req, res) {
         const patient = await Patient.findByPk(req.body.id_paciente);
         const doctor = await Doctor.findByPk(req.body.id_medico);
 
+        if (!patient) {
+            return res.status(404).json({ message: 'Patient not registered' });
+        }
+
+        if (!doctor) {
+            return res.status(404).json({ message: 'Doctor not registered' });
+        }
+
         const appointment = {
             id_paciente: patient.id,
             id_medico: doctor.id,
