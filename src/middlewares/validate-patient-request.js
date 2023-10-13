@@ -37,7 +37,7 @@ const validation = yup.object().shape({
     .required("Este campo é obrigatório"),
   rg: yup
     .string()
-    /*lógica para validar órgão expedidor*/
+    /*lógica para validar órgão expedidor?*/
     .max(20, "Este campo deve ter no máximo 20 caracteres")
     .required("Este campo é obrigatório"),
   birthplace: yup
