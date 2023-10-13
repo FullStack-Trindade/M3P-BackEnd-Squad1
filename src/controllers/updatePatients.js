@@ -16,7 +16,10 @@ async function updatePatient(request, response) {
       request.body.birthplace || patientInDatabase.birthplace;
     patientInDatabase.emergencyContact =
       request.body.emergencyContact || patientInDatabase.emergencyContact;
-    patientInDatabase.alergiesList =
+      
+      patientInDatabase.rg = patientInDatabase.rg;
+    
+      patientInDatabase.alergiesList =
       request.body.alergiesList || patientInDatabase.alergiesList;
     patientInDatabase.specificCares =
       request.body.specificCares || patientInDatabase.specificCares;

@@ -21,7 +21,6 @@ async function patientRegister(request, response) {
     };
 
     /*
-
     valida se o paciente já existe no banco de dados
 
     const userExists = await User.findOne({
@@ -31,7 +30,6 @@ async function patientRegister(request, response) {
     if (userExists) {
       return response.status(409).json({ message: "Paciente já cadastrado" });
     }
-
 */
 
     //primeiro lógica para criar um usuario do tipo paciente
