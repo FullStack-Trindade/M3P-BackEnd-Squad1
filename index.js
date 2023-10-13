@@ -4,6 +4,7 @@ const cors = require("cors");
 const connection = require("./src/database");
 
 const createPatient = require("./src/controllers/createPatients");
+const updatePatient = require("./src/controllers/updatePatients");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 
 const app = express();
@@ -17,6 +18,7 @@ app.use(
 );
 
 app.post("/api/pacientes", validatePatientRequest, createPatient);
+app.put('/api/pacientes/:id', updatePatient);
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log("local server online");
