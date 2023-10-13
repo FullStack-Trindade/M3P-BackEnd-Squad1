@@ -18,5 +18,14 @@ app.use(appointmentRoutes);
 
 app.listen(process.env.SERVER_PORT, () => console.log(`Aplicação está online na porta ${PORT}`));
 
-connection.authenticate();
+const connect = async() => {
+  try {
+    await connection.authenticate()
+    console.log('Conexão com banco de dados bem sucedida');
+  } catch (error) {
+    console.log('Sem conexao com banco de dados', error);
+  }
+}
+
+connect()
 connection.sync({ alter: true });
