@@ -43,7 +43,13 @@ const validation = yup.object().shape({
 
 function validateCreateAppointment(req, res, next) {
     try {
-        validation.validateSync(req.body);
+        const { body } = req;
+
+        if(Object.keys(body).length === 0) {
+            return res.status(400).json({ message: 'Requisição não pode ser vazia' });
+        }
+
+        validation.validateSync(body);
         next();
     } catch (error) {
         res.status(400).json({ message: error.message });
