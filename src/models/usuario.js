@@ -15,8 +15,9 @@ const Usuario = connection.define('usuario', {
         allowNull: false
     },
     genero: {
-        type: Sequelize.STRING,
-        allowNull: false
+        type: Sequelize.ENUM,
+        allowNull: false,
+        values: ['masc', 'fem', 'nao_informado']
     },
     cpf: {
         type: Sequelize.STRING,
