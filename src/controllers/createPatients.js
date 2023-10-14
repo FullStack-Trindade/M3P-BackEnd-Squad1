@@ -44,7 +44,7 @@ async function patientRegister(request, response) {
       birthplace: data.birthplace,
       emergencyContact: data.emergencyContact,
       alergiesList: data.alergiesList,
-      specificCares: data.specific_cares,
+      specificCares: data.specificCares,
       healthInsurance: data.healthInsurance,
       insuranceNumber: data.insuranceNumber,
       insuranceVality: data.insuranceVality,
@@ -53,14 +53,10 @@ async function patientRegister(request, response) {
 
     const patient = await Patient.create(patientDataDb);
 
-    //inicio salvar endereço no BD
     const adressDataDb = {
       adress: data.adress,
     };
-
     const adress = await Adress.create(adressDataDb);
-
-    //fim salvar endereço no BD
 
     response.status(201).json(patient);
   } catch (error) {
