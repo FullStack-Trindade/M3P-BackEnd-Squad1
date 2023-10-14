@@ -1,23 +1,23 @@
 const yup = require("yup");
 
 const enderecoSchema = yup.object().shape({
-    Cep: yup.string().required("CEP é obrigatório."),
-    Cidade: yup.string().required("Cidade é obrigatória."),
-    Estado: yup.string().required("Estado é obrigatório."),
-    Logradouro: yup.string().required("Logradouro é obrigatório."),
-    Numero: yup.string().required("Número é obrigatório."),
-    Complemento: yup.string().required("Complemento é obrigatório."),
-    Bairro: yup.string().required("Bairro é obrigatório."),
-    'Ponto de Referencia': yup.string(),
+    cep: yup.string().required("CEP é obrigatório."),
+    city: yup.string().required("Cidade é obrigatória."),
+    state: yup.string().required("Estado é obrigatório."),
+    street: yup.string().required("Logradouro é obrigatório."),
+    number: yup.string().required("Número é obrigatório."),
+    complement: yup.string().required("Complemento é obrigatório."),
+    neighborhood: yup.string().required("Bairro é obrigatório."),
+    reference: yup.string(),
   });
 
 const validation = yup.object().shape({
-  idUser: yup
-    .number("ID do usuário é obrigatório.")
-    .typeError("ID do usuário deve ser um número.")
-    .required("ID do usuário é obrigatório.")
-    .positive("ID do usuário deve ser positivo.")
-    .integer("ID do usuário deve ser um número inteiro."),
+  // idUser: yup
+  //   .number("ID do usuário é obrigatório.")
+  //   .typeError("ID do usuário deve ser um número.")
+  //   .required("ID do usuário é obrigatório.")
+  //   .positive("ID do usuário deve ser positivo.")
+  //   .integer("ID do usuário deve ser um número inteiro."),
   birth: yup
     .date("Data de nascimento deve estar em formato de data 1990-02-25")
     .required("Data de nascimento é obrigatória"),
