@@ -1,5 +1,5 @@
-const Patient = require("../models/patient");
-const Adress = require("../models/adress");
+const Patient = require("../../models/patient");
+const Adress = require("../../models/adress");
 
 async function patientRegister(request, response) {
   try {
