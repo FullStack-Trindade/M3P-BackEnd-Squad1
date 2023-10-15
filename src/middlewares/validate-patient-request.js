@@ -38,20 +38,20 @@ const validation = yup.object().shape({
   rg: yup
     .string()
     /*lógica para validar órgão expedidor?*/
-    .max(20, "Este campo deve ter no máximo 20 caracteres")
-    .required("Este campo é obrigatório"),
+    .max(20, "O campo RG deve ter no máximo 20 caracteres")
+    .required("O campo RG é obrigatório"),
   birthplace: yup
     .string()
-    .min(8, "Este campo deve ter pelo menos 5 caracteres")
-    .max(64, "Este campo deve ter no máximo 50 caracteres")
-    .required("Este campo é obrigatório"),
+    .min(8, "O campo naturalidade deve ter pelo menos 5 caracteres")
+    .max(64, "O campo naturalidade deve ter no máximo 50 caracteres")
+    .required("O campo naturalidade é obrigatório"),
   emergencyContact: yup
     .string()
     .matches(
       /^\(\d{2}\) \d \d{4}-\d{5}$/,
-      "Digite um número de telefone no formato (99) 9 9999-99999"
+      "No campo Contato de Emergência digite um número de telefone no formato (99) 9 9999-99999"
     )
-    .required("Este campo é obrigatório"),
+    .required("O campo Contato de Emergência é obrigatório"),
   allergiesList: yup
     .string(),
      specificCares: yup
@@ -59,7 +59,7 @@ const validation = yup.object().shape({
   healthInsurance: yup.string(),
   insuranceNumber: yup.string(),
   insuranceVality: yup
-  .date("Data de nascimento deve estar em formato de data 1990-02-25"),
+  .date("A Validade do Convênio deve ser um data"),
   adress: enderecoSchema,
 });
 
