@@ -11,12 +11,18 @@ const postUser = async (request, response)=>{
                 cpf: request.body.cpf
             }
         })
-        console.log(getUsuario)
+        
         if(getUsuario?.cpf == request.body.cpf){
             return response.status(409).json({
                 msg: `User CPF: ${request.body.cpf} já cadastrado!`
             })
         }
+
+        if(getUsuario?.email == request.body.email){
+            return response.status(409).json({
+                msg: `Email: ${request.body.email} já cadastrado!`
+            })
+        }        
     
         const cadastro = {
             name: request.body.name,
