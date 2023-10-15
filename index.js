@@ -15,6 +15,6 @@ app.use(express.json())
 connection.authenticate();
 connection.sync({ alter: true });
 
-const postUsuario = require('./src/controllers/usuario/postUsuario')
+const postUser = require('./src/controllers/user/postUser')
 const validaUsuario = require('./src/middlewares/validaUsuario')
-app.post('/api/usuario', validaUsuario, postUsuario)
+app.post('/api/user', validaUsuario, postUser)

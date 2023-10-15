@@ -1,41 +1,42 @@
-const Usuario = require('../../models/usuario')
+const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 
 const postUser = async (request, response)=>{
+
+  
     try {
-        const senha = await bcrypt.hash(request.body.senha, 10)
-        const getUsuario = Usuario.findOne({
+        const password = await bcrypt.hash(request.body.password, 10)
+        const getUsuario = await User.findOne({
             where: {
                 cpf: request.body.cpf
             }
         })
-
-        if(getUsuario.cpf == request.body.cpf){
+        console.log(getUsuario)
+        if(getUsuario?.cpf == request.body.cpf){
             return response.status(409).json({
-                msg: `Usuario CPF: ${request.body.cpf} já cadastrado!`
+                msg: `User CPF: ${request.body.cpf} já cadastrado!`
             })
         }
-
+    
         const cadastro = {
-            nome: request.body.nome,
-            genero: request.body.genero,
+            name: request.body.name,
+            gender: request.body.gender,
             cpf: request.body.cpf,
             email: request.body.email,
-            senha: senha,
-            id_tipo: request.body.id_tipo,
+            password: password,
+            id_type: request.body.id_type,
         }
     
-        const novoCadastro = await Usuario.create(cadastro)
+        const novoCadastro = await User.create(cadastro)
         if(novoCadastro) {
             return response.status(201).json({
-                msg: `Cadastro do usuário ${cadastro.nome} realizado com sucesso`
+                msg: `Cadastro do usuário ${cadastro.name} realizado com sucesso`
             })
         }else{
             return response.status(400).json({
-                
+                msg: "Não foi possível realizar o cadastro"
             })
         }
-
       
     } catch (error) {
         return response.status(500).json({

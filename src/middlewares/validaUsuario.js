@@ -2,13 +2,13 @@ const yup = require('yup')
 
 const validation = yup.object().shape({
 
-    nome: yup
-    .string("O nome deve ser uma string")
+    name: yup
+    .string("O name deve ser uma string")
     .required("Nome é obrigatório.")
-    .min(8,"O nome deve conter ao menos 8 caracateres")
-    .max(64,"O nome deve conter no máximo 64 caracateres"),
+    .min(8,"O name deve conter ao menos 8 caracateres")
+    .max(64,"O name deve conter no máximo 64 caracateres"),
 
-    genero: yup
+    gender: yup
     .string("Genero deve ser uma string")
     .required("Genero é obrigatório"),
     
@@ -23,12 +23,12 @@ const validation = yup.object().shape({
     .email("Você deve inserir um email válido")
     .required("Email é obrigatório"), 
 
-    senha: yup
+    password: yup
     .string("Senha deve ser uma string.")
-    .min(6,"A senha deve ter no mínimo 6 caracteres.")
-    .required("senha é obrigatório."),
+    .min(6,"A password deve ter no mínimo 6 caracteres.")
+    .required("password é obrigatório."),
 
-    id_tipo: yup
+    id_type: yup
     .number()
     .integer("Campo Tipo deve ser um integer")
     .required("Campo Tipo é obrigatório")

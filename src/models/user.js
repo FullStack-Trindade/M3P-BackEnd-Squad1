@@ -1,20 +1,20 @@
 const {Sequelize} = require('sequelize');
 const connection = require('../database')
-const Tipo = require('./tipo')
+const Type = require('./type')
 
 
-const Usuario = connection.define('usuario', {
+const User = connection.define('user', {
     id: {
         autoIncrement: true,
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
     },
-    nome: {
+    name: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    genero: {
+    gender: {
         type: Sequelize.ENUM,
         allowNull: false,
         values: ['masc', 'fem', 'nao_informado']
@@ -27,11 +27,11 @@ const Usuario = connection.define('usuario', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    senha: {
+    password: {
         type: Sequelize.STRING,
         allowNull: false
     },
-    id_tipo: {
+    id_type: {
         type: Sequelize.INTEGER,
         allowNull: false
     },
@@ -42,5 +42,5 @@ const Usuario = connection.define('usuario', {
     },
 });
 
-Usuario.belongsTo(Tipo, { foreignKey: 'id_tipo' });
-module.exports = Usuario; 
+User.belongsTo(Type, { foreignKey: 'id_type' });
+module.exports = User; 
