@@ -1,18 +1,20 @@
 require('dotenv').config()
 const express = require('express')
-const cors = require('cors');
 const connection = require('./src/database')
+const cors = require('cors')
 
 const app = express()
-app.use(express.json())
+
 app.use(cors({
     origin: '*',
     credentials: true,
-    allowedHeaders: ['Content-Type', 'Authorization'] 
+    allowedHeaders: ['Content-Type', 'Authorization']
   }));
-app.listen(process.env.SERVER_PORT, () => {
-  console.log("local server online");
-})
-
+app.listen(3000)
+app.use(express.json())
 connection.authenticate();
 connection.sync({ alter: true });
+
+const postUser = require('./src/controllers/user/postUser')
+const validaUsuario = require('./src/middlewares/validaUsuario')
+app.post('/api/usuario', validaUsuario, postUser)
