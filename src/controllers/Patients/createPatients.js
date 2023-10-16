@@ -15,9 +15,7 @@ async function patientRegister(request, response) {
       insuranceNumber: request.body.insuranceNumber,
       insuranceVality: request.body.insuranceVality,
       adress: request.body.adress,
-      /*
-      faltam os dados do usuário
-      */
+      idUser:request.body.idUser
     };
 
     /*
@@ -38,7 +36,7 @@ async function patientRegister(request, response) {
 
     const patientDataDb = {
       birth: data.birth,
-      /*userid: user.id*/
+      idUser: data.idUser,
       maritalStatus: data.maritalStatus,
       rg: data.rg,
       birthplace: data.birthplace,
