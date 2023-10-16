@@ -16,7 +16,7 @@ app.use(cors({
 
 app.use(appointmentRoutes);
 
-app.listen(process.env.SERVER_PORT, () => console.log(`Aplicação está online na porta ${PORT}`));
+app.listen(process.env.SERVER_PORT, () => console.log(`Aplicação está online na porta ${process.env.SERVER_PORT}`));
 
 const connect = async() => {
   try {
