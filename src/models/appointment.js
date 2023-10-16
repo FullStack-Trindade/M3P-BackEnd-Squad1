@@ -1,6 +1,8 @@
 const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
 
+const User = require('./user');
+
 const Appointment = connection.define('consulta', {
     id: {
         type: Sequelize.INTEGER,
@@ -10,41 +12,41 @@ const Appointment = connection.define('consulta', {
         primaryKey: true,
         onUpdate: 'CASCADE'
     },
-    // id_paciente: {
-    //     type: Sequelize.INTEGER,
-    //     allowNull: false,
-    //     onUpdate: 'CASCADE'
-    // },
-    // id_medico: {
-    //     type: Sequelize.INTEGER,
-    //     allowNull: false,
-    //     onUpdate: 'CASCADE'
-    // },
-    motivo_consulta: {
+    id_patient: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onUpdate: 'CASCADE'
+    },
+    id_doctor: {
+        type: Sequelize.INTEGER,
+        allowNull: false,
+        onUpdate: 'CASCADE'
+    },
+    appointment_reason: {
         type: Sequelize.STRING(68),
         allowNull: false,
         notEmpty: true
     },
-    data_consulta: {
+    appointment_date: {
         type: Sequelize.DATEONLY,
         allowNull: false,
         notEmpty: true
     },
-    hora_consulta: {
+    appointment_hour: {
         type: Sequelize.TIME,
         allowNull: false,
         notEmpty: true
     },
-    descricao_problema: {
+    problem_description: {
         type: Sequelize.STRING(1024),
         allowNull: false,
         notEmpty: true
     },
-    medicacao_receitada: {
+    medication_prescribed: {
         type: Sequelize.STRING(1024),
         allowNull: true
     },
-    dosagem_precaucoes: {
+    dosage_precautions: {
         type: Sequelize.STRING(256),
         allowNull: false,
         defaultValue: 'Medicação não receitada.'
@@ -53,8 +55,11 @@ const Appointment = connection.define('consulta', {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         notEmpty: true,
-        defaultValue: false
+        defaultValue: true
     }
 });
+
+Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_patient'});
+Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_doctor'});
 
 module.exports = Appointment;
