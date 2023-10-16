@@ -27,7 +27,7 @@ const Login = async (request, response)=>{
                         expiresIn: '1h'
                     }
                 )
-                return response.status(200).json({name: getUser.name, email: getUser.email, token: token, id_type: getUser.id_type})
+                return response.status(200).json({id: getUser.id, name: getUser.name, email: getUser.email, token: token, id_type: getUser.id_type})
             }
     
             return response.status(400).json({ mensagem: "Usuário ou Senha inválido" })
