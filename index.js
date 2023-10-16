@@ -17,4 +17,4 @@ connection.sync({ alter: true });
 
 const postUser = require('./src/controllers/user/postUser')
 const validaUsuario = require('./src/middlewares/validaUsuario')
-app.post('/api/user', validaUsuario, postUser)
+app.post('/api/usuario', validaUsuario, postUser)
