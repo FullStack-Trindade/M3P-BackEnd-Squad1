@@ -1,3 +1,4 @@
+
 const connection = require("../database/index");
 const { Sequelize } = require("sequelize");
 /*
