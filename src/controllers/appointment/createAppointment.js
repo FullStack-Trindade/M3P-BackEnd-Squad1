@@ -6,11 +6,11 @@ async function createAppointment (req, res) {
         const patient = await User.findByPk(req.body.id_patient);
         const doctor = await User.findByPk(req.body.id_doctor);
 
-        if (!patient || patient.id_type !== 1) {
+        if (!patient || patient.id_type !== 3) {
             return res.status(404).json({ message: 'Paciente não consta nos registros' });
         }
 
-        if (!doctor || doctor.id_type !== 3) {
+        if (!doctor || doctor.id_type !== 1) {
             return res.status(404).json({ message: 'Médico não consta nos registros' });
         }
 
