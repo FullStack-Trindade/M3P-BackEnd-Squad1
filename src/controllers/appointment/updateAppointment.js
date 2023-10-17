@@ -1,3 +1,5 @@
+const dayjs = require("dayjs");
+
 const Appointment = require("../../models/appointment");
 
 async function updateAppointment (req, res) {
@@ -5,22 +7,23 @@ async function updateAppointment (req, res) {
         const appointment = await Appointment.findByPk(req.params.id);
 
         const { 
-            motivo_consulta,
-            data_consulta,
-            hora_consulta,
-            descricao_problema,
-            medicacao_receitada,
-            dosagem_precaucoes,
+            appointment_reason,
+            appointment_date,
+            appointment_hour,
+            problem_description,
+            medication_prescribed,
+            dosage_precautions,
             status
         } = req.body;
 
-        appointment.motivo_consulta = motivo_consulta || appointment.motivo_consulta;
-        appointment.data_consulta = data_consulta || appointment.data_consulta;
-        appointment.hora_consulta = hora_consulta || appointment.hora_consulta;
-        appointment.descricao_problema = descricao_problema || appointment.descricao_problema;
-        appointment.medicacao_receitada = medicacao_receitada || appointment.medicacao_receitada;
-        appointment.dosagem_precaucoes = dosagem_precaucoes || appointment.dosagem_precaucoes; 
+        appointment.appointment_reason = appointment_reason || appointment.appointment_reason;
+        appointment.appointment_date = appointment_date || appointment.appointment_date;
+        appointment.appointment_hour = appointment_hour || appointment.appointment_hour;
+        appointment.problem_description = problem_description || appointment.problem_description;
+        appointment.medication_prescribed = medication_prescribed || appointment.medication_prescribed;
+        appointment.dosage_precautions = dosage_precautions || appointment.dosage_precautions; 
         appointment.status = status || appointment.status;
+        appointment.updated_at = dayjs().subtract(3,'hour');
 
         await appointment.save();
         return res.status(200).json(appointment);
