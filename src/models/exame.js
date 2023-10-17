@@ -1,5 +1,7 @@
 const connection = require('../database/index');
-const { Sequelize, DATE } = require('sequelize')
+const { Sequelize, DATE } = require('sequelize');
+
+const Patient = require('./patient')
 
 const Exame = connection.define('exame', {
 
@@ -40,7 +42,7 @@ const Exame = connection.define('exame', {
 
     labExame: {
         type: Sequelize.STRING,
-        allowNull: true,
+        allowNull: false,
     },
 
     urlExame: {
@@ -48,7 +50,12 @@ const Exame = connection.define('exame', {
         allowNull: true,
     },
 
-    resultadoExame: {
+    tipoExame: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
+    resultadoExame:{
         type: Sequelize.STRING,
         allowNull: false,
     },
@@ -60,6 +67,6 @@ const Exame = connection.define('exame', {
 
 });
 
-    Exame.bleongsTo(Patient, {foreignKey:"idPatient"})
+    Exame.belongsTo(Patient, {foreignKey:"id_patient"});
 
 module.exports = Exame;

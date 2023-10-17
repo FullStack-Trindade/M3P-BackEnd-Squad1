@@ -1,5 +1,5 @@
 
-const Patient = require('../../models/exame');
+const Exame = require('../../models/exame');
 
 async function createExame (request, response) {
 
@@ -18,7 +18,7 @@ async function createExame (request, response) {
             statusExame: request.body.statusExame,        
         }
 
-        if (request.body.nomeExame === "") {
+/*         if (request.body.nomeExame === "") {
             return res.status(404).json({message: 'É necessário preencher o campo Name'})           
         }
 
@@ -44,7 +44,7 @@ async function createExame (request, response) {
 
         if (request.body.statusExame === "") {
             return res.status(404).json({message: 'É necessário preencher o campo Birth'})       
-        }
+        } */
                 
         const idPaciente = await Patiente.findOne({where: {idPaciente: request.body.idPaciente}})
 

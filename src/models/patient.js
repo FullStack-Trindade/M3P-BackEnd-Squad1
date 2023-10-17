@@ -1,23 +1,19 @@
 
 const connection = require("../database/index");
 const { Sequelize } = require("sequelize");
-/*
+
 const Usuario = require('./user')
-*/
+
 const Patient = connection.define("patient", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-
-  /*
     idUser: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-        */
-
   birth: {
     type: Sequelize.DATEONLY,
     allowNull: true,
@@ -70,8 +66,8 @@ const Patient = connection.define("patient", {
   },
 });
 
-/*
-Patient.belongsTo(Usario, {foreignKey: "id_user"});
-*/
+
+  Patient.belongsTo(Usuario, {foreignKey: "id_user"});
+
 
 module.exports = Patient;
