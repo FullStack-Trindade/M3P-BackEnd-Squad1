@@ -1,4 +1,4 @@
-const Patient = require("../models/patient");
+const Patient = require("../../models/patient");
 
 async function updatePatient(request, response) {
   try {
@@ -16,10 +16,9 @@ async function updatePatient(request, response) {
       request.body.birthplace || patientInDatabase.birthplace;
     patientInDatabase.emergencyContact =
       request.body.emergencyContact || patientInDatabase.emergencyContact;
-      
-      patientInDatabase.rg = patientInDatabase.rg;
-    
-      patientInDatabase.alergiesList =
+    patientInDatabase.rg = patientInDatabase.rg;
+    patientInDatabase.idUser = patientInDatabase.idUser;
+    patientInDatabase.alergiesList =
       request.body.alergiesList || patientInDatabase.alergiesList;
     patientInDatabase.specificCares =
       request.body.specificCares || patientInDatabase.specificCares;
@@ -34,8 +33,6 @@ async function updatePatient(request, response) {
     patientInDatabase.adress = request.body.adress || patientInDatabase.adress;
 
     await patientInDatabase.save();
-
-    // lógica para atualizar o usuário
 
     response.status(200).json({ message: patientInDatabase });
   } catch (error) {

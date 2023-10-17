@@ -1,15 +1,15 @@
 const yup = require("yup");
 
 const enderecoSchema = yup.object().shape({
-    Cep: yup.string().required("CEP é obrigatório."),
-    Cidade: yup.string().required("Cidade é obrigatória."),
-    Estado: yup.string().required("Estado é obrigatório."),
-    Logradouro: yup.string().required("Logradouro é obrigatório."),
-    Numero: yup.string().required("Número é obrigatório."),
-    Complemento: yup.string().required("Complemento é obrigatório."),
-    Bairro: yup.string().required("Bairro é obrigatório."),
-    'Ponto de Referencia': yup.string(),
-  });
+  cep: yup.string().required("CEP é obrigatório."),
+  city: yup.string().required("Cidade é obrigatória."),
+  state: yup.string().required("Estado é obrigatório."),
+  street: yup.string().required("Logradouro é obrigatório."),
+  number: yup.string().required("Número é obrigatório."),
+  complement: yup.string().required("Complemento é obrigatório."),
+  neighborhood: yup.string().required("Bairro é obrigatório."),
+  reference: yup.string(),
+});
 
 const validation = yup.object().shape({
   idUser: yup
@@ -37,29 +37,26 @@ const validation = yup.object().shape({
     .required("Este campo é obrigatório"),
   rg: yup
     .string()
-    /*lógica para validar órgão expedidor*/
-    .max(20, "Este campo deve ter no máximo 20 caracteres")
-    .required("Este campo é obrigatório"),
+    /*lógica para validar órgão expedidor?*/
+    .max(20, "O campo RG deve ter no máximo 20 caracteres")
+    .required("O campo RG é obrigatório"),
   birthplace: yup
     .string()
-    .min(8, "Este campo deve ter pelo menos 5 caracteres")
-    .max(64, "Este campo deve ter no máximo 50 caracteres")
-    .required("Este campo é obrigatório"),
+    .min(8, "O campo naturalidade deve ter pelo menos 5 caracteres")
+    .max(64, "O campo naturalidade deve ter no máximo 50 caracteres")
+    .required("O campo naturalidade é obrigatório"),
   emergencyContact: yup
     .string()
     .matches(
       /^\(\d{2}\) \d \d{4}-\d{5}$/,
-      "Digite um número de telefone no formato (99) 9 9999-99999"
+      "No campo Contato de Emergência digite um número de telefone no formato (99) 9 9999-99999"
     )
-    .required("Este campo é obrigatório"),
-  allergiesList: yup
-    .string(),
-     specificCares: yup
-    .string(),
+    .required("O campo Contato de Emergência é obrigatório"),
+  allergiesList: yup.string(),
+  specificCares: yup.string(),
   healthInsurance: yup.string(),
   insuranceNumber: yup.string(),
-  insuranceVality: yup
-  .date("Data de nascimento deve estar em formato de data 1990-02-25"),
+  insuranceVality: yup.date("A Validade do Convênio deve ser um data"),
   adress: enderecoSchema,
 });
 
