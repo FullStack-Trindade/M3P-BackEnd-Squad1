@@ -1,9 +1,36 @@
 const Patient = require("../../models/patient");
 const Adress = require("../../models/adress");
+const User = require("../../models/user");
 
 async function patientRegister(request, response) {
   try {
-    const data = {
+    const { idUser } = request.body;
+
+    const usuarioById = await User.findOne({
+      where: {
+        id: idUser,
+      },
+    });
+
+    const pacienteByIdUser = await Patient.findOne({
+      where: {
+        idUser: idUser,
+      },
+    });
+
+    if (!usuarioById) {
+      return response.status(409).json({
+        msg: "O Paciente deve estar vinculado a um cadastro de usuário. Entre em contato com o administrador",
+      });
+    }
+
+    if (!pacienteByIdUser) {
+      return response.status(409).json({
+        msg: "Só pode haver um cadastro de paciente para cada usuário. Entre em contato com o administrador",
+      });
+    }
+
+    const dataPatient = {
       birth: request.body.birth,
       maritalStatus: request.body.maritalStatus,
       rg: request.body.rg,
@@ -15,46 +42,15 @@ async function patientRegister(request, response) {
       insuranceNumber: request.body.insuranceNumber,
       insuranceVality: request.body.insuranceVality,
       adress: request.body.adress,
-      idUser:request.body.idUser
+      idUser: request.body.idUser,
     };
 
-    /*
-    valida se o paciente já existe no banco de dados
-
-    const userExists = await User.findOne({
-      where: { cpf: request.body.cpf },
-    });
-    
-    if (userExists) {
-      return response.status(409).json({ message: "Paciente já cadastrado" });
-    }
-*/
-
-    //primeiro lógica para criar um usuario do tipo paciente
-
-    // depois lógica para pegar o user_id e em complemento a ele, cadastrar um paciente
-
-    const patientDataDb = {
-      birth: data.birth,
-      idUser: data.idUser,
-      maritalStatus: data.maritalStatus,
-      rg: data.rg,
-      birthplace: data.birthplace,
-      emergencyContact: data.emergencyContact,
-      alergiesList: data.alergiesList,
-      specificCares: data.specificCares,
-      healthInsurance: data.healthInsurance,
-      insuranceNumber: data.insuranceNumber,
-      insuranceVality: data.insuranceVality,
-      adress: data.adress,
-    };
-
-    const patient = await Patient.create(patientDataDb);
+    const patient = await Patient.create(dataPatient);
 
     const adressDataDb = {
-      adress: data.adress,
+      adress: dataPatient.adress,
     };
-    const adress = await Adress.create(adressDataDb);
+    const saveAdress = await Adress.create(adressDataDb);
 
     response.status(201).json(patient);
   } catch (error) {
