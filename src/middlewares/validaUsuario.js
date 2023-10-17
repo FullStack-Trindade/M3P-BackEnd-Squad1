@@ -32,8 +32,8 @@ const validation = yup.object().shape({
     .number()
     .integer("Campo Tipo deve ser um integer")
     .required("Campo Tipo é obrigatório")
-    .min(1, 'Campo tipo deve conter numero de 0 a 3, sendo 0 = Administrador, 1 = Médico, 2 = Enfermeiro(a) e 3 = Paciente')
-    .max(1, 'Campo tipo deve conter numero de 0 a 3, sendo 0 = Administrador, 1 = Médico, 2 = Enfermeiro(a) e 3 = Paciente'),
+    .min(0, 'Campo tipo deve conter numero de 0 a 3, sendo 0 = Administrador, 1 = Médico, 2 = Enfermeiro(a) e 3 = Paciente')
+    .max(3  , 'Campo tipo deve conter numero de 0 a 3, sendo 0 = Administrador, 1 = Médico, 2 = Enfermeiro(a) e 3 = Paciente'),
 
 })
 
