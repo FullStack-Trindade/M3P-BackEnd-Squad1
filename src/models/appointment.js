@@ -56,6 +56,16 @@ const Appointment = connection.define('consulta', {
         allowNull: false,
         notEmpty: true,
         defaultValue: true
+    },
+    created_at: {
+        type: 'TIMESTAMP',
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    updated_at: {
+        type: 'TIMESTAMP',
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
 });
 
