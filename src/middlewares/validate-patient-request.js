@@ -56,7 +56,6 @@ const validation = yup.object().shape({
   specificCares: yup.string(),
   healthInsurance: yup.string(),
   insuranceNumber: yup.string(),
-  insuranceVality: yup.date("A Validade do Convênio deve ser um data"),
   adress: enderecoSchema,
 });
 

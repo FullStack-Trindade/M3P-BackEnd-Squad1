@@ -24,7 +24,7 @@ async function patientRegister(request, response) {
       });
     }
 
-    if (!pacienteByIdUser) {
+    if (pacienteByIdUser) {
       return response.status(409).json({
         msg: "Só pode haver um cadastro de paciente para cada usuário. Entre em contato com o administrador",
       });
