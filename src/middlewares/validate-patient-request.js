@@ -6,7 +6,7 @@ const enderecoSchema = yup.object().shape({
   state: yup.string().required("Estado é obrigatório."),
   street: yup.string().required("Logradouro é obrigatório."),
   number: yup.string().required("Número é obrigatório."),
-  complement: yup.string().required("Complemento é obrigatório."),
+  complement: yup.string(),
   neighborhood: yup.string().required("Bairro é obrigatório."),
   reference: yup.string(),
 });
