@@ -11,7 +11,7 @@ const deletePatient = require("./src/controllers/Patients/deletePatients");
 const postUser = require('./src/controllers/user/postUser')
 
 const createExame = require ('./src/controllers/exames/createExames');
-const readExame = require ('./src/controllers/exames/readExames');
+const readExames = require ('./src/controllers/exames/readExames');
 const updateExame = require ('./src/controllers/exames/updateExames');
 const deleteExame = require ('./src/controllers/exames/deleteExames');
 
@@ -31,6 +31,7 @@ app.use(
 
 app.post("/api/pacientes", validatePatientRequest, createPatient);
 app.post("/api/exames/", validateExameRequest, createExame);
+app.get("/api/exames/:id", readExames);
 app.put("/api/pacientes/:id", updatePatient);
 app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);

@@ -8,7 +8,7 @@ const validationExame = yup.object().shape({
     horaExame: yup.string().required("Hora do exame é obrigatório."),
     tipoExame: yup.string().required("Tipo do exame é obrigatório."),
     labExame: yup.string().required("Nome do laboratório é obrigatório."),
-    resultadoExame: yup.string().required("Resulta do exame é obrigatório."),
+    resultaDoExame: yup.string().required("Resulta do exame é obrigatório."),
     statusExame: yup.string().required("Estatus do exame é obrigatório."),
   });
 

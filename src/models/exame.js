@@ -55,7 +55,7 @@ const Exame = connection.define('exame', {
         allowNull: false,
     },
 
-    resultadoExame:{
+    resultaDoExame:{
         type: Sequelize.STRING,
         allowNull: false,
     },

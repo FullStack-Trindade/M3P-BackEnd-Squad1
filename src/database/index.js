@@ -5,7 +5,7 @@ const connection = new Sequelize({
     host: process.env.HOST_DATABASE,
     username: process.env.USER_DATABASE,
     password: process.env.PASSWORD_DATABASE,
-    port: process.env.SERVER_PORT,
+    port: process.env.DB_PORT,
     database: process.env.NAME_DATABASE,
     define: {
         timestamps: true,
