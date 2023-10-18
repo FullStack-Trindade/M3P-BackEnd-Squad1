@@ -29,6 +29,7 @@ app.use(
   })
 );
 
+
 app.post("/api/pacientes", validatePatientRequest, createPatient);
 app.post("/api/exames/", validateExameRequest, createExame);
 app.get("/api/exames/:id", readExames);
@@ -39,6 +40,15 @@ app.delete("/api/pacientes/:id", deletePatient);
 
 app.post('/api/usuario', validaUsuario, postUser)
 
+const Login = require('./src/controllers/session/login')
+const validateToken = require('./src/middlewares/validateToken')
+app.post('/api/usuario/login', validateToken, Login)
+
+const postUser = require('./src/controllers/user/postUser')
+const validaUsuario = require('./src/middlewares/validaUsuario')
+app.post('/api/usuario', validaUsuario, postUser)
+
 app.listen(process.env.SERVER_PORT, () => {
   console.log("local server online");
 });
+
