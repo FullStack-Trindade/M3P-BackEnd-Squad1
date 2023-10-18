@@ -1,12 +1,13 @@
+const Patient = require('../../models/patient');
 const User = require('../../models/user');
 const Appointment = require('../../models/appointment');
 
 async function createAppointment (req, res) {
     try {
-        const patient = await User.findByPk(req.body.id_patient);
+        const patient = await Patient.findByPk(req.body.id_patient);
         const doctor = await User.findByPk(req.body.id_doctor);
 
-        if (!patient || patient.id_type !== 3) {
+        if (!patient) {
             return res.status(404).json({ message: 'Paciente não consta nos registros' });
         }
 
