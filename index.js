@@ -33,10 +33,12 @@ app.use(
 app.post("/api/pacientes", validatePatientRequest, createPatient);
 app.post("/api/exames/",  validateExameRequest , createExame);
 app.get("/api/exames/:id", readExames);
+app.delete("/api/exames/:id", deleteExame);
 app.put("/api/pacientes/:id", updatePatient);
 app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
+
 
 app.post('/api/usuario', validaUsuario, postUser)
 

@@ -1,4 +1,4 @@
-const exame = require('../../models/exame');
+const Exame = require('../../models/exame');
 
 async function updateExame(request, response) {
 
@@ -14,7 +14,7 @@ async function updateExame(request, response) {
             tipoExame,
             labExame,
             urlExame,
-            resultadoExame,   
+            resultadoExame,
             statusExame  
         } = request.body;
 
