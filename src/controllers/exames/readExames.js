@@ -11,17 +11,18 @@ async function exameRead (request, response) {
         const user = await User.findByPk(idUser);
         const listaExames = await Exame.findAll({
             where:{
-                id_pacient: idUser
+                id_paciente: idUser
             }
         });
 
-        if(!idUser) {
+        if(!user) {
             response.status(404).json({menssagem: "Usuario não encontrado."});
         } else {
-            response.status(200).json(idUser)
+            response.status(200).json({listaExames})
         }
 
     } catch (error) {
+        console.log(error);
         response.status(500).json({message: "Erro 500 - Verifique sua solicitação"})
     }
 };

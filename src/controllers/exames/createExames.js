@@ -1,10 +1,10 @@
-
 const Exame = require('../../models/exame');
 
 async function createExame (request, response) {
-
-    try {
-        
+        console.log(request.body);
+    
+        try {
+            
         const exame = {
             id_paciente: request.body.id_paciente,
             id_medico: request.body.id_medico,
@@ -15,8 +15,9 @@ async function createExame (request, response) {
             labExame: request.body.labExame,
             urlExame: request.body.urlExame,
             resultaDoExame: request.body.resultaDoExame,   
-            statusExame: request.body.statusExame,        
+            statusExame: true,        
         }
+
                
          const exameExistente = await Exame.findOne({
             where: {
@@ -26,17 +27,17 @@ async function createExame (request, response) {
              },
          });
 
-         if (exameExistente) {
-            return response.status(400).json({message: 'Já possui o exame'})
-                            
-            }
-            const newExame = await Exame.create(exame);
-            response.status(201).json(newExame)
-            
-    } catch (error) {
-        response.status(500).json({message: "Erro de Sistema! Tente mais tarde"})
-    }
-
+         if (!exameExistente) {
+             const newExame = await Exame.create(exame);
+             response.status(201).json(newExame)
+             
+            }else{
+                return response.status(400).json({message: 'Já possui o exame'})
+        }
+        } catch (error) {
+            console.log(error);
+            response.status(500).json({message: "Erro de Sistema! Tente mais tarde"})
+        }       
 };
 
 module.exports = createExame;

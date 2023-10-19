@@ -11,7 +11,7 @@ const Exame = connection.define('exame', {
         primaryKey: true,
     },
 
-    id_pacient:{
+    id_paciente:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
@@ -31,7 +31,7 @@ const Exame = connection.define('exame', {
     },
 
     horaExame: {
-        type: Sequelize.TIME,
+        type: Sequelize.STRING,
         allowNull: false,
     },
 
@@ -50,11 +50,6 @@ const Exame = connection.define('exame', {
         allowNull: true,
     },
 
-    tipoExame: {
-        type: Sequelize.STRING,
-        allowNull: false,
-    },
-
     resultaDoExame:{
         type: Sequelize.STRING,
         allowNull: false,
@@ -67,6 +62,6 @@ const Exame = connection.define('exame', {
 
 });
 
-    Exame.belongsTo(Patient, {foreignKey:"id_patient"});
+    Exame.belongsTo(Patient, {foreignKey:"id_paciente"});
 
 module.exports = Exame;
