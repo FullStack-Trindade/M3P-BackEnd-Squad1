@@ -5,21 +5,23 @@ async function exameRead (request, response) {
 
     const idUser = request.params.id;
 
-    
     try {
+        const id = request.query.id
+        console.log(id);
         
-        const user = await User.findByPk(idUser);
-        const listaExames = await Exame.findAll({
-            where:{
-                id_paciente: idUser
-            }
-        });
-
-        if(!user) {
-            response.status(404).json({menssagem: "Usuario não encontrado."});
-        } else {
-            response.status(200).json({listaExames})
+        if (id) {
+            const user = await Exame.findAll({
+                where: {
+                    id_paciente: id
+                }
+            })
+            if(!user) {
+                response.status(404).json({menssagem: "Usuario não encontrado."});
+            } 
+            return response.status(200).json({user})
         }
+        const listaExames = await Exame.findAll();
+        return response.status(200).json({listaExames})
 
     } catch (error) {
         console.log(error);

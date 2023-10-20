@@ -31,7 +31,7 @@ app.use(
 
 
 app.post("/api/exames/",  validateExameRequest , createExame);
-app.get("/api/exames/:id", readExames);
+app.get("/api/exames/", readExames);
 app.put("/api/exames/:id", validateExameRequest , updateExame);
 app.delete("/api/exames/:id", deleteExame);
 
