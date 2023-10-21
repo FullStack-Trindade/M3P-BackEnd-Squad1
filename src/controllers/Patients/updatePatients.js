@@ -17,6 +17,7 @@ async function updatePatient(request, response) {
     patientInDatabase.emergencyContact =
       request.body.emergencyContact || patientInDatabase.emergencyContact;
     patientInDatabase.rg = patientInDatabase.rg;
+    patientInDatabase.orgaoExpedidor = patientInDatabase.orgaoExpedidor;
     patientInDatabase.idUser = patientInDatabase.idUser;
     patientInDatabase.alergiesList =
       request.body.alergiesList || patientInDatabase.alergiesList;
