@@ -1,3 +1,5 @@
+const dayjs = require("dayjs");
+
 const Adress = require("../../models/adress");
 const Patient = require("../../models/patient");
 
@@ -32,6 +34,7 @@ async function updatePatient(request, response) {
       request.body.insuranceNumber || patientInDatabase.insuranceNumber;
     patientInDatabase.insuranceVality =
       request.body.insuranceVality || patientInDatabase.insuranceVality;
+    patientInDatabase.updated_at = dayjs().subtract(3, "hour");
 
     await patientInDatabase.save();
 
@@ -65,6 +68,7 @@ async function updatePatient(request, response) {
     adressInDatabase.reference = request.body.adress.reference
       ? request.body.adress.reference
       : adressInDatabase.reference;
+    adressInDatabase.updated_at = dayjs().subtract(3, "hour");
 
     console.log(adressInDatabase);
 
