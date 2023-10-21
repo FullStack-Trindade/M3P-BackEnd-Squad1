@@ -32,6 +32,10 @@ const Patient = connection.define("patient", {
     type: Sequelize.STRING,
     allowNull: false,
   },
+  orgaoExpedidor: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
   birthplace: {
     type: Sequelize.STRING,
     allowNull: false,
@@ -61,9 +65,19 @@ const Patient = connection.define("patient", {
     allowNull: false,
   },
   adress: {
-    type: Sequelize.JSONB,
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
+  created_at: {
+    type: 'TIMESTAMP',
+    allowNull: false,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+},
+updated_at: {
+    type: 'TIMESTAMP',
+    allowNull: false,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+}
 });
 
 Patient.belongsTo(User, {foreignKey: "id_user"});

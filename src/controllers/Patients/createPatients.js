@@ -24,16 +24,19 @@ async function patientRegister(request, response) {
       });
     }
 
-    if (!pacienteByIdUser) {
+    if (pacienteByIdUser) {
       return response.status(409).json({
         msg: "Só pode haver um cadastro de paciente para cada usuário. Entre em contato com o administrador",
       });
     }
 
+    const adress = await Adress.create(request.body);
+    
     const dataPatient = {
       birth: request.body.birth,
       maritalStatus: request.body.maritalStatus,
       rg: request.body.rg,
+      orgaoExpedidor: request.body.orgaoExpedidor,
       birthplace: request.body.birthplace,
       emergencyContact: request.body.emergencyContact,
       alergiesList: request.body.alergiesList,
@@ -41,16 +44,11 @@ async function patientRegister(request, response) {
       healthInsurance: request.body.healthInsurance,
       insuranceNumber: request.body.insuranceNumber,
       insuranceVality: request.body.insuranceVality,
-      adress: request.body.adress,
+      adress: adress.id,
       idUser: request.body.idUser,
     };
 
     const patient = await Patient.create(dataPatient);
-
-    const adressDataDb = {
-      adress: dataPatient.adress,
-    };
-    const saveAdress = await Adress.create(adressDataDb);
 
     response.status(201).json(patient);
   } catch (error) {
