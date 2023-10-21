@@ -29,8 +29,17 @@ async function patientRegister(request, response) {
         msg: "Só pode haver um cadastro de paciente para cada usuário. Entre em contato com o administrador",
       });
     }
-
-    const adress = await Adress.create(request.body);
+     const dataAdress = {
+      cep: request.body.adress.cep,
+      city: request.body.adress.city,
+      state: request.body.adress.state,
+      street: request.body.adress.street,
+      number: request.body.adress.number,
+      complement: request.body.adress.complement,
+      neighborhood: request.body.adress.neighborhood,
+      reference: request.body.adress.reference
+     }
+    const adress = await Adress.create(dataAdress);
     
     const dataPatient = {
       birth: request.body.birth,
