@@ -4,6 +4,10 @@ async function listPatientRecords (req, res) {
     try {
         const patients = await Patient.findAll({ include: { all: true } });
 
+        if (!patients) {
+            return res.status(400).json({ message: 'Pacientes não encontrados' })
+        }
+
         const filteredPatients = [];
         patients.forEach(patient => {
             if (patient.appointments.length > 0
@@ -12,6 +16,10 @@ async function listPatientRecords (req, res) {
                 filteredPatients.push(patient);
             }
         })
+
+        if (filteredPatients.length === 0) {
+            return res.status(400).json({ message: 'Pacientes não encontrados' })
+        }
 
         return res.status(200).json(filteredPatients);
 
