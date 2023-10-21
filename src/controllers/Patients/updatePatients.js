@@ -23,8 +23,6 @@ async function updatePatient(request, response) {
       request.body.alergiesList || patientInDatabase.alergiesList;
     patientInDatabase.specificCares =
       request.body.specificCares || patientInDatabase.specificCares;
-    patientInDatabase.healthInsurance =
-      request.body.healthInsurance || patientInDatabase.healthInsurance;
     patientInDatabase.health_insurance =
       request.body.health_insurance || patientInDatabase.health_insurance;
     patientInDatabase.insuranceNumber =
@@ -32,6 +30,7 @@ async function updatePatient(request, response) {
     patientInDatabase.insuranceVality =
       request.body.insuranceVality || patientInDatabase.insuranceVality;
     patientInDatabase.adress = request.body.adress || patientInDatabase.adress;
+    patientInDatabase.updated_at = dayjs().subtract(3, "hour");
 
     await patientInDatabase.save();
 
