@@ -20,7 +20,8 @@ const validation = yup.object().shape({
     .integer("ID do usuário deve ser um número inteiro."),
   birth: yup
     .date("Data de nascimento deve estar em formato de data 1990-02-25")
-    .required("Data de nascimento é obrigatória"),
+    .required("Data de nascimento é obrigatória")
+    .max(new Date(), "Verifique a data de nascimento"),
   maritalStatus: yup
     .string()
     .oneOf(
@@ -37,9 +38,9 @@ const validation = yup.object().shape({
     .required("Este campo é obrigatório"),
   rg: yup
     .string()
-    /*lógica para validar órgão expedidor?*/
     .max(20, "O campo RG deve ter no máximo 20 caracteres")
     .required("O campo RG é obrigatório"),
+  orgaoExpedidor: yup.string(),
   birthplace: yup
     .string()
     .min(8, "O campo naturalidade deve ter pelo menos 5 caracteres")
@@ -56,6 +57,9 @@ const validation = yup.object().shape({
   specificCares: yup.string(),
   healthInsurance: yup.string(),
   insuranceNumber: yup.string(),
+  insuranceVality: yup
+    .date()
+    .min(new Date(), "Validade do seguro de saúde deve ser válida"),
   adress: enderecoSchema,
 });
 
