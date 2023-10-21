@@ -1,6 +1,7 @@
 const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
 
+const Patient = require('./patient');
 const User = require('./user');
 
 const Appointment = connection.define('consulta', {
@@ -69,7 +70,7 @@ const Appointment = connection.define('consulta', {
     }
 });
 
-Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_patient'});
+Appointment.belongsTo(Patient, { sourcekey: 'id', foreignKey: 'id_patient'});
 Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_doctor'});
 
 module.exports = Appointment;
