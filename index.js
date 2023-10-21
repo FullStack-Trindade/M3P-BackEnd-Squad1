@@ -1,7 +1,8 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const connection = require("./src/database");
+
+const connection = require("./src/database/index");
 
 const createPatient = require("./src/controllers/Patients/createPatients");
 const updatePatient = require("./src/controllers/Patients/updatePatients");
@@ -12,6 +13,8 @@ const postUser = require('./src/controllers/user/postUser')
 
 const validaUsuario = require('./src/middlewares/validaUsuario')
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
+
+const patientRecordRoutes = require('./src/routes/patientRecord');
 
 const app = express();
 app.use(express.json());
@@ -40,7 +43,18 @@ const postUser = require('./src/controllers/user/postUser')
 const validaUsuario = require('./src/middlewares/validaUsuario')
 app.post('/api/usuario', validaUsuario, postUser)
 
-app.listen(process.env.SERVER_PORT, () => {
-  console.log("local server online");
-});
+app.use(patientRecordRoutes);
 
+app.listen(process.env.SERVER_PORT, () => console.log(`Aplicação está online na porta ${process.env.SERVER_PORT}`));
+
+const connect = async() => {
+  try {
+    await connection.authenticate()
+    console.log('Conexão com banco de dados bem sucedida');
+  } catch (error) {
+    console.log('Sem conexao com banco de dados', error);
+  }
+}
+
+connect()
+connection.sync({ alter: true });
