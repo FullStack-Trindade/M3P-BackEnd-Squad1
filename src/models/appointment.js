@@ -70,7 +70,6 @@ const Appointment = connection.define('consulta', {
     }
 });
 
-Appointment.belongsTo(Patient, { sourcekey: 'id', foreignKey: 'id_patient'});
 Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_doctor'});
 
 module.exports = Appointment;
