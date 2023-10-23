@@ -41,6 +41,10 @@ const User = connection.define('user', {
         allowNull: false,
         defaultValue: true
     },
+    // phone: {
+    //     type: Sequelize.STRING,
+    //     allowNull: false
+    // },
 });
 
 User.belongsTo(Type, { foreignKey: 'id_type' });

@@ -3,6 +3,9 @@ const bcrypt = require('bcrypt');
 const dayjs = require('dayjs');
 
 const putUser = async (request, response) => {
+
+    //incluir telefone
+    
     try {
         const getUsuario = await User.findOne({
             where: {

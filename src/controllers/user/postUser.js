@@ -2,7 +2,7 @@ const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 
 const postUser = async (request, response)=>{
-
+// incluir telefone
   
     try {
         const password = await bcrypt.hash(request.body.password, 10)
