@@ -12,6 +12,7 @@ const postUser = require('./src/controllers/user/postUser')
 
 const validaUsuario = require('./src/middlewares/validaUsuario')
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
+const validatePatientUpdate = require("./src/middlewares/validate-patient-update");
 
 const app = express();
 app.use(express.json());
@@ -24,7 +25,7 @@ app.use(
 );
 
 app.post("/api/pacientes", validatePatientRequest, createPatient);
-app.put("/api/pacientes/:id", validatePatientRequest, updatePatient);
+app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
 app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
