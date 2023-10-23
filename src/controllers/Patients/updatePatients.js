@@ -4,6 +4,7 @@ const Adress = require("../../models/adress");
 const Patient = require("../../models/patient");
 
 async function updatePatient(request, response) {
+  
   try {
     const patientInDatabase = await Patient.findByPk(request.params.id);
 
@@ -14,8 +15,8 @@ async function updatePatient(request, response) {
     }
 
     if (
-      patientInDatabase.rg !== request.body.rg ||
-      patientInDatabase.orgaoExpedidor !== request.body.orgaoExpedidor 
+      request.body.rg !== undefined && patientInDatabase.rg !== request.body.rg ||
+      request.body.orgaoExpedidor !== undefined && patientInDatabase.orgaoExpedidor !== request.body.orgaoExpedidor 
       
     ) {
       return response
