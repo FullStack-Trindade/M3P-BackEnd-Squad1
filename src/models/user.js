@@ -31,8 +31,9 @@ const User = connection.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    id_type: {
-        type: Sequelize.INTEGER,
+    idType: {
+        type: Sequelize.ENUM,
+        values: ['MEDICO', 'ADMINISTRADOR', 'ENFERMEIRO'],
         allowNull: false
     },
     status: {

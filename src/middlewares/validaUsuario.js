@@ -28,7 +28,7 @@ const validation = yup.object().shape({
     .min(6,"A password deve ter no mínimo 6 caracteres.")
     .required("password é obrigatório."),
 
-    id_type: yup
+    idType: yup
     .number()
     .integer("Campo Tipo deve ser um integer")
     .required("Campo Tipo é obrigatório")

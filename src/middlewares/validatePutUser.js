@@ -18,12 +18,17 @@ const validation = yup.object().shape({
     .email("Você deve inserir um email válido")
     .required("Email é obrigatório"), 
 
+/*     phone: yup
+    .string("Telefone deve ser uma string")
+    .matches(/^\(\d{2}\)\s9\s\d{4}-\d{4}$/, "Formato de telefone inválido")
+    .required("Telefone é obrigatório"), */
+
     password: yup
     .string("Senha deve ser uma string.")
     .min(6,"O password deve ter no mínimo 6 caracteres.")
     .required("password é obrigatório."),
 
-    id_type: yup
+    idType: yup
     .number()
     .integer("Campo Tipo deve ser um integer")
     .required("Campo Tipo é obrigatório")
