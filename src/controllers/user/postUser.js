@@ -35,9 +35,8 @@ const postUser = async (request, response)=>{
     
         const novoCadastro = await User.create(cadastro)
         if(novoCadastro) {
-            return response.status(201).json({
-                msg: `Cadastro do usuário ${cadastro.name} realizado com sucesso`
-            })
+            return response.status(201).json(novoCadastro
+            )
         }else{
             return response.status(400).json({
                 msg: "Não foi possível realizar o cadastro"

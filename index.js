@@ -25,7 +25,7 @@ app.use(
 
 
 app.post("/api/pacientes", validatePatientRequest, createPatient);
-app.put("/api/pacientes/:id", updatePatient);
+app.put("/api/pacientes/:id", validatePatientRequest, updatePatient);
 app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
