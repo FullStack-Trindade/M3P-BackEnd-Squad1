@@ -4,8 +4,6 @@ const dayjs = require('dayjs');
 
 const putUser = async (request, response) => {
 
-    //incluir telefone
-    
     try {
         const getUsuario = await User.findOne({
             where: {
@@ -38,9 +36,8 @@ const putUser = async (request, response) => {
         });
 
         if (updateCadastro[0] > 0) {
-            return response.status(200).json({
-                msg: `Cadastro do usuário ${update.name} atualizado com sucesso`
-            });
+            return response.status(200).json(updateCadastro
+            );
         } else {
             return response.status(400).json({
                 msg: 'Não foi possível atualizar o cadastro'
@@ -48,7 +45,7 @@ const putUser = async (request, response) => {
         }
     } catch (error) {
         return response.status(500).json({
-            msg: 'Não foi possível atender sua solicitação'
+            msg: 'Não foi possível atualizar o cadastro de usuário'
         });
     }
 };
