@@ -8,7 +8,9 @@ const updatePatient = require("./src/controllers/Patients/updatePatients");
 const patientList = require("./src/controllers/Patients/patientList");
 const searchPatients = require("./src/controllers/Patients/searchPatients");
 const deletePatient = require("./src/controllers/Patients/deletePatients");
-const postUser = require('./src/controllers/user/postUser')
+
+const postUser = require('./src/controllers/user/postUser');
+const getUser = require('./src/controllers/user/getUser');
 
 const createExame = require ('./src/controllers/exames/createExames');
 const readExames = require ('./src/controllers/exames/readExames');
@@ -49,6 +51,7 @@ const validateToken = require('./src/middlewares/validateToken')
 app.post('/api/usuario/login', validateToken, Login)
 
 app.post('/api/usuario', validaUsuario, postUser)
+app.get('/api/usuario', getUser)
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log("local server online");
