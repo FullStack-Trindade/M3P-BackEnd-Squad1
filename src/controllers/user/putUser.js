@@ -26,8 +26,9 @@ const putUser = async (request, response) => {
             gender: request.body.gender || getUsuario?.gender,
             email: request.body.email || getUsuario?.email,
             password: password,
-            id_type: request.body.id_type || getUsuario?.id_type,
-            updated_at: dayjs().subtract(3, 'hour').format('YYYY-MM-DD HH:mm:ss') 
+            idType: request.body.idType || getUsuario?.idType,
+            phone: request.body.phone || getUsuario?.phone,
+            updated_at: dayjs().subtract(3, 'hour').format('YYYY-MM-DD HH:mm:ss'),
         };
 
         const updateCadastro = await User.update(update, {
