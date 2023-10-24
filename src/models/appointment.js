@@ -1,10 +1,9 @@
 const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
 
-const Patient = require('./patient');
 const User = require('./user');
 
-const Appointment = connection.define('consulta', {
+const Appointment = connection.define('appointment', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -23,7 +22,6 @@ const Appointment = connection.define('consulta', {
         allowNull: false,
         onUpdate: 'CASCADE'
     },
-    //baixado o maximo de caracteres para 64, estava 68.
     appointment_reason: {
         type: Sequelize.STRING(64),
         allowNull: false,
