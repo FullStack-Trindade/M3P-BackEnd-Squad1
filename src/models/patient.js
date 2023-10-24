@@ -1,9 +1,10 @@
-
 const connection = require("../database/index");
 const { Sequelize } = require("sequelize");
-/*
-const Usuario = require('./user')
-*/
+
+const Appointment = require("./appointment");
+// const Exam = require("./exame");
+const User = require("./user");
+
 const Patient = connection.define("patient", {
   id: {
     type: Sequelize.INTEGER,
@@ -11,12 +12,10 @@ const Patient = connection.define("patient", {
     primaryKey: true,
   },
 
-  /*
-    idUser: {
-        type: Sequelize.INTEGER,
-        allowNull: false,
-    },
-        */
+  idUser: {
+    type: Sequelize.INTEGER,
+    allowNull: false,
+  },
 
   birth: {
     type: Sequelize.DATEONLY,
@@ -33,6 +32,10 @@ const Patient = connection.define("patient", {
     ),
   },
   rg: {
+    type: Sequelize.STRING,
+    allowNull: false,
+  },
+  orgaoExpedidor: {
     type: Sequelize.STRING,
     allowNull: false,
   },
@@ -65,13 +68,27 @@ const Patient = connection.define("patient", {
     allowNull: false,
   },
   adress: {
-    type: Sequelize.JSONB,
+    type: Sequelize.INTEGER,
     allowNull: false,
   },
+  created_at: {
+    type: 'TIMESTAMP',
+    allowNull: false,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+},
+updated_at: {
+    type: 'TIMESTAMP',
+    allowNull: false,
+    defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+}
 });
 
-/*
-Patient.belongsTo(Usario, {foreignKey: "id_user"});
-*/
+Patient.belongsTo(User, {foreignKey: "idUser"});
+
+Patient.hasMany(Appointment, { sourceKey: 'id', foreignKey: 'id_patient'});
+Appointment.belongsTo(Patient, { foreignKey: 'id_patient' });
+
+// Patient.hasMany(Exam, { sourceKey: 'id', foreignKey: 'id_pacient'});
+// Exam.belongsTo(Patient, { foreignKey: 'id_pacient' });
 
 module.exports = Patient;
