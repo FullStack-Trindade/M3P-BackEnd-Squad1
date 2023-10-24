@@ -35,4 +35,4 @@ async function updateAppointment (req, res) {
 
 module.exports = updateAppointment;
 
-// bad request 400 esta falando.
+// bad request 400 esta faltando.
