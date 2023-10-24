@@ -31,7 +31,7 @@ const User = connection.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
-    idType: {
+    id_type: {
         type: Sequelize.ENUM,
         values: ['0', '1', '2', '3'],
         allowNull: false
@@ -58,5 +58,5 @@ const User = connection.define('user', {
     }
 });
 
-User.belongsTo(Type, { foreignKey: 'idType' });
+User.belongsTo(Type, { foreignKey: 'id_type' });
 module.exports = User; 
