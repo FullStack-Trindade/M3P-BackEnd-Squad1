@@ -7,7 +7,7 @@ const update = require('../middlewares/appointment/validate-update-appointment')
 // CONTROLLERS
 const createAppointment = require('../controllers/appointment/createAppointment');
 const updateAppointment = require('../controllers/appointment/updateAppointment');
-const listAppointments = require('../controllers/appointment/listAppointment');
+const listAppointments = require('../controllers/appointment/listAppointments');
 const deleteAppointmentById = require('../controllers/appointment/deleteAppointmentById');
 
 // ROUTES
