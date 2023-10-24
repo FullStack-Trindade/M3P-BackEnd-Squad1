@@ -81,6 +81,6 @@ updated_at: {
 }
 });
 
-Patient.belongsTo(User, {foreignKey: "id_user"});
+Patient.belongsTo(User, {foreignKey: "idUser"});
 
 module.exports = Patient;
