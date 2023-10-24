@@ -6,11 +6,11 @@ async function createAppointment (req, res) {
     try {
         const patient = await Patient.findByPk(req.body.id_patient);
         const doctor = await User.findByPk(req.body.id_doctor);
-//Status do erro alterado para 400, estava 404.
+
         if (!patient) {
             return res.status(400).json({ message: 'Paciente não consta nos registros' });
         }
-//Status do erro alterado para 400, estava 404.
+
         if (!doctor || doctor.id_type !== 1) {
             return res.status(400).json({ message: 'Médico não consta nos registros' });
         }

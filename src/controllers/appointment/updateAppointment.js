@@ -6,6 +6,10 @@ async function updateAppointment (req, res) {
     try {
         const appointment = await Appointment.findByPk(req.params.id);
 
+        if (!appointment) {
+            res.status(400).json({ message: 'Consulta não encontrada' });
+        }
+
         const { 
             appointment_reason,
             appointment_date,
@@ -34,5 +38,3 @@ async function updateAppointment (req, res) {
 }
 
 module.exports = updateAppointment;
-
-// bad request 400 esta faltando.
