@@ -23,8 +23,9 @@ const Appointment = connection.define('consulta', {
         allowNull: false,
         onUpdate: 'CASCADE'
     },
+    //baixado o maximo de caracteres para 64, estava 68.
     appointment_reason: {
-        type: Sequelize.STRING(68),
+        type: Sequelize.STRING(64),
         allowNull: false,
         notEmpty: true
     },
