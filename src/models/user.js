@@ -31,13 +31,19 @@ const User = connection.define('user', {
         allowNull: false
     },
     id_type: {
-        type: Sequelize.INTEGER,
+        type: Sequelize.ENUM,
+        values: ['0', '1', '2', '3'],
         allowNull: false
     },
     status: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
         defaultValue: true
+    },
+
+    phone: {
+        type: Sequelize.STRING,
+        allowNull: false
     },
     created_at: {
         type: 'TIMESTAMP',
