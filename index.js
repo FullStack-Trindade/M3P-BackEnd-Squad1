@@ -45,8 +45,6 @@ app.delete("/api/pacientes/:id", deletePatient);
 app.post("/api/usuario", validaUsuario, postUser);
 app.put("/api/usuarios/:id",validatePutUser,putUser );
 
-app.use(appointmentRoutes);
-
 const connect = async() => {
   try {
     await connection.authenticate()
