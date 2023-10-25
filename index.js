@@ -48,6 +48,10 @@ app.post("/api/usuario", validaUsuario, postUser);
 app.put("/api/usuarios/:id",validatePutUser,putUser );
 app.get("/api/usuarios",getUser);
 
+
+//Consultas
+app.use(appointmentRoutes);
+
 const startServer = () => {
 
   app.listen(process.env.SERVER_PORT, () => {
