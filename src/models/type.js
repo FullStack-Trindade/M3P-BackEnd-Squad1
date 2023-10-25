@@ -2,7 +2,7 @@ const { Sequelize } = require('sequelize')
 const connection = require('../database')
 
 const Type = connection.define('type', {
-  idType: {
+  id_type: {
     type: Sequelize.INTEGER,
     primaryKey: true
   },
@@ -14,16 +14,16 @@ const Type = connection.define('type', {
 
 connection.sync().then(() => {
   Type.findOrCreate({
-    where: { idType: 0, descricao: 'Administrador' }
+    where: { id_type: 0, descricao: 'Administrador' }
   });
   Type.findOrCreate({
-    where: { idType: 1, descricao: 'Medico' }
+    where: { id_type: 1, descricao: 'Medico' }
   });
   Type.findOrCreate({
-    where: { idType: 2, descricao: 'Enfermeiro' }
+    where: { id_type: 2, descricao: 'Enfermeiro' }
   });
   Type.findOrCreate({
-    where: { idType: 3, descricao: 'Paciente' }
+    where: { id_type: 3, descricao: 'Paciente' }
   });
 });
 
