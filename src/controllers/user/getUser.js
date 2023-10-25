@@ -4,7 +4,6 @@ const getUser = async (request, response)=>{
 
     try {
         const getUsuario = await User.findAll()    
-
         if(getUsuario){
             return response.status(200).json(getUsuario)
         }else{
@@ -14,7 +13,8 @@ const getUser = async (request, response)=>{
         }
     } catch (error) {
         return response.status(500).json({
-            msg: `Não foi possível atender sua solicitação.`
+            msg: `Não foi possível atender sua solicitação.`,
+            error: error.message
         })
     }
     

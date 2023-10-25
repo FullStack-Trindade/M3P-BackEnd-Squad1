@@ -19,11 +19,13 @@ const deletePatient = require("./src/controllers/Patients/deletePatients");
 //Usuário
 const postUser = require("./src/controllers/user/postUser");
 const putUser = require("./src/controllers/user/putUser");
+const getUser = require('./src/controllers/user/getUser');
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 const validatePutUser = require("./src/middlewares/validatePutUser");
+
 
 const app = express();
 app.use(express.json());
@@ -44,11 +46,21 @@ app.delete("/api/pacientes/:id", deletePatient);
 //Usuário
 app.post("/api/usuario", validaUsuario, postUser);
 app.put("/api/usuarios/:id",validatePutUser,putUser );
+app.get("/api/usuarios",getUser);
+
+const startServer = () => {
+
+  app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
+  });
+  };
+
 
 const connect = async() => {
   try {
     await connection.authenticate()
     console.log('Conexão com banco de dados bem sucedida');
+    startServer();
   } catch (error) {
     console.log('Sem conexao com banco de dados', error);
   }
@@ -56,3 +68,4 @@ const connect = async() => {
 
 connect()
 connection.sync({ alter: true });
+
