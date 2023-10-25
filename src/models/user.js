@@ -57,4 +57,5 @@ const User = connection.define('user', {
 });
 
 User.belongsTo(Type, { foreignKey: 'id_type' });
+
 module.exports = User; 

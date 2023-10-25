@@ -1,4 +1,4 @@
-const Patient = require('../../models/exame');
+const Exame = require('../../models/exame');
 
 
 async function deleteExame(request, response) {
@@ -10,7 +10,7 @@ async function deleteExame(request, response) {
             response.status(400).json({ message: "Exame não existe." });
 
         } else {
-            await Patient.destroy({where: {id: req.params.id}});
+            await Exame.destroy({where: {id: request.params.id}});
             return response.status(202).json({ message: 'Deletado com sucesso'}); 
         }
     

@@ -1,58 +1,40 @@
-const exame = require('../../models/exame');
+const Exame = require('../../models/exame');
 
 async function updateExame(request, response) {
+    
+    const { id } = request.params;
+    const exameExiste = await Exame.findByPk(id)
+
+    if (!exameExiste) {
+        return response.status(400).json({message: 'Exame não encontrado'}) 
+    } 
 
     try {
-
-        const { id } = request.params;
         const {
-            idPaciente,
-            idMedico,
+            id_paciente,
+            id_medico,
             nomeExame,    
             dataExame,
             horaExame,
             tipoExame,
             labExame,
             urlExame,
-            resultadoExame,   
-            statusExame  
+            resultaDoExame, 
         } = request.body;
+                
+            exameExiste.nomeExame = nomeExame;
+            exameExiste.dataExame = dataExame;
+            exameExiste.horaExame = horaExame;
+            exameExiste.tipoExame = tipoExame;
+            exameExiste.labExame = labExame;
+            exameExiste.urlExame = urlExame;
+            exameExiste.resultaDoExame = resultaDoExame;
 
-                        
-        const idExists = await Exame.findByPk(id)
-        if (!idExists) {
-            return response.status(400).json({message: 'Id não encontrado'}) 
-            
-        }      
-
-        const cpfExists = await Exame.findOne({
-            where: {
-                cpf
-            }})
-        if (cpfExists) {   
-            return response.status(400).json({message: 'CPF já consta no Banco de Dados. Confira'})
-            
-    
-        }else {
-
-            const exame = await exame.findByPk(id);
-            exame.nomeExame = nomeExame;
-            exame.dataExame = dataExame;
-            exame.horaExame = horaExame;
-            exame.tipoExame = tipoExame;
-            exame.labExame = labExame;
-            exame.urlExame = urlExame;
-            exame.resultadoExame = resultadoExame;
-            exame.statusExame = statusExame;
-
-            const exameUpdate = await exame.save();
+            const exameUpdate = await exameExiste.save();
             return response.status(200).json(exameUpdate) 
-        }
 
     } catch (error) {
-        console.log(error)
         return response.status(500).json({message:  "Erro de Sistema! Tente mais tarde"});
-    
     }
 };
 

@@ -72,4 +72,3 @@ const connect = async() => {
 
 connect()
 connection.sync({ alter: true });
-

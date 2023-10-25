@@ -1,30 +1,31 @@
 const Exame = require('../../models/exame');
+const User = require('../../models/user');
 
 async function exameRead (request, response) {
 
+    const idUser = request.params.id;
+
     try {
-     
-        const status = request.query;
-
-        if(status.status) {
-
-            if (!["AGUARDANDO", "EXECUTADO"].includes(status.status)) {
-            return response.status(400).json({message: 'Valor Inválido para Status'});
-        }
-
-            const exame = await Exame.findAll(
-                {
-                    where: {status: status.status}
+        const id = request.query.id
+        console.log(id);
+        
+        if (id) {
+            const user = await Exame.findAll({
+                where: {
+                    id_paciente: id
                 }
-            );
-            response.status(200).json(exame);
-
-        } else {
-            const exame = await Exame.findAll();
-            response.json(exame);
+            })
+            if(!user) {
+                response.status(404).json({menssagem: "Usuario não encontrado."});
+            } 
+            return response.status(200).json({user})
         }
+        const listaExames = await Exame.findAll();
+        return response.status(200).json({listaExames})
+
     } catch (error) {
-        response.status(500).json({message:  "Erro de Sistema! Tente mais tarde"})
+        console.log(error);
+        response.status(500).json({message: "Erro 500 - Verifique sua solicitação"})
     }
 };
 
