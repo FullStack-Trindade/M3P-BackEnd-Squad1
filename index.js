@@ -17,7 +17,8 @@ connection.sync({ alter: true });
 
 const Login = require('./src/controllers/session/login')
 const validateToken = require('./src/middlewares/validateToken')
-app.post('/api/usuario/login', validateToken, Login)
+// rota estava /api/usuario/login
+app.post('/api/usuarios/login', validateToken, Login)
 
 const postUser = require('./src/controllers/user/postUser')
 const validaUsuario = require('./src/middlewares/validaUsuario')
