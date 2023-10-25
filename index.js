@@ -20,6 +20,7 @@ const deletePatient = require("./src/controllers/Patients/deletePatients");
 const postUser = require("./src/controllers/user/postUser");
 const putUser = require("./src/controllers/user/putUser");
 const getUser = require('./src/controllers/user/getUser');
+const searchUserByCpf = require('./src/controllers/user/searchUserByCpfEmail');
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
@@ -47,6 +48,7 @@ app.delete("/api/pacientes/:id", deletePatient);
 app.post("/api/usuario", validaUsuario, postUser);
 app.put("/api/usuarios/:id",validatePutUser,putUser );
 app.get("/api/usuarios",getUser);
+app.get("/api/usuarios/search",searchUserByCpf);
 
 
 //Consultas
