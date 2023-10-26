@@ -12,12 +12,6 @@ const enderecoSchema = yup.object().shape({
 });
 
 const validation = yup.object().shape({
-  idUser: yup
-    .number("ID do usuário é obrigatório.")
-    .typeError("ID do usuário deve ser um número.")
-    .required("ID do usuário é obrigatório.")
-    .positive("ID do usuário deve ser positivo.")
-    .integer("ID do usuário deve ser um número inteiro."),
   birth: yup
     .date("Data de nascimento deve estar em formato de data 1990-02-25")
     .required("Data de nascimento é obrigatória")
@@ -36,7 +30,7 @@ const validation = yup.object().shape({
       "Selecione um Estado Civil válido"
     )
     .required("Este campo é obrigatório"),
-    birthplace: yup
+  birthplace: yup
     .string()
     .min(8, "O campo naturalidade deve ter pelo menos 5 caracteres")
     .max(64, "O campo naturalidade deve ter no máximo 50 caracteres")
