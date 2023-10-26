@@ -44,9 +44,10 @@ app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
 
 //Usuário
-app.post("/api/usuario", validaUsuario, postUser);
+app.post('/api/usuario', validateToken , validaUsuario, postUser);
 app.put("/api/usuarios/:id",validatePutUser,putUser );
 app.get("/api/usuarios",getUser);
+app.post('/api/usuarios/login', Login);
 
 //Consultas
 app.use(appointmentRoutes);
@@ -57,7 +58,6 @@ const startServer = () => {
     console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
   });
   };
-
 
 const connect = async() => {
   try {
