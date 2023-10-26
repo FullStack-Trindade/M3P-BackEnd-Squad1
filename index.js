@@ -8,9 +8,7 @@ const updatePatient = require("./src/controllers/Patients/updatePatients");
 const patientList = require("./src/controllers/Patients/patientList");
 const searchPatients = require("./src/controllers/Patients/searchPatients");
 const deletePatient = require("./src/controllers/Patients/deletePatients");
-const postUser = require('./src/controllers/user/postUser')
 
-const validaUsuario = require('./src/middlewares/validaUsuario')
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 
 const app = express();
@@ -30,11 +28,9 @@ app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
 
-app.post('/api/usuario', validaUsuario, postUser)
-
 const Login = require('./src/controllers/session/login')
 const validateToken = require('./src/middlewares/validateToken')
-app.post('/api/usuario/login', validateToken, Login)
+app.post('/api/usuarios/login', Login)
 
 const postUser = require('./src/controllers/user/postUser')
 const validaUsuario = require('./src/middlewares/validaUsuario')
