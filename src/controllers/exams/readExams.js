@@ -12,7 +12,7 @@ async function examRead (request, response) {
         if (id) {
             const user = await Exam.findAll({
                 where: {
-                    id_paciente: id
+                    id_patient: id
                 }
             })
             if(!user) {
@@ -20,8 +20,8 @@ async function examRead (request, response) {
             } 
             return response.status(200).json({user})
         }
-        const listaExames = await Exame.findAll();
-        return response.status(200).json({listaExames})
+        const listExams = await Exam.findAll();
+        return response.status(200).json({listExams})
 
     } catch (error) {
         console.log(error);
