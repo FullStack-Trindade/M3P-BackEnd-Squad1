@@ -60,10 +60,10 @@ const Patient = connection.define("patient", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  adress: {
+/*   adress: {
     type: Sequelize.JSONB,
     allowNull: false,
-  },
+  }, */
 });
 
 

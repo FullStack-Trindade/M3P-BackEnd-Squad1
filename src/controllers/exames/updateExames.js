@@ -1,25 +1,25 @@
-const Exame = require('../../models/exame');
+const Exam = require('../../models/exam');
 
-async function updateExame(request, response) {
+async function updateExam(request, response) {
     
     const { id } = request.params;
-    const exameExiste = await Exame.findByPk(id)
+    const examExisting = await Exam.findByPk(id)
 
-    if (!exameExiste) {
+    if (!examExisting) {
         return response.status(400).json({message: 'Exame não encontrado'}) 
     } 
 
     try {
         const {
-            id_paciente,
-            id_medico,
-            nomeExame,    
-            dataExame,
-            horaExame,
-            tipoExame,
-            labExame,
-            urlExame,
-            resultaDoExame, 
+            id_patient,
+            id_doctor,
+            nameExam,    
+            dateExam,
+            hourExam,
+            typeExam,
+            labExam,
+            urlExam,
+            resulExam, 
         } = request.body;
                 
             exameExiste.nomeExame = nomeExame;
@@ -38,4 +38,4 @@ async function updateExame(request, response) {
     }
 };
 
-module.exports = updateExame;
+module.exports = updateExam;

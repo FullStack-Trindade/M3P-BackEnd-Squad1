@@ -50,8 +50,8 @@ const Login = require('./src/controllers/session/login')
 const validateToken = require('./src/middlewares/validateToken')
 app.post('/api/usuario/login', validateToken, Login)
 
-app.post('/api/usuario', validaUsuario, postUser)
-app.get('/api/usuario', getUser)
+app.post('/api/usuarios', validaUsuario, postUser)
+app.get('/api/usuarios', getUser)
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log("local server online");

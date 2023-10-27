@@ -3,7 +3,7 @@ const { Sequelize, DATE } = require('sequelize');
 
 const Patient = require('./patient')
 
-const Exame = connection.define('exame', {
+const Exam = connection.define('exam', {
 
     id: {
         type: Sequelize.INTEGER,
@@ -11,57 +11,57 @@ const Exame = connection.define('exame', {
         primaryKey: true,
     },
 
-    id_paciente:{
+    id_patient:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    id_medico:{
+    id_doctor:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
 
-    nomeExame: {
+    nameExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    dataExame: {
+    dateExam: {
         type: Sequelize.DATEONLY,
         allowNull: false,
     },
 
-    horaExame: {
+    hourExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    tipoExame: {
+    typeExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    labExame: {
+    labExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    urlExame: {
+    urlExam: {
         type: Sequelize.STRING,
         allowNull: true,
     },
 
-    resultaDoExame:{
+    resultExam:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    statusExame: {
+    statusExam: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
     },
 
 });
 
-    Exame.belongsTo(Patient, {foreignKey:"id_paciente"});
+    Exame.belongsTo(Patient, {foreignKey:"id_patient"});
 
-module.exports = Exame;
+module.exports = Exam;
