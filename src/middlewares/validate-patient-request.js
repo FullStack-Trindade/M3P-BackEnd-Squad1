@@ -1,26 +1,27 @@
 const yup = require("yup");
 
 const enderecoSchema = yup.object().shape({
-    cep: yup.string().required("CEP é obrigatório."),
-    city: yup.string().required("Cidade é obrigatória."),
-    state: yup.string().required("Estado é obrigatório."),
-    street: yup.string().required("Logradouro é obrigatório."),
-    number: yup.string().required("Número é obrigatório."),
-    complement: yup.string().required("Complemento é obrigatório."),
-    neighborhood: yup.string().required("Bairro é obrigatório."),
-    reference: yup.string(),
-  });
+  cep: yup.string().required("CEP é obrigatório."),
+  city: yup.string().required("Cidade é obrigatória."),
+  state: yup.string().required("Estado é obrigatório."),
+  street: yup.string().required("Logradouro é obrigatório."),
+  number: yup.string().required("Número é obrigatório."),
+  complement: yup.string(),
+  neighborhood: yup.string().required("Bairro é obrigatório."),
+  reference: yup.string(),
+});
 
 const validation = yup.object().shape({
-  // idUser: yup
-  //   .number("ID do usuário é obrigatório.")
-  //   .typeError("ID do usuário deve ser um número.")
-  //   .required("ID do usuário é obrigatório.")
-  //   .positive("ID do usuário deve ser positivo.")
-  //   .integer("ID do usuário deve ser um número inteiro."),
+  idUser: yup
+    .number("ID do usuário é obrigatório.")
+    .typeError("ID do usuário deve ser um número.")
+    .required("ID do usuário é obrigatório.")
+    .positive("ID do usuário deve ser positivo.")
+    .integer("ID do usuário deve ser um número inteiro."),
   birth: yup
     .date("Data de nascimento deve estar em formato de data 1990-02-25")
-    .required("Data de nascimento é obrigatória"),
+    .required("Data de nascimento é obrigatória")
+    .max(new Date(), "Verifique a data de nascimento"),
   maritalStatus: yup
     .string()
     .oneOf(
@@ -37,9 +38,9 @@ const validation = yup.object().shape({
     .required("Este campo é obrigatório"),
   rg: yup
     .string()
-    /*lógica para validar órgão expedidor?*/
     .max(20, "O campo RG deve ter no máximo 20 caracteres")
     .required("O campo RG é obrigatório"),
+  orgaoExpedidor: yup.string(),
   birthplace: yup
     .string()
     .min(8, "O campo naturalidade deve ter pelo menos 5 caracteres")
@@ -52,14 +53,13 @@ const validation = yup.object().shape({
       "No campo Contato de Emergência digite um número de telefone no formato (99) 9 9999-99999"
     )
     .required("O campo Contato de Emergência é obrigatório"),
-  allergiesList: yup
-    .string(),
-     specificCares: yup
-    .string(),
+  allergiesList: yup.string(),
+  specificCares: yup.string(),
   healthInsurance: yup.string(),
   insuranceNumber: yup.string(),
   insuranceVality: yup
-  .date("A Validade do Convênio deve ser um data"),
+    .date()
+    .min(new Date(), "Validade do seguro de saúde deve ser válida"),
   adress: enderecoSchema,
 });
 

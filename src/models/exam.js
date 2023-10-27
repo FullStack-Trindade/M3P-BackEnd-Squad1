@@ -1,5 +1,5 @@
 const connection = require('../database/index');
-const { Sequelize, DATE } = require('sequelize');
+const { Sequelize} = require('sequelize');
 
 const Patient = require('./patient')
 
@@ -11,7 +11,7 @@ const Exam = connection.define('exam', {
         primaryKey: true,
     },
 
-    id_patient:{
+    id_pacient:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
