@@ -31,7 +31,7 @@ const deleteExam = require("./src/controllers/exams/deleteExams");
 const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 const validatePutUser = require("./src/middlewares/validatePutUser");
-const validateExams = require("./src/middlewares/validate-exams");
+const validateExam = require("./src/middlewares/validateExam");
 
 
 
@@ -57,8 +57,8 @@ app.put("/api/usuarios/:id",validatePutUser,putUser );
 app.get("/api/usuarios",getUser);
 
 //Exame
-app.post("/api/exames", validateExams, createExam);
-app.put("/api/exames/:id", validateExams, updateExam);
+app.post("/api/exames", validateExam, createExam);
+app.put("/api/exames/:id", validateExam, updateExam);
 app.get("/api/exames", readExam);
 app.post("/api/exames/:id", deleteExam);
 
