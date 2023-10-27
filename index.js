@@ -21,10 +21,17 @@ const postUser = require("./src/controllers/user/postUser");
 const putUser = require("./src/controllers/user/putUser");
 const getUser = require('./src/controllers/user/getUser');
 
+//Exam
+const createExam = require("./src/controllers/exams/createExams");
+const readExam = require("./src/controllers/exams/readExams");
+const updateExam = require("./src/controllers/exams/updateExams");
+const deleteExam = require("./src/controllers/exams/deleteExams"); 
+
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 const validatePutUser = require("./src/middlewares/validatePutUser");
+
 
 
 const app = express();
@@ -36,7 +43,7 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-
+//Paciente
 app.post("/api/pacientes", validatePatientRequest, createPatient);
 app.put("/api/pacientes/:id", validatePatientRequest, updatePatient);
 app.get("/api/pacientes", patientList);
@@ -47,6 +54,12 @@ app.delete("/api/pacientes/:id", deletePatient);
 app.post("/api/usuario", validaUsuario, postUser);
 app.put("/api/usuarios/:id",validatePutUser,putUser );
 app.get("/api/usuarios",getUser);
+
+//Exame
+app.post("/api/exames", createExam);
+app.put("/api/exames/:id", updateExam);
+app.get("/api/exames", readExam);
+app.post("/api/exames/:id", deleteExam);
 
 
 //Consultas
