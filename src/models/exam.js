@@ -11,7 +11,7 @@ const Exam = connection.define('exam', {
         primaryKey: true,
     },
 
-    id_pacient:{
+    id_patient:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
@@ -62,6 +62,6 @@ const Exam = connection.define('exam', {
 
 });
 
-    Exame.belongsTo(Patient, {foreignKey:"id_patient"});
+    Exam.belongsTo(Patient, {foreignKey:"id_patient"});
 
 module.exports = Exam;

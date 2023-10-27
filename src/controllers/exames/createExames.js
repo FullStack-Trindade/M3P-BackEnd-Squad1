@@ -8,28 +8,28 @@ async function createExam(request, response) {
 
 
     const exam = {
-        id_pacient: request.body.id_pacient,
+        id_patient: request.body.id_patient,
         id_doctor: request.body.id_doctor,
-        examName: request.body.examName,
-        dtExam: request.body.dtExam || newDate.setDate(newDate.getDate()),
+        nameExam: request.body.nameExam,
+        dateExam: request.body.dateExam || newDate.setDate(newDate.getDate()),
         examTime: request.body.examTime || examTime,
-        examType: request.body.examType,
-        examLab: request.body.examLab,
+        typeExam: request.body.typeExam,
+        labExam: request.body.labExam,
         urlExam: request.body.urlExam,
-        examResults: request.body.examResults,
+        resultExam: request.body.resultExam,
     }
 
 
-    const examExistente = await Exam.findOne({
+    const examExisting = await Exam.findOne({
         where: {
-            id_pacient: exam.id_pacient,
-            examName: exam.examName,
-            dtExam: exam.dtExam
+            id_patient: exam.id_patient,
+            nameExam: exam.nameExam,
+            dateExam: exam.dateExam
 
         },
     });
 
-    if (!examExistente) {
+    if (!examExisting) {
         const newExam = await Exam.create(exam);
         response.status(201).json(newExam)
 
