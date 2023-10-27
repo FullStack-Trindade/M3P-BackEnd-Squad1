@@ -12,7 +12,7 @@ async function createExam(request, response) {
         id_doctor: request.body.id_doctor,
         nameExam: request.body.nameExam,
         dateExam: request.body.dateExam || newDate.setDate(newDate.getDate()),
-        examTime: request.body.examTime || examTime,
+        hourExam: request.body.hourExam || examTime,
         typeExam: request.body.typeExam,
         labExam: request.body.labExam,
         urlExam: request.body.urlExam,
@@ -38,6 +38,7 @@ async function createExam(request, response) {
     }
         
     } catch (error) {
+        console.log(error);
         return response.status(500).json({ message: 'Não foi possível atender sua solicitação' })
     }
     

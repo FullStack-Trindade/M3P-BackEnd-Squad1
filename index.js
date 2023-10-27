@@ -32,6 +32,7 @@ const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 const validatePutUser = require("./src/middlewares/validatePutUser");
 const validateExam = require("./src/middlewares/validateExam");
+const validateExamUpdate = require('./src/middlewares/appointment/validateExamUpdate');
 
 
 
@@ -58,9 +59,9 @@ app.get("/api/usuarios",getUser);
 
 //Exame
 app.post("/api/exames", validateExam, createExam);
-app.put("/api/exames/:id", validateExam, updateExam);
+app.put("/api/exames/:id", validateExamUpdate, updateExam);
 app.get("/api/exames", readExam);
-app.post("/api/exames/:id", deleteExam);
+app.delete("/api/exames/:id", deleteExam);
 
 
 //Consultas

@@ -70,5 +70,6 @@ const Appointment = connection.define('appointment', {
 });
 
 Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_doctor'});
+Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_patient'});
 
 module.exports = Appointment;

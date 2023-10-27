@@ -58,6 +58,7 @@ const Exam = connection.define('exam', {
     statusExam: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: true
     },
 
 });

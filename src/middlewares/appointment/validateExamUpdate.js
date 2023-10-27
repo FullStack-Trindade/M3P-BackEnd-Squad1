@@ -1,12 +1,6 @@
 const yup = require("yup");
 
 const validation = yup.object().shape({
-    id_patient: yup
-    .number()
-    .typeError("ID do usuário deve ser um número.")
-    .required("ID do usuário é obrigatório.")
-    .positive("ID do usuário deve ser positivo.")
-    .integer("ID do usuário deve ser um número inteiro."),
     id_doctor: yup
     .number()
     .typeError("ID do médico deve ser um número.")
@@ -40,7 +34,7 @@ const validation = yup.object().shape({
     .required("O campo resultado do exame é obrigatório"),
 });
 
-function validateExam(request, response, next) {
+function validateExamUpdate(request, response, next) {
   try {
     validation.validateSync(request.body);
     next();
@@ -49,4 +43,4 @@ function validateExam(request, response, next) {
   }
 }
 
-module.exports = validateExam;
+module.exports = validateExamUpdate;

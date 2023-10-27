@@ -19,21 +19,22 @@ async function updateExam(request, response) {
             typeExam,
             labExam,
             urlExam,
-            resulExam, 
+            resultExam, 
         } = request.body;
                 
-            exameExiste.nomeExame = nomeExame;
-            exameExiste.dataExame = dataExame;
-            exameExiste.horaExame = horaExame;
-            exameExiste.tipoExame = tipoExame;
-            exameExiste.labExame = labExame;
-            exameExiste.urlExame = urlExame;
-            exameExiste.resultaDoExame = resultaDoExame;
+            examExisting.nameExam = nameExam;
+            examExisting.dateExam = dateExam;
+            examExisting.hourExam = hourExam;
+            examExisting.typeExam = typeExam;
+            examExisting.labExam = labExam;
+            examExisting.urlExam = urlExam;
+            examExisting.resultExam = resultExam;
 
-            const exameUpdate = await exameExiste.save();
-            return response.status(200).json(exameUpdate) 
+            const examUpdate = await examExisting.save();
+            return response.status(200).json(examUpdate) 
 
     } catch (error) {
+        console.log(error);
         return response.status(500).json({message:  "Erro de Sistema! Tente mais tarde"});
     }
 };
