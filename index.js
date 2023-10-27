@@ -22,17 +22,17 @@ const putUser = require("./src/controllers/user/putUser");
 const getUser = require('./src/controllers/user/getUser');
 
 //Exam
-const createExam = require("./src/controllers/exames/createExams");
-const readExam = require("./src/controllers/exames/readExams");
-const updateExam = require("./src/controllers/exames/updateExams");
-const deleteExam = require("./src/controllers/exames/deleteExams"); 
+const createExam = require("./src/controllers/exams/createExams");
+const readExam = require("./src/controllers/exams/readExams");
+const updateExam = require("./src/controllers/exams/updateExams");
+const deleteExam = require("./src/controllers/exams/deleteExams"); 
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 const validatePatientUpdate = require("./src/middlewares/validate-patient-update");
 const validatePutUser = require("./src/middlewares/validatePutUser");
-const validateExam = require("./src/middlewares/validate-exemes.request");
+const validateExam = require("./src/middlewares/validate-exams.request");
 const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
 
 const app = express();
