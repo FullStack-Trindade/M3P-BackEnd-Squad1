@@ -11,7 +11,7 @@ const Exam = connection.define('exam', {
         primaryKey: true,
     },
 
-    id_pacient:{
+    id_patient:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
@@ -20,48 +20,49 @@ const Exam = connection.define('exam', {
         allowNull: false,
     },
 
-    examName: {
+    nameExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    dtExam: {
-        type: Sequelize.DATE,
+    dateExam: {
+        type: Sequelize.DATEONLY,
         allowNull: false,
     },
 
-    examTime: {
+    hourExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    examType: {
+    typeExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    examLab: {
+    labExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    examUrl: {
+    urlExam: {
         type: Sequelize.STRING,
         allowNull: true,
     },
 
-    examResults:{
+    resultExam:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    statusExame: {
-        type: Sequelize.BOOLEAN,        
-        valueDefault: true
+    statusExam: {
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: true
     },
 
 });
 
-   Exam.belongsTo(Patient, {foreignKey:"id_paciente"});
+    Exam.belongsTo(Patient, {foreignKey:"id_patient"});
 
 module.exports = Exam;
