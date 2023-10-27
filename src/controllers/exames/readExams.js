@@ -1,7 +1,7 @@
-const Exame = require('../../models/exame');
+const Exam = require('../../models/exam');
 const User = require('../../models/user');
 
-async function exameRead (request, response) {
+async function examRead (request, response) {
 
     const idUser = request.params.id;
 
@@ -10,7 +10,7 @@ async function exameRead (request, response) {
         console.log(id);
         
         if (id) {
-            const user = await Exame.findAll({
+            const user = await Exam.findAll({
                 where: {
                     id_paciente: id
                 }
@@ -29,4 +29,4 @@ async function exameRead (request, response) {
     }
 };
 
-module.exports = exameRead;
+module.exports = examRead;

@@ -1,4 +1,4 @@
-const Exam = require('../../models/exame');
+const Exam = require('../../models/exam');
 
 async function createExam(request, response) {
 

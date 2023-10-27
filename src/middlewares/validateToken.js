@@ -12,7 +12,7 @@ const validateToken = (request, response, next)=>{
 
 
     const newToken = token.slice(7)
-    newToken = newToken.substring(0, newToken.length - 1)
+/*     newToken = newToken.substring(0, newToken.length - 1) */
 
 
     jwt.verify(newToken,'secret_key', (error, conteudoDoToken)=>{

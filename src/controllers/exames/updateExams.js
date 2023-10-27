@@ -1,4 +1,4 @@
-const Exame = require('../../models/exame');
+const Exam = require('../../models/exam');
 
 async function updateExame(request, response) {
     
