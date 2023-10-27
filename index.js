@@ -39,8 +39,6 @@ const Login = require('./src/controllers/session/login')
 const validateToken = require('./src/middlewares/validateToken')
 app.post('/api/usuario/login', validateToken, Login)
 
-const postUser = require('./src/controllers/user/postUser')
-const validaUsuario = require('./src/middlewares/validaUsuario')
 app.post('/api/usuario', validaUsuario, postUser)
 
 app.use(patientRecordRoutes);
