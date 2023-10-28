@@ -3,12 +3,9 @@ const User = require("../../models/user");
 async function searchUserByCpf(request, response) {
   try {
     if (!request.body.cpf && !request.body.email) {
-      response
-        .status(400)
-        .json({
-          message:
-            "Você deve fornecer um CPF ou um email para buscar o usuário",
-        });
+      response.status(400).json({
+        message: "Você deve fornecer um CPF ou um email para buscar o usuário",
+      });
     } else {
       let userExists;
 
@@ -27,11 +24,7 @@ async function searchUserByCpf(request, response) {
       }
 
       if (!userExists) {
-        response
-          .status(400)
-          .json({
-            message: "Usuário não encontrado com o CPF ou email fornecido",
-          });
+        response.status(200).json(null);
       } else {
         response.status(200).json(userExists);
       }
