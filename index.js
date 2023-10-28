@@ -48,7 +48,7 @@ app.delete("/api/pacientes/:id", deletePatient);
 app.post("/api/usuario", validaUsuario, postUser);
 app.put("/api/usuarios/:id",validatePutUser,putUser );
 app.get("/api/usuarios",getUser);
-app.get("/api/usuarios/search",searchUserByCpf);
+app.post("/api/usuarios/search",searchUserByCpf);
 
 
 //Consultas
