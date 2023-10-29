@@ -1,10 +1,10 @@
-const Sequelize = require('sequelize')
+require('dotenv').config();
 
 require('pg').types.setTypeParser(1114, function(stringValue) {
     return new Date(Date.parse(stringValue + '+0000'));
 })
 
-const connection = new Sequelize({
+module.exports = {
     dialect: process.env.DIALECT_DATABASE,
     host: process.env.HOST_DATABASE,
     username: process.env.USER_DATABASE,
@@ -17,6 +17,4 @@ const connection = new Sequelize({
         underscoredAll: true
     },    
     timezone: '-03:00'
-})
-
-module.exports = connection
+}
