@@ -1,65 +1,71 @@
 const connection = require('../database/index');
 const { Sequelize, DATE } = require('sequelize')
 
-const Exame = connection.define('exame', {
-
+const Exame = connection.define('exam', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true,
     },
-
-    id_pacient:{
+    id_patient:{
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+            model: { tableName: 'patients', key: 'id' }
+        }
     },
-    id_medico:{
+    id_doctor:{
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+            model: { tableName: 'users', key: 'id' }
+        }
     },
-
-    nomeExame: {
+    nameExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-
-    dataExame: {
+    dateExam: {
         type: Sequelize.DATEONLY,
         allowNull: false,
     },
-
-    horaExame: {
-        type: Sequelize.TIME,
-        allowNull: false,
-    },
-
-    tipoExame: {
+    hourExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
-
-    labExame: {
+    typeExam: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    labExam: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+    urlExam: {
         type: Sequelize.STRING,
         allowNull: true,
     },
-
-    urlExame: {
-        type: Sequelize.STRING,
-        allowNull: true,
-    },
-
-    resultadoExame: {
+    resultExam:{
         type: Sequelize.STRING,
         allowNull: false,
     },
-
-    statusExame: {
+    statusExam: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: true
     },
-
+    created_at: {
+        type: 'TIMESTAMP',
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    updated_at: {
+        type: 'TIMESTAMP',
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+    }
 });
 
-    Exame.bleongsTo(Patient, {foreignKey:"idPatient"})
+    // Exame.bleongsTo(Patient, {foreignKey:"idPatient"})
 
 module.exports = Exame;
