@@ -1,11 +1,11 @@
-const {Sequelize} = require('sequelize');
-const connection = require('../database')
+const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
+
 const Type = require('./type')
 
-
-const User = connection.define('user', {
+const User = sequelize.define('users', {
     id: {
-        autoIncrement: true,
         type: Sequelize.INTEGER,
         autoIncrement: true,
         primaryKey: true
@@ -40,12 +40,10 @@ const User = connection.define('user', {
         allowNull: false,
         defaultValue: true
     },
-
     phone: {
         type: Sequelize.STRING,
         allowNull: false
     },
-
     created_at: {
         type: 'TIMESTAMP',
         allowNull: false,
@@ -60,4 +58,4 @@ const User = connection.define('user', {
 
 User.belongsTo(Type, { foreignKey: 'id_type' });
 
-module.exports = User; 
+module.exports = User;
