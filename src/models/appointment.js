@@ -1,10 +1,11 @@
-const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
 
 const User = require('./user');
 const Patient = require('./patient');
 
-const Appointment = connection.define('appointment', {
+const Appointment = sequelize.define('appointments', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
