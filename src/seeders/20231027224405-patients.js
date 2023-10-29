@@ -19,7 +19,7 @@ module.exports = {
         health_insurance: 'Amil',
         insurance_number: '123456',
         insurance_vality: '2025-10',
-        adress: 1,
+        adress_id: 1,
         status: true
       },
       {
@@ -35,7 +35,7 @@ module.exports = {
         health_insurance: 'SUS',
         insurance_number: '789123',
         insurance_vality: '',
-        adress: 2,
+        adress_id: 2,
         status: true
       }
     ]);
