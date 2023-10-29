@@ -53,7 +53,7 @@ async function patientRegister(request, response) {
       healthInsurance: request.body.healthInsurance,
       insuranceNumber: request.body.insuranceNumber,
       insuranceVality: request.body.insuranceVality,
-      adress: adress.id,
+      adressId: adress.id,
       idUser: request.body.idUser,
     };
 

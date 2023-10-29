@@ -45,35 +45,35 @@ async function updatePatient(request, response) {
 
     await patientInDatabase.save();
 
-    const adressInDatabase = await Adress.findByPk(patientInDatabase.adress);
+    const adressInDatabase = await Adress.findByPk(patientInDatabase.adressId);
 
     if (!adressInDatabase) {
       return response.status(404).json({ message: "Endereço não encontrado" });
     }
 
-    adressInDatabase.cep = request.body.adress.cep
-      ? request.body.adress.cep
+    adressInDatabase.cep = request.body.adressId.cep
+      ? request.body.adressId.cep
       : adressInDatabase.cep;
-    adressInDatabase.city = request.body.adress.city
-      ? request.body.adress.city
+    adressInDatabase.city = request.body.adressId.city
+      ? request.body.adressId.city
       : adressInDatabase.city;
-    adressInDatabase.state = request.body.adress.state
-      ? request.body.adress.state
+    adressInDatabase.state = request.body.adressId.state
+      ? request.body.adressId.state
       : adressInDatabase.state;
-    adressInDatabase.street = request.body.adress.street
-      ? request.body.adress.street
+    adressInDatabase.street = request.body.adressId.street
+      ? request.body.adressId.street
       : adressInDatabase.street;
-    adressInDatabase.number = request.body.adress.number
-      ? request.body.adress.number
+    adressInDatabase.number = request.body.adressId.number
+      ? request.body.adressId.number
       : adressInDatabase.number;
-    adressInDatabase.complement = request.body.adress.complement
-      ? request.body.adress.complement
+    adressInDatabase.complement = request.body.adressId.complement
+      ? request.body.adressId.complement
       : adressInDatabase.complement;
-    adressInDatabase.neighborhood = request.body.adress.neighborhood
-      ? request.body.adress.neighborhood
+    adressInDatabase.neighborhood = request.body.adressId.neighborhood
+      ? request.body.adressId.neighborhood
       : adressInDatabase.neighborhood;
-    adressInDatabase.reference = request.body.adress.reference
-      ? request.body.adress.reference
+    adressInDatabase.reference = request.body.adressId.reference
+      ? request.body.adressId.reference
       : adressInDatabase.reference;
     adressInDatabase.updated_at = dayjs().subtract(3, "hour");
 
