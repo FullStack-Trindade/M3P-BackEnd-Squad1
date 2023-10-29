@@ -1,7 +1,8 @@
-const { Sequelize } = require('sequelize')
-const connection = require('../database')
+const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
 
-const Type = connection.define('type', {
+const Type = sequelize.define('types', {
   id_type: {
     type: Sequelize.INTEGER,
     primaryKey: true
@@ -12,7 +13,7 @@ const Type = connection.define('type', {
   }
 });
 
-connection.sync().then(() => {
+sequelize.sync().then(() => {
   Type.findOrCreate({
     where: { id_type: 0, descricao: 'Administrador' }
   });
@@ -27,4 +28,4 @@ connection.sync().then(() => {
   });
 });
 
-module.exports = Type; 
+module.exports = Type;
