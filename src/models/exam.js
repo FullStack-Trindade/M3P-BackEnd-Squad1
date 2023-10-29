@@ -11,10 +11,16 @@ const Exam = sequelize.define('exams', {
     id_patient:{
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+            model: { tableName: 'patients', key: 'id' }
+        }
     },
     id_doctor:{
         type: Sequelize.INTEGER,
         allowNull: false,
+        references: {
+            model: { tableName: 'users', key: 'id' }
+        }
     },
     nameExam: {
         type: Sequelize.STRING,
