@@ -2,8 +2,6 @@ const { Sequelize } = require('sequelize');
 const connection = require('../config/database');
 const sequelize = new Sequelize(connection);
 
-const Patient = require('./patient')
-
 const Exam = sequelize.define('exams', {
     id: {
         type: Sequelize.INTEGER,
@@ -51,9 +49,16 @@ const Exam = sequelize.define('exams', {
         allowNull: false,
         defaultValue: true
     },
-
+    created_at: {
+        type: 'TIMESTAMP',
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+    },
+    updated_at: {
+        type: 'TIMESTAMP',
+        allowNull: false,
+        defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
+    }
 });
-
-Exam.belongsTo(Patient, {foreignKey:"id_patient"});
 
 module.exports = Exam;
