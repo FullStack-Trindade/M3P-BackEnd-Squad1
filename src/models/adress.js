@@ -1,7 +1,8 @@
-const connection = require("../database/index");
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
 
-const Adress = connection.define("adress", {
+const Adress = sequelize.define("adresses", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
@@ -41,12 +42,12 @@ const Adress = connection.define("adress", {
     type: 'TIMESTAMP',
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-},
-updated_at: {
+  },
+  updated_at: {
     type: 'TIMESTAMP',
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-}
+  }
 });
 
 module.exports = Adress;
