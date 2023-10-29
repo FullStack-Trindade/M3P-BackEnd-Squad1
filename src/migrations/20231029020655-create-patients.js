@@ -66,7 +66,7 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
-      adress: {
+      adress_id: {
         type: Sequelize.INTEGER,
         allowNull: false,
         references: {
