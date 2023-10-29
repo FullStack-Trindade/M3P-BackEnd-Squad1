@@ -2,7 +2,9 @@ const { Sequelize } = require('sequelize');
 const connection = require('../config/database');
 const sequelize = new Sequelize(connection);
 
-const Type = require('./type')
+const Patient = require('./patient');
+const Appointment = require('./appointment');
+const Exam = require('./exam');
 
 const User = sequelize.define('users', {
     id: {
@@ -33,7 +35,10 @@ const User = sequelize.define('users', {
     },
     id_type: {
         type: Sequelize.INTEGER,
-        allowNull: false
+        allowNull: false,
+        references: {
+            model: { tableName: 'types', key: 'id' }
+        }
     },
     status: {
         type: Sequelize.BOOLEAN,
@@ -56,6 +61,13 @@ const User = sequelize.define('users', {
     }
 });
 
-User.belongsTo(Type, { foreignKey: 'id_type' });
+User.hasOne(Patient, { sourceKey: 'id', foreignKey: 'idUser' });
+Patient.belongsTo(User, { foreignKey: 'idUser' });
+
+User.hasMany(Appointment, { sourceKey: 'id', foreignKey: 'id_doctor' });
+Appointment.belongsTo(User, { foreignKey: 'id_doctor' });
+
+User.hasMany(Exam, { sourceKey: 'id', foreignKey: 'id_doctor' });
+Exam.belongsTo(User, { foreignKey: 'id_doctor' });
 
 module.exports = User;
