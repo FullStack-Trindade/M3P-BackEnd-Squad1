@@ -2,9 +2,6 @@ const { Sequelize } = require('sequelize');
 const connection = require('../config/database');
 const sequelize = new Sequelize(connection);
 
-const User = require('./user');
-const Patient = require('./patient');
-
 const Appointment = sequelize.define('appointments', {
     id: {
         type: Sequelize.INTEGER,
@@ -17,12 +14,18 @@ const Appointment = sequelize.define('appointments', {
     id_patient: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        references: {
+            model: { tableName: 'patients', key: 'id' }
+        }
     },
     id_doctor: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        references: {
+            model: { tableName: 'users', key: 'id' }
+        }
     },
     appointment_reason: {
         type: Sequelize.STRING(64),
@@ -70,8 +73,5 @@ const Appointment = sequelize.define('appointments', {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
 });
-
-Appointment.belongsTo(User, { /* sourcekey: 'id', */ foreignKey: 'id_doctor'});
-Appointment.belongsTo(Patient, {/*  sourcekey: 'id',  */foreignKey: 'id_patient'});
 
 module.exports = Appointment;
