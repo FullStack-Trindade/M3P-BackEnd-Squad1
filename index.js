@@ -1,9 +1,9 @@
 require('dotenv').config()
 const express = require('express')
 const cors = require('cors');
-const appointmentRoutes = require('./src/routes/appointment')
 
-const connection = require('./src/database/index');
+const { Sequelize } = require('sequelize');
+const connection = require('./src/config/database');
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
@@ -26,6 +26,9 @@ const createExam = require("./src/controllers/exams/createExams");
 const readExam = require("./src/controllers/exams/readExams");
 const updateExam = require("./src/controllers/exams/updateExams");
 const deleteExam = require("./src/controllers/exams/deleteExams"); 
+
+//Consultas
+const appointmentRoutes = require('./src/routes/appointment');
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
@@ -67,15 +70,16 @@ app.delete("/api/exames/:id", deleteExam);
 app.use(appointmentRoutes);
 
 const startServer = () => {
-
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
   });
-  };
+};
+
+const sequelize = new Sequelize(connection);
 
 const connect = async() => {
   try {
-    await connection.authenticate()
+    await sequelize.authenticate()
     console.log('Conexão com banco de dados bem sucedida');
     startServer();
   } catch (error) {
@@ -83,5 +87,4 @@ const connect = async() => {
   }
 }
 
-connect()
-connection.sync({ alter: true });
+connect();
