@@ -5,10 +5,13 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "nodemon index.js"
+    "start": "nodemon index.js",
+    "db-migrate": "npx sequelize-cli db:migrate",
+    "db-seed": "npx sequelize-cli db:seed:all",
+    "db-seed-undo": "npx sequelize-cli db:seed:undo:all"
   },
   "keywords": [],
-  "author": "",
+  "author": "Squad01",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -22,5 +25,8 @@
     "pg-hstore": "^2.3.4",
     "sequelize": "^6.33.0",
     "yup": "^1.3.2"
+  },
+  "devDependencies": {
+    "sequelize-cli": "^6.6.1"
   }
 }
