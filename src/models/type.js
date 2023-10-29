@@ -2,6 +2,8 @@ const { Sequelize } = require('sequelize');
 const connection = require('../config/database');
 const sequelize = new Sequelize(connection);
 
+const User = require('./user');
+
 const Type = sequelize.define('types', {
   id: {
     type: Sequelize.INTEGER,
@@ -23,19 +25,7 @@ const Type = sequelize.define('types', {
   }
 });
 
-sequelize.sync().then(() => {
-  Type.findOrCreate({
-    where: { id_type: 0, descricao: 'Administrador' }
-  });
-  Type.findOrCreate({
-    where: { id_type: 1, descricao: 'Medico' }
-  });
-  Type.findOrCreate({
-    where: { id_type: 2, descricao: 'Enfermeiro' }
-  });
-  Type.findOrCreate({
-    where: { id_type: 3, descricao: 'Paciente' }
-  });
-});
+Type.hasOne(User, { sourceKey: 'id', foreignKey: 'id_type' });
+User.belongsTo(Type, { foreignKey: 'id_type' });
 
 module.exports = Type;
