@@ -52,8 +52,8 @@ const Adress = sequelize.define("adresses", {
   }
 });
 
-Adress.hasOne(Patient, { sourceKey: 'id', foreignKey: 'adress' });
-Patient.belongsTo(Adress, { foreignKey: 'adress' });
+Adress.hasOne(Patient, { sourceKey: 'id', foreignKey: 'adressId' });
+Patient.belongsTo(Adress, { foreignKey: 'adressId' });
 
 module.exports = Adress;
 
