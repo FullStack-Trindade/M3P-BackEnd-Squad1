@@ -1,22 +1,21 @@
-const connection = require("../database/index");
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
 
 /* const Appointment = require("./appointment"); */
 // const Exam = require("./exame");
 const User = require("./user");
 
-const Patient = connection.define("patient", {
+const Patient = sequelize.define("patients", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
     primaryKey: true,
   },
-
   idUser: {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
-
   birth: {
     type: Sequelize.DATEONLY,
     allowNull: true,
@@ -75,12 +74,12 @@ const Patient = connection.define("patient", {
     type: 'TIMESTAMP',
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-},
-updated_at: {
+  },
+  updated_at: {
     type: 'TIMESTAMP',
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-}
+  }
 });
 
 Patient.belongsTo(User, {foreignKey: "idUser"});
