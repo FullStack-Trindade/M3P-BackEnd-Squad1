@@ -7,16 +7,16 @@ const putUser = async (request, response) => {
     try {
         const getUsuario = await User.findOne({
             where: {
-                id: request.body.id
+                id: request.params.id
             }
         });
-
+        
         if (getUsuario?.email === request.body.email) {
             return response.status(409).json({
                 msg: `Email: ${request.body.email} já cadastrado!`
             });
         }
-
+        
         const password = request.body.password !== '' ? await bcrypt.hash(request.body.password, 10) : getUsuario.password;
 
         const update = {
@@ -24,20 +24,19 @@ const putUser = async (request, response) => {
             gender: request.body.gender || getUsuario?.gender,
             email: request.body.email || getUsuario?.email,
             password: password,
-            idType: request.body.idType || getUsuario?.idType,
+            id_type: request.body.id_type || getUsuario?.id_type,
             phone: request.body.phone || getUsuario?.phone,
             updated_at: dayjs().subtract(3, 'hour').format('YYYY-MM-DD HH:mm:ss'),
         };
 
         const updateCadastro = await User.update(update, {
             where: {
-                id: request.body.id
+                id: request.params.id
             }
         });
 
         if (updateCadastro[0] > 0) {
-            return response.status(200).json(updateCadastro
-            );
+            return response.status(200).json(update);
         } else {
             return response.status(400).json({
                 msg: 'Não foi possível atualizar o cadastro'
