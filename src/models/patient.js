@@ -70,6 +70,12 @@ const Patient = sequelize.define("patients", {
     type: Sequelize.INTEGER,
     allowNull: false,
   },
+  status: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false,
+    notEmpty: true,
+    defaultValue: true
+  },
   created_at: {
     type: 'TIMESTAMP',
     allowNull: false,
