@@ -1,9 +1,9 @@
-require('dotenv').config()
-const express = require('express')
-const cors = require('cors');
-const appointmentRoutes = require('./src/routes/appointment')
+require("dotenv").config();
+const express = require("express");
+const cors = require("cors");
+const appointmentRoutes = require("./src/routes/appointment");
 
-const connection = require('./src/database/index');
+const connection = require("./src/database/index");
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
@@ -15,11 +15,13 @@ const updatePatient = require("./src/controllers/Patients/updatePatients");
 const patientList = require("./src/controllers/Patients/patientList");
 const searchPatients = require("./src/controllers/Patients/searchPatients");
 const deletePatient = require("./src/controllers/Patients/deletePatients");
+const searchPatientByIdUser = require("./src/controllers/Patients/searchPatientByIdUser");
 
 //Usuário
 const postUser = require("./src/controllers/user/postUser");
 const putUser = require("./src/controllers/user/putUser");
-const getUser = require('./src/controllers/user/getUser');
+const getUser = require("./src/controllers/user/getUser");
+const searchUserByCpf = require("./src/controllers/user/searchUserByCpfEmail");
 
 //Exam
 const createExam = require("./src/controllers/exams/createExams");
@@ -50,11 +52,13 @@ app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
 app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
+app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
 
-//Usuário
-app.post('/api/usuarios', validateToken , validaUsuario, postUser);
-app.put("/api/usuarios/:id",validatePutUser,putUser );
-app.get("/api/usuarios",getUser);
+
+app.post("/api/usuario", validaUsuario, postUser);
+app.put("/api/usuarios/:id", validatePutUser, putUser);
+app.get("/api/usuarios", getUser);
+app.post("/api/usuarios/search", searchUserByCpf);
 app.post('/api/usuarios/login', Login);
 
 //Exame
@@ -63,25 +67,25 @@ app.put("/api/exames/:id", validateExamUpdate, updateExam);
 app.get("/api/exames", readExam);
 app.delete("/api/exames/:id", deleteExam);
 
+
 //Consultas
 app.use(appointmentRoutes);
 
 const startServer = () => {
-
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
   });
-  };
+};
 
 const connect = async() => {
+
   try {
-    await connection.authenticate()
-    console.log('Conexão com banco de dados bem sucedida');
+    await connection.authenticate();
+    console.log("Conexão com banco de dados bem sucedida");
     startServer();
   } catch (error) {
-    console.log('Sem conexao com banco de dados', error);
+    console.log("Sem conexao com banco de dados", error);
   }
-}
-
+};
 connect()
 connection.sync({ alter: true });
