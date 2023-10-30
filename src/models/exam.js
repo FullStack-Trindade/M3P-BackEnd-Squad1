@@ -1,7 +1,9 @@
 const connection = require('../database/index');
-const { Sequelize, DATE } = require('sequelize')
+const { Sequelize} = require('sequelize');
 
-const Exame = connection.define('exame', {
+const Patient = require('./patient')
+
+const Exam = connection.define('exam', {
 
     id: {
         type: Sequelize.INTEGER,
@@ -9,57 +11,58 @@ const Exame = connection.define('exame', {
         primaryKey: true,
     },
 
-    id_pacient:{
+    id_patient:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
-    id_medico:{
+    id_doctor:{
         type: Sequelize.INTEGER,
         allowNull: false,
     },
 
-    nomeExame: {
+    nameExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    dataExame: {
+    dateExam: {
         type: Sequelize.DATEONLY,
         allowNull: false,
     },
 
-    horaExame: {
-        type: Sequelize.TIME,
-        allowNull: false,
-    },
-
-    tipoExame: {
+    hourExam: {
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    labExame: {
+    typeExam: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
+    labExam: {
+        type: Sequelize.STRING,
+        allowNull: false,
+    },
+
+    urlExam: {
         type: Sequelize.STRING,
         allowNull: true,
     },
 
-    urlExame: {
-        type: Sequelize.STRING,
-        allowNull: true,
-    },
-
-    resultadoExame: {
+    resultExam:{
         type: Sequelize.STRING,
         allowNull: false,
     },
 
-    statusExame: {
+    statusExam: {
         type: Sequelize.BOOLEAN,
         allowNull: false,
+        defaultValue: true
     },
 
 });
 
-    Exame.bleongsTo(Patient, {foreignKey:"idPatient"})
+    Exam.belongsTo(Patient, {foreignKey:"id_patient"});
 
-module.exports = Exame;
+module.exports = Exam;

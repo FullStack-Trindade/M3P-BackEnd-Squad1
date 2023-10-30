@@ -40,10 +40,12 @@ const User = connection.define('user', {
         allowNull: false,
         defaultValue: true
     },
+
     phone: {
         type: Sequelize.STRING,
         allowNull: false
     },
+
     created_at: {
         type: 'TIMESTAMP',
         allowNull: false,
@@ -57,4 +59,5 @@ const User = connection.define('user', {
 });
 
 User.belongsTo(Type, { foreignKey: 'id_type' });
+
 module.exports = User; 

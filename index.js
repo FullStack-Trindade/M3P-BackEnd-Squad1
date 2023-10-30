@@ -23,10 +23,19 @@ const putUser = require("./src/controllers/user/putUser");
 const getUser = require("./src/controllers/user/getUser");
 const searchUserByCpf = require("./src/controllers/user/searchUserByCpfEmail");
 
+//Exam
+const createExam = require("./src/controllers/exams/createExams");
+const readExam = require("./src/controllers/exams/readExams");
+const updateExam = require("./src/controllers/exams/updateExams");
+const deleteExam = require("./src/controllers/exams/deleteExams"); 
+
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
+const validatePatientUpdate = require("./src/middlewares/validate-patient-update");
 const validatePutUser = require("./src/middlewares/validatePutUser");
+const validateExam = require("./src/middlewares/validate-exams.request");
+const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
 
 const app = express();
 app.use(express.json());
@@ -39,17 +48,25 @@ app.use(
 );
 
 app.post("/api/pacientes", validatePatientRequest, createPatient);
-app.put("/api/pacientes/:id", validatePatientRequest, updatePatient);
+app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
 app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
 app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
 
-//Usuário
+
 app.post("/api/usuario", validaUsuario, postUser);
 app.put("/api/usuarios/:id", validatePutUser, putUser);
 app.get("/api/usuarios", getUser);
 app.post("/api/usuarios/search", searchUserByCpf);
+app.post('/api/usuarios/login', Login);
+
+//Exame
+app.post("/api/exames", validateExam, createExam);
+app.put("/api/exames/:id", validateExamUpdate, updateExam);
+app.get("/api/exames", readExam);
+app.delete("/api/exames/:id", deleteExam);
+
 
 //Consultas
 app.use(appointmentRoutes);
@@ -60,7 +77,8 @@ const startServer = () => {
   });
 };
 
-const connect = async () => {
+const connect = async() => {
+
   try {
     await connection.authenticate();
     console.log("Conexão com banco de dados bem sucedida");
@@ -69,6 +87,5 @@ const connect = async () => {
     console.log("Sem conexao com banco de dados", error);
   }
 };
-
-connect();
+connect()
 connection.sync({ alter: true });
