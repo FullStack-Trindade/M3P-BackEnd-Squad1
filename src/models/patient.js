@@ -67,7 +67,7 @@ const Patient = connection.define("patient", {
     type: Sequelize.STRING,
     allowNull: false,
   },
-  adressId: {
+  adress: {
     type: Sequelize.INTEGER,
     allowNull: false,
     references: {

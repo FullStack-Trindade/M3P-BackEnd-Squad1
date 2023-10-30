@@ -69,7 +69,7 @@ const Adress = connection.define("adress", {
   }
 });
 
-Adress.hasOne(Patient, { sourceKey: 'id', foreignKey: 'adressId' });
-Patient.belongsTo(Adress, { foreignKey: 'adressId' });
+Adress.hasOne(Patient, { sourceKey: 'id', foreignKey: 'adress' });
+Patient.belongsTo(Adress, { foreignKey: 'adress', as: 'adress_id' });
 
 module.exports = Adress;
