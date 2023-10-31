@@ -7,6 +7,14 @@ async function createDiet (req, res) {
         const patient = await Patient.findByPk(req.body.id_patient);
         const doctor = await User.findByPk(req.body.id_doctor);
 
+        if (!patient) {
+            return res.status(400).json({ message: 'Paciente não consta nos registros' });
+        }
+
+        if (!doctor || doctor.id_type !== 1) {
+            return res.status(400).json({ message: 'Médico não consta nos registros' });
+        }
+
         const diet = {
             id_patient: patient.id,
             id_doctor: doctor.id,
