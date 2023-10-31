@@ -1,7 +1,6 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const appointmentRoutes = require("./src/routes/appointment");
 
 const connection = require("./src/database/index");
 
@@ -29,6 +28,12 @@ const readExam = require("./src/controllers/exams/readExams");
 const updateExam = require("./src/controllers/exams/updateExams");
 const deleteExam = require("./src/controllers/exams/deleteExams"); 
 
+//Consultas
+const appointmentRoutes = require("./src/routes/appointment");
+
+//Dietas
+const dietRoutes = require("./src/routes/diet");
+
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
@@ -47,7 +52,7 @@ app.use(
   })
 );
 
-app.post("/api/pacientes", validatePatientRequest, createPatient);
+app.post("/api/pacientes", validateToken, validatePatientRequest, createPatient);
 app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
 app.get("/api/pacientes", patientList);
 app.get("/api/pacientes/:id", searchPatients);
@@ -67,9 +72,11 @@ app.put("/api/exames/:id", validateExamUpdate, updateExam);
 app.get("/api/exames", readExam);
 app.delete("/api/exames/:id", deleteExam);
 
-
 //Consultas
 app.use(appointmentRoutes);
+
+//Dietas
+app.use(dietRoutes);
 
 const startServer = () => {
   app.listen(process.env.SERVER_PORT, () => {
