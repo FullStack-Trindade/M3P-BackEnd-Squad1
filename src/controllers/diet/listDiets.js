@@ -2,6 +2,8 @@ const Diet = require('../../models/diet');
 
 async function listDiets (req, res) {
     try {
+        const filter = req.query;
+
         if (filter.id) {
             if (filter.id <= 0) {
                 return res.status(400).json({ message: 'O ID do paciente deve ser um número positivo' });
