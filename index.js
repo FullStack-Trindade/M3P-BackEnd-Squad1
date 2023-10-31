@@ -1,13 +1,14 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
-const appointmentRoutes = require("./src/routes/appointment");
+
 
 const connection = require("./src/database/index");
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
 const validateToken = require("./src/middlewares/validateToken");
+const authRoutes = require('./src/routes/auth');
 
 //Pacientes
 const createPatient = require("./src/controllers/Patients/createPatients");
@@ -23,11 +24,14 @@ const putUser = require("./src/controllers/user/putUser");
 const getUser = require("./src/controllers/user/getUser");
 const searchUserByCpf = require("./src/controllers/user/searchUserByCpfEmail");
 
-//Exam
+//Exame
 const createExam = require("./src/controllers/exams/createExams");
 const readExam = require("./src/controllers/exams/readExams");
 const updateExam = require("./src/controllers/exams/updateExams");
 const deleteExam = require("./src/controllers/exams/deleteExams"); 
+
+//Consultas
+const appointmentRoutes = require("./src/routes/appointment");
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
@@ -47,6 +51,9 @@ app.use(
   })
 );
 
+app.use(authRoutes);
+
+//Paciente
 app.post("/api/pacientes", validatePatientRequest, createPatient);
 app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
 app.get("/api/pacientes", patientList);
@@ -54,8 +61,8 @@ app.get("/api/pacientes/:id", searchPatients);
 app.delete("/api/pacientes/:id", deletePatient);
 app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
 
-
-app.post("/api/usuario", validaUsuario, postUser);
+//Usuário
+app.post("/api/usuario", validateToken, validaUsuario, postUser);
 app.put("/api/usuarios/:id", validatePutUser, putUser);
 app.get("/api/usuarios", getUser);
 app.post("/api/usuarios/search", searchUserByCpf);
@@ -66,7 +73,6 @@ app.post("/api/exames", validateExam, createExam);
 app.put("/api/exames/:id", validateExamUpdate, updateExam);
 app.get("/api/exames", readExam);
 app.delete("/api/exames/:id", deleteExam);
-
 
 //Consultas
 app.use(appointmentRoutes);
