@@ -6,6 +6,10 @@ async function updateDiet (req, res) {
     try {
         const diet = await Diet.findByPk(req.params.id);
 
+        if (!diet) {
+            res.status(400).json({ message: 'Dieta não encontrada' });
+        }
+        
         const { 
             diet_name,
             diet_date,
