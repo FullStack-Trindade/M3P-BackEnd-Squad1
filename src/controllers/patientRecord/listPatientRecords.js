@@ -1,8 +1,13 @@
+const { Sequelize } = require('sequelize');
+
 const Patient = require('../../models/patient');
 
 async function listPatientRecords (req, res) {
     try {
-        const patients = await Patient.findAll({ include: { all: true } });
+        const patients = await Patient.findAll({
+                include: { all: true },                    
+                order: [[ Sequelize.literal('id'), 'ASC' ]] 
+        });
 
         if (!patients) {
             return res.status(400).json({ message: 'Pacientes não encontrados' })
