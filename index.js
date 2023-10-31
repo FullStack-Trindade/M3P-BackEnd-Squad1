@@ -1,6 +1,9 @@
 require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
+const swaggerUi = require("swagger-ui-express");
+const swaggerSpec = require("./swagger");
+
 const appointmentRoutes = require("./src/routes/appointment");
 
 const connection = require("./src/database/index");
@@ -46,6 +49,16 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+const generateSwagger = require("./generateSwagger");
+
+
+app.get("/swagger.js", async (req, res) => {
+  const swaggerSpec = await generateSwagger();
+  res.setHeader("Content-Type", "application/json");
+  res.send(swaggerSpec);
+});
+
+app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 app.post("/api/pacientes", validatePatientRequest, createPatient);
 app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
