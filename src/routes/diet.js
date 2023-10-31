@@ -2,6 +2,7 @@ const { Router } = require('express');
 
 // MIDDLEWARES
 const register = require('../middlewares/diet/validate-create-diet');
+const update = require('../middlewares/diet/validate-update-diet');
 
 // CONTROLLERS
 const createDiet = require('../controllers/diet/createDiet');
@@ -15,6 +16,5 @@ dietRoutes
     .post('/api/dietas', register.validateCreateDiet, createDiet)
     .put('/api/dietas/:id', update.validateCreateDiet, updateDiet)
     .get('/api/dietas', listDiets)
-
 
 module.exports = dietRoutes;
