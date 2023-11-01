@@ -10,14 +10,12 @@ async function listPatientRecords (req, res) {
         });
 
         if (!patients) {
-            return res.status(400).json({ message: 'Pacientes não encontrados' })
+            return res.status(400).json({ message: 'Não há pacientes com prontuários' })
         }
 
         const filteredPatients = [];
         patients.forEach(patient => {
-            if (patient.appointments.length > 0
-                // || patient.exams.length > 0
-                ) {
+            if (patient.appointments.length > 0 || patient.exams.length > 0) {
                 filteredPatients.push(patient);
             }
         })
