@@ -2,7 +2,6 @@ require("dotenv").config();
 const express = require("express");
 const cors = require("cors");
 
-
 const connection = require("./src/database/index");
 
 //Autenticação
@@ -32,6 +31,9 @@ const deleteExam = require("./src/controllers/exams/deleteExams");
 
 //Consultas
 const appointmentRoutes = require("./src/routes/appointment");
+
+//Prontuários
+const patientRecordRoutes = require('./src/routes/patientRecord');
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
@@ -77,6 +79,9 @@ app.delete("/api/exames/:id", deleteExam);
 //Consultas
 app.use(appointmentRoutes);
 
+//Prontuários
+app.use(patientRecordRoutes);
+
 const startServer = () => {
   app.listen(process.env.SERVER_PORT, () => {
     console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
@@ -84,7 +89,6 @@ const startServer = () => {
 };
 
 const connect = async() => {
-
   try {
     await connection.authenticate();
     console.log("Conexão com banco de dados bem sucedida");
@@ -93,5 +97,6 @@ const connect = async() => {
     console.log("Sem conexao com banco de dados", error);
   }
 };
+
 connect()
 connection.sync({ alter: true });
