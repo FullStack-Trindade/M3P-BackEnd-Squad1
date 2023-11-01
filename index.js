@@ -9,6 +9,7 @@ const patientList = require("./src/controllers/Patients/patientList");
 const searchPatients = require("./src/controllers/Patients/searchPatients");
 const deletePatient = require("./src/controllers/Patients/deletePatients");
 const postUser = require('./src/controllers/user/postUser')
+const delUser = require('./src/controllers/user/delUser')
 
 const validaUsuario = require('./src/middlewares/validaUsuario')
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
@@ -37,7 +38,8 @@ app.post('/api/usuario/login', Login)
 
 
 
-app.post('/api/usuario', validaUsuario, postUser)
+app.post('/api/usuarios', validaUsuario, postUser)
+app.delete("/api/usuarios/:id", delUser);
 
 app.listen(process.env.SERVER_PORT, () => {
   console.log("local server online");
