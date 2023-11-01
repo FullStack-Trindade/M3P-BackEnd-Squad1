@@ -40,7 +40,7 @@ app.post('/api/usuario/login', Login)
 
 
 
-app.post('/api/usuarios', validaUsuario, postUser)
+app.post('/api/usuarios', postUser)
 app.put('/api/usuarios/:id', validaUsuario, putUser)
 app.get('/api/usuarios', validaUsuario, getUser)
 app.delete("/api/usuarios/:id", delUser);

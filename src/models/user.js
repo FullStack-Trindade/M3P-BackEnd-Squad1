@@ -23,6 +23,10 @@ const User = connection.define('user', {
         type: Sequelize.STRING,
         allowNull: false
     },
+    phone: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
     email: {
         type: Sequelize.STRING,
         allowNull: false
