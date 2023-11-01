@@ -64,7 +64,7 @@ app.delete("/api/pacientes/:id", deletePatient);
 app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
 
 //Usuário
-app.post("/api/usuario", validateToken, validaUsuario, postUser);
+app.post("/api/usuarios", validateToken, validaUsuario, postUser);
 app.put("/api/usuarios/:id", validatePutUser, putUser);
 app.get("/api/usuarios", getUser);
 app.post("/api/usuarios/search", searchUserByCpf);
