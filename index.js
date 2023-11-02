@@ -10,12 +10,14 @@ const validateToken = require("./src/middlewares/validateToken");
 const authRoutes = require('./src/routes/auth');
 
 //Pacientes
-const createPatient = require("./src/controllers/Patients/createPatients");
-const updatePatient = require("./src/controllers/Patients/updatePatients");
-const patientList = require("./src/controllers/Patients/patientList");
-const searchPatients = require("./src/controllers/Patients/searchPatients");
-const deletePatient = require("./src/controllers/Patients/deletePatients");
-const searchPatientByIdUser = require("./src/controllers/Patients/searchPatientByIdUser");
+// const createPatient = require("./src/controllers/Patients/createPatients");
+// const updatePatient = require("./src/controllers/Patients/updatePatients");
+// const patientList = require("./src/controllers/Patients/patientList");
+// const searchPatients = require("./src/controllers/Patients/searchPatients");
+// const deletePatient = require("./src/controllers/Patients/deletePatients");
+// const searchPatientByIdUser = require("./src/controllers/Patients/searchPatientByIdUser");
+
+const patientRoutes = require("./src/routes/patient");
 
 //Usuário
 const postUser = require("./src/controllers/user/postUser");
@@ -37,8 +39,8 @@ const patientRecordRoutes = require('./src/routes/patientRecord');
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
-const validatePatientRequest = require("./src/middlewares/validate-patient-request");
-const validatePatientUpdate = require("./src/middlewares/validate-patient-update");
+// const validatePatientRequest = require("./src/middlewares/validate-patient-request");
+// const validatePatientUpdate = require("./src/middlewares/validate-patient-update");
 const validatePutUser = require("./src/middlewares/validatePutUser");
 const validateExam = require("./src/middlewares/validate-exams.request");
 const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
@@ -56,12 +58,13 @@ app.use(
 app.use(authRoutes);
 
 //Paciente
-app.post("/api/pacientes", validatePatientRequest, createPatient);
-app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
-app.get("/api/pacientes", patientList);
-app.get("/api/pacientes/:id", searchPatients);
-app.delete("/api/pacientes/:id", deletePatient);
-app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
+// app.post("/api/pacientes", validatePatientRequest, createPatient);
+// app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
+// app.get("/api/pacientes", patientList);
+// app.get("/api/pacientes/:id", searchPatients);
+// app.delete("/api/pacientes/:id", deletePatient);
+// app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
+app.use(patientRoutes);
 
 //Usuário
 app.post("/api/usuarios", validateToken, validaUsuario, postUser);
