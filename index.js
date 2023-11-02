@@ -6,16 +6,8 @@ const connection = require("./src/database/index");
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
-const validateToken = require("./src/middlewares/validateToken");
+//const validateToken = require("./src/middlewares/validateToken");
 const authRoutes = require('./src/routes/auth');
-
-//Pacientes
-// const createPatient = require("./src/controllers/Patients/createPatients");
-// const updatePatient = require("./src/controllers/Patients/updatePatients");
-// const patientList = require("./src/controllers/Patients/patientList");
-// const searchPatients = require("./src/controllers/Patients/searchPatients");
-// const deletePatient = require("./src/controllers/Patients/deletePatients");
-// const searchPatientByIdUser = require("./src/controllers/Patients/searchPatientByIdUser");
 
 const patientRoutes = require("./src/routes/patient");
 
@@ -40,8 +32,6 @@ const patientRecordRoutes = require('./src/routes/patientRecord');
 
 //Midleware
 const validaUsuario = require("./src/middlewares/validaUsuario");
-// const validatePatientRequest = require("./src/middlewares/validate-patient-request");
-// const validatePatientUpdate = require("./src/middlewares/validate-patient-update");
 const validatePutUser = require("./src/middlewares/validatePutUser");
 const validateExam = require("./src/middlewares/validate-exams.request");
 const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
@@ -59,20 +49,14 @@ app.use(
 app.use(authRoutes);
 
 //Paciente
-// app.post("/api/pacientes", validatePatientRequest, createPatient);
-// app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
-// app.get("/api/pacientes", patientList);
-// app.get("/api/pacientes/:id", searchPatients);
-// app.delete("/api/pacientes/:id", deletePatient);
-// app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
 app.use(patientRoutes);
 
 //Usuário
 app.post("/api/usuarios", validaUsuario, postUser);
 app.put("/api/usuarios/:id", validatePutUser, putUser);
-app.get("/api/usuarios", validateToken, getUser);
-app.post("/api/usuarios/search",validateToken , searchUserByCpf);
-app.delete("/api/usuarios/:id",validateToken, delUser);
+app.get("/api/usuarios", getUser);
+app.post("/api/usuarios/search", searchUserByCpf);
+app.delete("/api/usuarios/:id", delUser);
 app.post('/api/usuarios/login', Login);
 
 //Exame
