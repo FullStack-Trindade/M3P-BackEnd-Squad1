@@ -5,11 +5,13 @@ const validateCreateMedication = require('../middlewares/medication/validate-cre
 
 // CONTROLLERS
 const createMedication = require('../controllers/medications/createMedication');
+const deleteMedication = require('../controllers/medications/deleteMedication');
 
 // ROUTES
 const medicationRoutes = new Router();
 
 medicationRoutes
-    .post('/api/medicamentos', validateCreateMedication.validateCreateMedication, createMedication);
+    .post('/api/medicamentos', validateCreateMedication.validateCreateMedication, createMedication)
+    .delete('/api/medicamentos/:id',deleteMedication);
     
 module.exports = medicationRoutes;
