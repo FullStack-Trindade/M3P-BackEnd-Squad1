@@ -20,9 +20,10 @@ const authRoutes = require('./src/routes/auth');
 const patientRoutes = require("./src/routes/patient");
 
 //Usuário
-const postUser = require("./src/controllers/user/postUser");
-const putUser = require("./src/controllers/user/putUser");
-const getUser = require("./src/controllers/user/getUser");
+const postUser = require('./src/controllers/user/postUser')
+const delUser = require('./src/controllers/user/delUser')
+const getUser = require('./src/controllers/user/getUser')
+const putUser = require('./src/controllers/user/putUser')
 const searchUserByCpf = require("./src/controllers/user/searchUserByCpfEmail");
 
 //Exame
@@ -69,8 +70,9 @@ app.use(patientRoutes);
 //Usuário
 app.post("/api/usuarios", validaUsuario, postUser);
 app.put("/api/usuarios/:id", validatePutUser, putUser);
-app.get("/api/usuarios", getUser);
-app.post("/api/usuarios/search", searchUserByCpf);
+app.get("/api/usuarios", validateToken, getUser);
+app.post("/api/usuarios/search",validateToken , searchUserByCpf);
+app.delete("/api/usuarios/:id",validateToken, delUser);
 app.post('/api/usuarios/login', Login);
 
 //Exame
