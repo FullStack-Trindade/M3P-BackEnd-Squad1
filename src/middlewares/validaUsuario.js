@@ -23,7 +23,7 @@ const validation = yup.object().shape({
     )
     .required("CPF é obrigatório.")
     .min(11, "O CPF deve conter ao menos 11 caracteres")
-    .max(11, "O CPF deve conter no máximo 11 caracteres"),
+    .max(14, "O CPF deve conter no máximo 11 caracteres"),
 
   email: yup
     .string("Email deve ser uma string")
