@@ -19,6 +19,10 @@ const authRoutes = require('./src/routes/auth');
 
 const patientRoutes = require("./src/routes/patient");
 
+// Medicamentos
+
+const medicationRoutes = require("./src/routes/medication");
+
 //Usuário
 const postUser = require("./src/controllers/user/postUser");
 const putUser = require("./src/controllers/user/putUser");
@@ -65,6 +69,9 @@ app.use(authRoutes);
 // app.delete("/api/pacientes/:id", deletePatient);
 // app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
 app.use(patientRoutes);
+
+// MEDICAMENTOS
+app.use(medicationRoutes);
 
 //Usuário
 app.post("/api/usuarios", validaUsuario, postUser);
