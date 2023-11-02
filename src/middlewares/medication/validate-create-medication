@@ -17,9 +17,7 @@ const validation = yup.object().shape({
       "Selecione um tipo de medicação válido"
     )
     .required("Campo de tipo de medicação é obrigatório"),
-  amountMedication: yup
-    .integer("quantidade da medicação deve ser um número")
-    .required("É necessário informar a quantidade"),
+  amountMedication: yup.number().required("É necessário informar a quantidade"),
   unitMedication: yup
     .string()
     .oneOf(

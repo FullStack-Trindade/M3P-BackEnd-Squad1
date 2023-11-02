@@ -7,9 +7,9 @@ const validateCreateMedication = require('../middlewares/medication/validate-cre
 const createMedication = require('../controllers/medications/createMedication');
 
 // ROUTES
-const appointmentRoutes = new Router();
+const medicationRoutes = new Router();
 
-appointmentRoutes
-    .post('/api/medicamentos', validateCreateMedication, createMedication)
+medicationRoutes
+    .post('/api/medicamentos', validateCreateMedication.validateCreateMedication, createMedication);
     
-module.exports = appointmentRoutes;
+module.exports = medicationRoutes;
