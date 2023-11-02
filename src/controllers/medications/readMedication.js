@@ -1,26 +1,23 @@
 const Medication = require('../../models/medication');
-const User = require('../../models/user');
 
 async function medicationRead (request, response) {
 
-    const idUser = request.params.id;
-
-    try {
-        const id = request.query.id
+        try {
+        const id = request.params.id
               
         if (id) {
-            const user = await Medication.findAll({
+            const filteredList = await Medication.findAll({
                 where: {
                     id_patient: id
                 }
             })
-            if(!user) {
-                response.status(404).json({menssagem: "Usuario não encontrado."});
+            if(filteredList.length == 0) {
+                response.status(404).json({menssagem: "Não constam medicamentos para este usário"});
             } 
-            return response.status(200).json({user})
+            return response.status(200).json(filteredList)
         }
         const listMedications = await Medication.findAll();
-        return response.status(200).json({listMedications})
+        return response.status(200).json(listMedications)
 
     } catch (error) {
         console.log(error);
