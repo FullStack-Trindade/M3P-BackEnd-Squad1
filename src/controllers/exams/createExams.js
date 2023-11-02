@@ -17,6 +17,7 @@ async function createExam(request, response) {
         labExam: request.body.labExam,
         urlExam: request.body.urlExam,
         resultExam: request.body.resultExam,
+        statusExam: true
     }
 
 
