@@ -6,7 +6,7 @@ const connection = require("./src/database/index");
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
-const validateToken = require("./src/middlewares/validateToken");
+//const validateToken = require("./src/middlewares/validateToken");
 const authRoutes = require('./src/routes/auth');
 
 //Pacientes
