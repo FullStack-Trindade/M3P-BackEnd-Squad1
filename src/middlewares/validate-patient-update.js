@@ -12,12 +12,6 @@ const enderecoSchema = yup.object().shape({
 });
 
 const validation = yup.object().shape({
-  idUser: yup
-    .number("ID do usuário é obrigatório.")
-    .typeError("ID do usuário deve ser um número.")
-    .required("ID do usuário é obrigatório.")
-    .positive("ID do usuário deve ser positivo.")
-    .integer("ID do usuário deve ser um número inteiro."),
   birth: yup
     .date("Data de nascimento deve estar em formato de data 1990-02-25")
     .required("Data de nascimento é obrigatória")
@@ -36,11 +30,6 @@ const validation = yup.object().shape({
       "Selecione um Estado Civil válido"
     )
     .required("Este campo é obrigatório"),
-  rg: yup
-    .string()
-    .max(20, "O campo RG deve ter no máximo 20 caracteres")
-    .required("O campo RG é obrigatório"),
-  orgaoExpedidor: yup.string(),
   birthplace: yup
     .string()
     .min(8, "O campo naturalidade deve ter pelo menos 5 caracteres")
@@ -63,7 +52,7 @@ const validation = yup.object().shape({
   adress: enderecoSchema,
 });
 
-function validatePatientRequest(request, response, next) {
+function validatePatientUpdate(request, response, next) {
   try {
     validation.validateSync(request.body);
     next();
@@ -72,4 +61,4 @@ function validatePatientRequest(request, response, next) {
   }
 }
 
-module.exports = validatePatientRequest;
+module.exports = validatePatientUpdate;

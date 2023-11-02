@@ -1,55 +1,27 @@
 const User = require('../../models/user')
-const bcrypt = require('bcrypt')
 
-const postUser = async (request, response) => {
+const delUser = async (request, response) => {
 
     try {
-        const password = await bcrypt.hash(request.body.password, 10)
-        const getUsuario = await User.findOne({
+        const result = await User.findByPk(request.params.id)
+
+        if (!result) {
+            return response.status(400).json({
+                mensagem: "Id não localizado."
+            })
+        }
+
+        await User.destroy({
             where: {
-                cpf: request.body.cpf
+                id: request.params.id
             }
         })
-
-        if (getUsuario?.cpf == request.body.cpf) {
-            return response.status(409).json({
-                msg: `User CPF: ${request.body.cpf} já cadastrado!`
-            })
-        }
-
-        if (getUsuario?.email == request.body.email) {
-            return response.status(409).json({
-                msg: `Email: ${request.body.email} já cadastrado!`
-            })
-        }
-
-        const cadastro = {
-            name: request.body.name,
-            gender: request.body.gender,
-            cpf: request.body.cpf,
-            phone: request.body.phone,
-            email: request.body.email,
-            password: password,
-            id_type: request.body.id_type,
-        }
-
-        const novoCadastro = await User.create(cadastro)
-        if (novoCadastro) {
-            return response.status(201).json({
-                msg: `Cadastro do usuário ${cadastro.name} realizado com sucesso`
-            })
-        } else {
-            return response.status(400).json({
-                msg: "Não foi possível realizar o cadastro"
-            })
-        }
+        return response.status(200).json({ mensagem: "Excluido com sucesso." })
 
     } catch (error) {
-        return response.status(500).json({
-            msg: 'Não foi possível atender sua solicitação'
-        })
+        return response.status(500).json({ mensagem: "Não foi possível processar sua solicitação." })
     }
 
 }
 
-module.exports = postUser
+module.exports = delUser
