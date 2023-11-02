@@ -6,7 +6,7 @@ const connection = require("./src/database/index");
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
-const validateToken = require("./src/middlewares/validateToken");
+//const validateToken = require("./src/middlewares/validateToken");
 const authRoutes = require('./src/routes/auth');
 
 //Pacientes
@@ -67,7 +67,7 @@ app.use(authRoutes);
 app.use(patientRoutes);
 
 //Usuário
-app.post("/api/usuarios", validateToken, validaUsuario, postUser);
+app.post("/api/usuarios", validaUsuario, postUser);
 app.put("/api/usuarios/:id", validatePutUser, putUser);
 app.get("/api/usuarios", getUser);
 app.post("/api/usuarios/search", searchUserByCpf);
