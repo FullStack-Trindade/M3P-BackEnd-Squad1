@@ -6,7 +6,7 @@ async function updateExercise(request, response) {
     const exerciseExisting = await Exercise.findByPk(id)
 
     if (!exerciseExisting) {
-        return response.status(400).json({message: 'Exercicio não encontrado'}) 
+        return response.status(400).json({message: 'Série de exercicio não existe.'}) 
     } 
 
     try {
