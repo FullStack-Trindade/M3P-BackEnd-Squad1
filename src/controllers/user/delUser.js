@@ -16,7 +16,7 @@ const delUser = async (request, response) => {
                 id: request.params.id
             }
         })
-        return response.status(200).json({ mensagem: "Excluido com sucesso." })
+        return response.status(201).json({ mensagem: "Excluido com sucesso." })
 
     } catch (error) {
         return response.status(500).json({ mensagem: "Não foi possível processar sua solicitação." })

@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken')
 
 const Login = async (request, response)=>{
     try {
-        if (request.body.email == '' || request.body.password == '' || request.body.id_type == 4) {
+        if (request.body.email == '' || request.body.password == '') {
             return response.status(400).json({ mensagem: "Usuário ou Senha inválido" })
         }
     
