@@ -21,7 +21,7 @@ async function examRead (request, response) {
             return response.status(200).json({user})
         }
         const listExams = await Exam.findAll();
-        return response.status(200).json({listExams})
+        return response.status(200).json(listExams)
 
     } catch (error) {
         console.log(error);
