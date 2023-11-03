@@ -14,13 +14,12 @@ const validation = yup.object().shape({
       ["MASCULINO", "FEMININO", "NAO_INFORMADO"],
       "Gênero inválido, deverá ser MASCULINO, FEMININO OU NAO_INFORMADO"
     ),
-
   cpf: yup
     .string("O CPF deve ser uma string")
-    .matches(
-      /[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}/g,
-      "No campo CPF digite um número no formato 000.000.000-00"
-    )
+    // .matches(
+    //   /[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}/g,
+    //   "No campo CPF digite um número no formato 000.000.000-00"
+    // )
     .required("CPF é obrigatório.")
     .min(11, "O CPF deve conter ao menos 11 caracteres")
     .max(14, "O CPF deve conter no máximo 11 caracteres"),
@@ -41,7 +40,7 @@ const validation = yup.object().shape({
   password: yup
     .string("Senha deve ser uma string.")
     .min(6, "A password deve ter no mínimo 6 caracteres.")
-    .required("password é obrigatório."),
+    ,
 
   id_type: yup
     .number()
@@ -57,7 +56,7 @@ const validation = yup.object().shape({
     ),
 });
 
-const validaUsuario = (request, response, next) => {
+const validateUpdateUser = (request, response, next) => {
   try {
     validation.validateSync(request.body);
     next();
@@ -68,4 +67,4 @@ const validaUsuario = (request, response, next) => {
   }
 };
 
-module.exports = validaUsuario;
+module.exports = validateUpdateUser;
