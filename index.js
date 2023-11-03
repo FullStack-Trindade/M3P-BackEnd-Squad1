@@ -8,34 +8,24 @@ const connection = require("./src/database/index");
 const Login = require("./src/controllers/session/login");
 //const validateToken = require("./src/middlewares/validateToken");
 
-const authRoutes = require('./src/routes/auth');
+const authRoutes = require("./src/routes/auth");
 const patientRoutes = require("./src/routes/patient");
-const userRoutes = require('./src/routes/user')
-
-//Usuário
-// const postUser = require('./src/controllers/user/postUser')
-// const delUser = require('./src/controllers/user/delUser')
-// const getUser = require('./src/controllers/user/getUser')
-// const putUser = require('./src/controllers/user/putUser')
-// const searchUserByCpf = require("./src/controllers/user/searchUserByCpfEmail");
+const userRoutes = require("./src/routes/user");
 
 //Exame
 const createExam = require("./src/controllers/exams/createExams");
 const readExam = require("./src/controllers/exams/readExams");
 const updateExam = require("./src/controllers/exams/updateExams");
-const deleteExam = require("./src/controllers/exams/deleteExams"); 
+const deleteExam = require("./src/controllers/exams/deleteExams");
 
 //Consultas
 const appointmentRoutes = require("./src/routes/appointment");
 
 //Prontuários
-const patientRecordRoutes = require('./src/routes/patientRecord');
+const patientRecordRoutes = require("./src/routes/patientRecord");
 
-//Midleware
-//const validaUsuario = require("./src/middlewares/validaUsuario");
-//const validatePutUser = require("./src/middlewares/validatePutUser");
 const validateExam = require("./src/middlewares/validate-exams.request");
-const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
+const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
 
 const app = express();
 app.use(express.json());
@@ -54,12 +44,6 @@ app.use(patientRoutes);
 
 //Usuário
 app.use(userRoutes);
-// app.post("/api/usuarios", validaUsuario, postUser);
-// app.put("/api/usuarios/:id", validatePutUser, putUser);
-// app.get("/api/usuarios", getUser);
-// app.post("/api/usuarios/search", searchUserByCpf);
-// app.delete("/api/usuarios/:id", delUser);
-// app.post('/api/usuarios/login', Login);
 
 //Exame
 app.post("/api/exames", validateExam, createExam);
@@ -79,7 +63,7 @@ const startServer = () => {
   });
 };
 
-const connect = async() => {
+const connect = async () => {
   try {
     await connection.authenticate();
     console.log("Conexão com banco de dados bem sucedida");
@@ -89,5 +73,5 @@ const connect = async() => {
   }
 };
 
-connect()
+connect();
 connection.sync({ alter: true });
