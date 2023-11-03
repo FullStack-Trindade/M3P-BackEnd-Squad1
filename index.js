@@ -27,6 +27,7 @@ const deleteExam = require("./src/controllers/exams/deleteExams");
 //Exercicio
 const createExercise = require("./src/controllers/exercise/createExercise");
 const readExercise = require("./src/controllers/exercise/readExercise");
+const updateExercise = require("./src/controllers/exercise/updateExercise");
 
 //Consultas
 const appointmentRoutes = require("./src/routes/appointment");
@@ -72,6 +73,7 @@ app.delete("/api/exames/:id", deleteExam);
 //Exercicio
 app.post("/api/exercicios", createExercise);
 app.get("/api/exercicios", readExercise);
+app.put("/api/exercicios/:id", updateExercise);
 
 //Consultas
 app.use(appointmentRoutes);
