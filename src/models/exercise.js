@@ -41,7 +41,7 @@ const Exercise = connection.define('exercise',{
         allowNull: false,
     },
 
-    quantityWeek: {
+    amountWeek: {
         type: Sequelize.INTEGER,
         allowNull: false,
     },
@@ -58,7 +58,7 @@ const Exercise = connection.define('exercise',{
     },
 });
 
-    Exercise.belongTo(Patient, {foreingKey: "id_patient"});
-    Exercise.belongTo(Nurse, {foreingKey: "id_nurse"});
+/*     Exercise.belongTo(Patient, {foreingKey: "id_patient"});
+    Exercise.belongTo(Nurse, {foreingKey: "id_nurse"}); */
 
 module.exports = Exercise;
