@@ -24,11 +24,9 @@ const searchPatientRecordByUser = async (request, response) => {
         message: "Aqui vem a lógica de filtro de todos os prontuários",
       });
     }
-    console.log(userRequest);
-    console.log(patientRequest);
     return response
       .status(400)
-            .json({ message: "Dados dos pacientes inconsistentes" });
+      .json({ message: "Dados dos pacientes inconsistentes" });
   } catch (error) {
     return response
       .status(500)
