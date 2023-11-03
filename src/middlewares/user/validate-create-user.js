@@ -14,7 +14,15 @@ const validation = yup.object().shape({
       ["MASCULINO", "FEMININO", "NAO_INFORMADO"],
       "Gênero inválido, deverá ser MASCULINO, FEMININO OU NAO_INFORMADO"
     ),
-
+    cpf: yup
+    .string("O CPF deve ser uma string")
+    // .matches(
+    //   /[0-9]{3}\.[0-9]{3}\.[0-9]{3}\-[0-9]{2}/g,
+    //   "No campo CPF digite um número no formato 000.000.000-00"
+    // )
+    .required("CPF é obrigatório.")
+    .min(11, "O CPF deve conter ao menos 11 caracteres")
+    .max(11, "O CPF deve conter no máximo 11 caracteres"),
   phone: yup
     .string("Telefone deve ser uma string")
     .matches(
