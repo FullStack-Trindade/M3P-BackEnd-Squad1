@@ -1,7 +1,7 @@
 const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 
-const postUser = async (request, response)=>{
+const createUser = async (request, response)=>{
 
       
     try {
@@ -35,6 +35,7 @@ const postUser = async (request, response)=>{
         }
     
         const novoCadastro = await User.create(cadastro)
+       
         if(novoCadastro) {
             return response.status(201).json(novoCadastro
             )
@@ -52,4 +53,4 @@ const postUser = async (request, response)=>{
    
 }
 
-module.exports = postUser
+module.exports = createUser
