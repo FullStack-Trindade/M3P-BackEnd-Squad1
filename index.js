@@ -32,7 +32,7 @@ const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePatientRequest = require("./src/middlewares/validate-patient-request");
 const validatePutUser = require("./src/middlewares/validatePutUser");
 const validateExam = require("./src/middlewares/validateExam");
-const validateExamUpdate = require('./src/middlewares/appointment/validateExamUpdate');
+const validateExamUpdate = require('./src/middlewares/validateExamUpdate');
 
 
 
