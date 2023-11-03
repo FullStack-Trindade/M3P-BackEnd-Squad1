@@ -41,6 +41,7 @@ const validaUsuario = require("./src/middlewares/validaUsuario");
 const validatePutUser = require("./src/middlewares/validatePutUser");
 const validateExam = require("./src/middlewares/validate-exams.request");
 const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
+const validateExercise = require("./src/middlewares/validate-exercise");
 
 const app = express();
 app.use(express.json());
@@ -72,9 +73,9 @@ app.get("/api/exames", readExam);
 app.delete("/api/exames/:id", deleteExam);
 
 //Exercicio
-app.post("/api/exercicios", createExercise);
+app.post("/api/exercicios", validateExercise, createExercise);
 app.get("/api/exercicios", readExercise);
-app.put("/api/exercicios/:id", updateExercise);
+app.put("/api/exercicios/:id", validateExercise, updateExercise);
 app.delete("/api/exercicios/:id", deleteExercise);
 
 //Consultas
