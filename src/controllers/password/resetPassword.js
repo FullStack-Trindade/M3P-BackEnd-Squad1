@@ -50,6 +50,16 @@ async function sendNewPassword (req, res) {
         
             return true;
         }
+
+        const newPassword = await resetFunction(
+            req.body.id_user, req.body.token, req.body.password
+        )
+
+        return res.status(200).json({
+            newPassword: newPassword,
+            message: 'Nova senha cadastrada com sucesso'
+        });
+        
     } catch (error) {
         return res.status(500).json({ message: 'Requisição não pode ser executada' });
     }
