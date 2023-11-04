@@ -1,5 +1,5 @@
 ###em construção
-
+acesso a documentação da api: http://localhost:3000/docs/
 <div align="center">
 
 ![code](https://img.shields.io/badge/Code-JavaScript-F7DF1E.svg)
