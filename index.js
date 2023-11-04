@@ -6,17 +6,12 @@ const connection = require("./src/database/index");
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
-//const validateToken = require("./src/middlewares/validateToken");
 const authRoutes = require('./src/routes/auth');
+//const validateToken = require("./src/middlewares/validateToken");
 
-//Pacientes
-// const createPatient = require("./src/controllers/Patients/createPatients");
-// const updatePatient = require("./src/controllers/Patients/updatePatients");
-// const patientList = require("./src/controllers/Patients/patientList");
-// const searchPatients = require("./src/controllers/Patients/searchPatients");
-// const deletePatient = require("./src/controllers/Patients/deletePatients");
-// const searchPatientByIdUser = require("./src/controllers/Patients/searchPatientByIdUser");
 
+const loginRoute = require('./src/routes/login');
+const authRoutes = require('./src/routes/auth');
 const patientRoutes = require("./src/routes/patient");
 
 // Medicamentos
@@ -24,30 +19,22 @@ const patientRoutes = require("./src/routes/patient");
 const medicationRoutes = require("./src/routes/medication");
 
 //Usuário
-const postUser = require("./src/controllers/user/postUser");
-const putUser = require("./src/controllers/user/putUser");
-const getUser = require("./src/controllers/user/getUser");
-const searchUserByCpf = require("./src/controllers/user/searchUserByCpfEmail");
+const userRoutes = require("./src/routes/user");
 
 //Exame
 const createExam = require("./src/controllers/exams/createExams");
 const readExam = require("./src/controllers/exams/readExams");
 const updateExam = require("./src/controllers/exams/updateExams");
-const deleteExam = require("./src/controllers/exams/deleteExams"); 
+const deleteExam = require("./src/controllers/exams/deleteExams");
 
 //Consultas
 const appointmentRoutes = require("./src/routes/appointment");
 
 //Prontuários
-const patientRecordRoutes = require('./src/routes/patientRecord');
+const patientRecordRoutes = require("./src/routes/patientRecord");
 
-//Midleware
-const validaUsuario = require("./src/middlewares/validaUsuario");
-// const validatePatientRequest = require("./src/middlewares/validate-patient-request");
-// const validatePatientUpdate = require("./src/middlewares/validate-patient-update");
-const validatePutUser = require("./src/middlewares/validatePutUser");
 const validateExam = require("./src/middlewares/validate-exams.request");
-const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
+const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
 
 const app = express();
 app.use(express.json());
@@ -59,26 +46,21 @@ app.use(
   })
 );
 
+//Login
+app.use(loginRoute);
+
+//Auth
 app.use(authRoutes);
 
 //Paciente
-// app.post("/api/pacientes", validatePatientRequest, createPatient);
-// app.put("/api/pacientes/:id", validatePatientUpdate, updatePatient);
-// app.get("/api/pacientes", patientList);
-// app.get("/api/pacientes/:id", searchPatients);
-// app.delete("/api/pacientes/:id", deletePatient);
-// app.get("/api/pacientes/usuario/:id", searchPatientByIdUser);
 app.use(patientRoutes);
 
 // MEDICAMENTOS
 app.use(medicationRoutes);
 
 //Usuário
-app.post("/api/usuarios", validaUsuario, postUser);
-app.put("/api/usuarios/:id", validatePutUser, putUser);
-app.get("/api/usuarios", getUser);
-app.post("/api/usuarios/search", searchUserByCpf);
-app.post('/api/usuarios/login', Login);
+app.use(userRoutes);
+
 
 //Exame
 app.post("/api/exames", validateExam, createExam);
@@ -98,7 +80,7 @@ const startServer = () => {
   });
 };
 
-const connect = async() => {
+const connect = async () => {
   try {
     await connection.authenticate();
     console.log("Conexão com banco de dados bem sucedida");
@@ -108,5 +90,5 @@ const connect = async() => {
   }
 };
 
-connect()
+connect();
 connection.sync({ alter: true });

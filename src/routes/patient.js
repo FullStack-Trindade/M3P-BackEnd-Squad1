@@ -2,17 +2,17 @@ const { Router } = require("express");
 
 // MIDDLEWARES
 
-const validatePatientRequest = require("../middlewares/validate-patient-request");
-const validatePatientUpdate = require("../middlewares/validate-patient-update");
+const validatePatientRequest = require("../middlewares/patient/validate-patient-request");
+const validatePatientUpdate = require("../middlewares/patient/validate-patient-update");
 
 // // CONTROLLERS
 
-const createPatient = require("../controllers/Patients/createPatients");
-const updatePatient = require("../controllers/Patients/updatePatients");
-const patientList = require("../controllers/Patients/patientList");
-const searchPatients = require("../controllers/Patients/searchPatients");
-const deletePatient = require("../controllers/Patients/deletePatients");
-const searchPatientByIdUser = require("../controllers/Patients/searchPatientByIdUser");
+const createPatient = require("../controllers/patients/createPatients");
+const updatePatient = require("../controllers/patients/updatePatients");
+const patientList = require("../controllers/patients/patientList");
+const searchPatients = require("../controllers/patients/searchPatients");
+const deletePatient = require("../controllers/patients/deletePatients");
+const searchPatientByIdUser = require("../controllers/patients/searchPatientByIdUser");
 
 // // ROUTES
 const patientRoutes = new Router();
