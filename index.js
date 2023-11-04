@@ -52,16 +52,10 @@ const medicationRoutes = require("./src/routes/medication");
 const userRoutes = require("./src/routes/user");
 
 //Exame
-const createExam = require("./src/controllers/exams/createExams");
-const readExam = require("./src/controllers/exams/readExams");
-const updateExam = require("./src/controllers/exams/updateExams");
-const deleteExam = require("./src/controllers/exams/deleteExams");
+const examRoutes = require("./src/routes/exam");
 
 //Exercicio
-const createExercise = require("./src/controllers/exercise/createExercise");
-const readExercise = require("./src/controllers/exercise/readExercise");
-const updateExercise = require("./src/controllers/exercise/updateExercise");
-const deleteExercise = require("./src/controllers/exercise/deleteExercise");
+const exerciseRoutes = require("./src/routes/exercise");
 
 //Consultas
 const appointmentRoutes = require("./src/routes/appointment");
@@ -69,11 +63,6 @@ const appointmentRoutes = require("./src/routes/appointment");
 //Prontuários
 const patientRecordRoutes = require("./src/routes/patientRecord");
 
-//middlewares
-const validateExercise = require("./src/middlewares/validate-exercise");
-
-const validateExam = require("./src/middlewares/validate-exams.request");
-const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
 
 const app = express();
 app.use(express.json());
@@ -102,18 +91,11 @@ app.use(medicationRoutes);
 //Usuário
 app.use(userRoutes);
 
-
-//Exame
-app.post("/api/exames", validateExam, createExam);
-app.put("/api/exames/:id", validateExamUpdate, updateExam);
-app.get("/api/exames", readExam);
-app.delete("/api/exames/:id", deleteExam);
+//Exames
+app.use(examRoutes);
 
 //Exercicio
-app.post("/api/exercicios", validateExercise, createExercise);
-app.get("/api/exercicios", readExercise);
-app.put("/api/exercicios/:id", validateExercise, updateExercise);
-app.delete("/api/exercicios/:id", deleteExercise);
+app.use(exerciseRoutes);
 
 //Consultas
 app.use(appointmentRoutes);
