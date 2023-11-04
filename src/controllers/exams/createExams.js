@@ -9,7 +9,13 @@ async function createExam(request, response) {
 
     const exam = {
         id_patient: request.body.id_patient,
+        id_patient: request.body.id_patient,
         id_doctor: request.body.id_doctor,
+        nameExam: request.body.nameExam,
+        dateExam: request.body.dateExam || newDate.setDate(newDate.getDate()),
+        hourExam: request.body.hourExam || examTime,
+        typeExam: request.body.typeExam,
+        labExam: request.body.labExam,
         nameExam: request.body.nameExam,
         dateExam: request.body.dateExam || newDate.setDate(newDate.getDate()),
         hourExam: request.body.hourExam || examTime,
@@ -18,6 +24,7 @@ async function createExam(request, response) {
         urlExam: request.body.urlExam,
         resultExam: request.body.resultExam,
         statusExam: request.body.statusExam
+        resultExam: request.body.resultExam,
     }
 
 
@@ -27,9 +34,14 @@ async function createExam(request, response) {
             nameExam: exam.nameExam,
             dateExam: exam.dateExam
 
+            id_patient: exam.id_patient,
+            nameExam: exam.nameExam,
+            dateExam: exam.dateExam,
+            hourExam: exam.hourExam
         },
     });
 
+    if (!examExisting) {
     if (!examExisting) {
         const newExam = await Exam.create(exam);
         response.status(201).json(newExam)
@@ -39,6 +51,7 @@ async function createExam(request, response) {
     }
         
     } catch (error) {
+        console.log(error);
         console.log(error);
         return response.status(500).json({ message: 'Não foi possível atender sua solicitação' })
     }

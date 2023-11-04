@@ -9,8 +9,18 @@ async function updatePatient(request, response) {
 
     if (!patientInDatabase) {
       return response
-        .status(404)
+        .status(400)
         .json({ message: "Cadastro de Paciente não encontrado" });
+    }
+
+    if (
+      (request.body.rg && patientInDatabase.rg !== request.body.rg) ||
+      (request.body.orgaoExpedidor &&
+        patientInDatabase.orgaoExpedidor !== request.body.orgaoExpedidor)
+    ) {
+      return response
+        .status(400)
+        .json({ message: "O campo RG e/ou Órgão não pode ser modificado" });
     }
 
     patientInDatabase.birth = request.body.birth || patientInDatabase.birth;
@@ -20,10 +30,6 @@ async function updatePatient(request, response) {
       request.body.birthplace || patientInDatabase.birthplace;
     patientInDatabase.emergencyContact =
       request.body.emergencyContact || patientInDatabase.emergencyContact;
-    patientInDatabase.rg = request.body.rg || patientInDatabase.rg;
-    patientInDatabase.orgaoExpedidor =
-      request.body.orgaoExpedidor || patientInDatabase.orgaoExpedidor;
-    patientInDatabase.idUser = request.body.idUser || patientInDatabase.idUser;
     patientInDatabase.alergiesList =
       request.body.alergiesList || patientInDatabase.alergiesList;
     patientInDatabase.specificCares =
@@ -70,13 +76,11 @@ async function updatePatient(request, response) {
       : adressInDatabase.reference;
     adressInDatabase.updated_at = dayjs().subtract(3, "hour");
 
-    console.log(adressInDatabase);
-
     await adressInDatabase.save();
 
     response
       .status(200)
-      .json({ message: "Paciente e endereço atualizado com sucesso" });
+      .json({ message: "Cadastro do Paciente atualizado com sucesso" });
   } catch (error) {
     console.log(error);
     response.status(500).json({ message: "Erro ao processar sua solicitação" });
