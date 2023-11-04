@@ -1,32 +1,56 @@
 const Exam = require('../../models/exam');
 const User = require('../../models/user');
+const Patient = require('../../models/patient');
 
-async function examRead (request, response) {
+async function examRead(request, response) {
 
-    const idUser = request.params.id;
+  try {
+    const nomePaciente = request.query.name
+      ? request.query.name.replace(/_/g, " ")
+      : null;
 
-    try {
-        const id = request.query.id
-        console.log(id);
-        
-        if (id) {
-            const user = await Exam.findAll({
-                where: {
-                    id_patient: id
-                }
-            })
-            if(!user) {
-                response.status(404).json({menssagem: "Usuario não encontrado."});
-            } 
-            return response.status(200).json({user})
+    if (nomePaciente) {
+      const userRequest = await User.findOne({
+        where: {
+          name: nomePaciente,
+        },
+
+      })
+
+      if (userRequest) {
+
+        const patients = await Patient.findOne({
+          where: { id_user: userRequest.id },
+        })
+
+        if (patients) {
+          const exams = await Exam.findAll({
+            where: {
+              id_patient: patients.id
+            }
+          })
+          return response.status(200).json(exams);
+        } else {
+          return response.status(400).json({ message: "Não há exames para este paciente." })
         }
-        const listExams = await Exam.findAll();
-        return response.status(200).json(listExams)
 
-    } catch (error) {
-        console.log(error);
-        response.status(500).json({message: "Erro 500 - Verifique sua solicitação"})
-    }
+      } else {
+
+        return response.status(400).json({ message: "Não há paciente com este nome." })
+      }
+
+    } else {
+      const listExams = await Exam.findAll()
+      return response.status(200).json(listExams)
+    };
+
+  } catch (error) {
+
+    return response
+      .status(500)
+      .json({ message: "Erro ao buscar exames do paciente." });
+  }
 };
 
 module.exports = examRead;
+
