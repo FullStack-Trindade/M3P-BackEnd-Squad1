@@ -1,32 +1,63 @@
 const Exercise = require('../../models/exercise');
 const User = require('../../models/user');
+const Patient = require('../../models/patient');
 
-async function exerciseRead (request, response) {
-
-    const idUser = request.params.id;
+async function readExercise(request, response) {
 
     try {
-        const id = request.query.id
-        console.log(id);
-        
-        if (id) {
-            const user = await Exercise.findAll({
-                where: {
-                    id_patient: id
-                }
-            })
-            if(!user) {
-                response.status(404).json({menssagem: "Usuario não encontrado."});
-            } 
-            return response.status(200).json({user})
-        }
-        const listExercise = await Exercise.findAll();
-        return response.status(200).json(listExercise)
+        const nomePaciente = request.query.name
+            ? request.query.name.replace(/_/g, " ")
+            : null;
 
+        if (nomePaciente) {
+            const userRequest = await User.findOne({
+                where: {
+                    name: nomePaciente,
+                },
+
+            })
+            
+            if (userRequest) {
+
+                const patients = await Patient.findOne({
+                    where: { id_user: userRequest.id },
+                })
+
+                if (patients) {
+                    const exercise = await Exercise.findAll({
+                        where: {
+                            id_patient: patients.id
+                        }
+                    })
+                    if (exercise.length>0) {
+                        return response.status(200).json(exercise);
+
+
+                    } else {
+                        return response.status(400).json({ message: "Não há série de exercicios para este paciente." })
+                    }
+
+                } else {
+
+                    return response.status(400).json({ message: "Não há paciente com este nome." })
+                }
+
+            } else {
+      
+                return response.status(400).json({message: "Não existe paciente com este nome."})
+            };
+
+        }else{
+            const listExercise = await Exercise.findAll()
+                return response.status(200).json(listExercise) 
+        }
     } catch (error) {
-        console.log(error);
-        response.status(500).json({message: "Erro 500 - Verifique sua solicitação"})
+
+        return response
+            .status(500)
+            .json({ message: "Erro ao buscar série de exercicios do paciente." });
     }
 };
 
-module.exports = exerciseRead;
+module.exports = readExercise;
+
