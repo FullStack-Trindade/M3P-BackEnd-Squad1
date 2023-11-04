@@ -5,11 +5,20 @@ const cors = require("cors");
 const connection = require("./src/database/index");
 
 //Autenticação
+const Login = require("./src/controllers/session/login");
+const authRoutes = require('./src/routes/auth');
 //const validateToken = require("./src/middlewares/validateToken");
+
 
 const loginRoute = require('./src/routes/login');
 const authRoutes = require('./src/routes/auth');
 const patientRoutes = require("./src/routes/patient");
+
+// Medicamentos
+
+const medicationRoutes = require("./src/routes/medication");
+
+//Usuário
 const userRoutes = require("./src/routes/user");
 
 //Exame
@@ -46,8 +55,12 @@ app.use(authRoutes);
 //Paciente
 app.use(patientRoutes);
 
+// MEDICAMENTOS
+app.use(medicationRoutes);
+
 //Usuário
 app.use(userRoutes);
+
 
 //Exame
 app.post("/api/exames", validateExam, createExam);
