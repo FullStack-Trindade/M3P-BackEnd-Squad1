@@ -1,14 +1,12 @@
+const { Sequelize } = require("sequelize");
+
 const Patient = require("../../models/patient");
 const User = require("../../models/user");
-const Exam = require("../../models/exam");
-const Appointment = require("../../models/appointment");
 
 const searchPatientRecordByUser = async (request, response) => {
   try {
-    const nomeSemTratamento = request.query.name;
-    const idPaciente = request.params.id;
-
-    const nomePaciente = nomeSemTratamento.replace(/_/g, " ");
+    const idPaciente = parseInt(request.params.id);
+    const nomePaciente = request.query.name.replace(/_/g, " ");
 
     const userRequest = await User.findOne({
       where: {
@@ -16,17 +14,28 @@ const searchPatientRecordByUser = async (request, response) => {
       },
     });
 
-    const patientRequest = await Patient.findByPk(idPaciente);
+    if (userRequest && userRequest.id > 0) {
+      const patientRequest = await Patient.findByPk(idPaciente);
 
-    if ((userRequest.id = patientRequest.idUser)) {
-      //Lógica de pegar todos os prontuários e filtrar por id_patient em todas as tabelas. Juntar em objeto só e enviar
-      return response.status(200).json({
-        message: "Aqui vem a lógica de filtro de todos os prontuários",
-      });
+      if (patientRequest && userRequest.id === patientRequest.idUser) {
+        
+        const patients = await Patient.findAll({
+          where: { id: patientRequest.id },
+          include: { all: true },
+        });
+
+        if (!patients || patients.length === 0) {
+          return response
+            .status(400)
+            .json({ message: "Não há pacientes com prontuários" });
+        }
+
+        return response.status(200).json(patients);
+      }
+      return response
+        .status(400)
+        .json({ message: "Dados dos pacientes inconsistentes" });
     }
-    return response
-      .status(400)
-      .json({ message: "Dados dos pacientes inconsistentes" });
   } catch (error) {
     return response
       .status(500)
@@ -35,3 +44,4 @@ const searchPatientRecordByUser = async (request, response) => {
 };
 
 module.exports = searchPatientRecordByUser;
+
