@@ -4,6 +4,35 @@ const cors = require("cors");
 
 const connection = require("./src/database/index");
 
+const app = express();
+const swaggerUi = require('swagger-ui-express');
+const swaggerJSDoc = require('swagger-jsdoc');
+
+app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+const swaggerOptions = {
+  definition: {
+    openapi: '3.0.0',
+    info: {
+      title: 'Nome da Sua API',
+      version: '1.0.0',
+      description: 'Descrição da sua API',
+    },
+  },
+  apis: ['./src/routes/patient.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 //Autenticação
 //const validateToken = require("./src/middlewares/validateToken");
 
@@ -26,16 +55,6 @@ const patientRecordRoutes = require("./src/routes/patientRecord");
 
 const validateExam = require("./src/middlewares/validate-exams.request");
 const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
-
-const app = express();
-app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
 
 //Login
 app.use(loginRoute);
@@ -60,12 +79,6 @@ app.use(appointmentRoutes);
 
 //Prontuários
 app.use(patientRecordRoutes);
-
-const startServer = () => {
-  app.listen(process.env.SERVER_PORT, () => {
-    console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
-  });
-};
 
 const connect = async () => {
   try {
