@@ -9,6 +9,7 @@ const connection = require("./src/database/index");
 
 const loginRoute = require('./src/routes/login');
 const authRoutes = require('./src/routes/auth');
+const passwordRoutes = require("./src/routes/password");
 const patientRoutes = require("./src/routes/patient");
 const userRoutes = require("./src/routes/user");
 
@@ -42,6 +43,9 @@ app.use(loginRoute);
 
 //Auth
 app.use(authRoutes);
+
+//Password
+app.use(passwordRoutes);
 
 //Paciente
 app.use(patientRoutes);
