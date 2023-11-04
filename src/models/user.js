@@ -5,6 +5,7 @@ const Type = require('./type')
 const Patient = require('./patient');
 const Appointment = require('./appointment');
 const Exam = require('./exam');
+const Token = require('./token');
 
 const User = connection.define('user', {
     id: {
@@ -66,6 +67,9 @@ const User = connection.define('user', {
 });
 
 User.belongsTo(Type, { foreignKey: 'id_type' });
+
+User.hasOne(Token, { sourceKey: 'id', foreignKey: 'id_user' });
+Patient.belongsTo(User, { foreignKey: 'id_user' });
 
 User.hasOne(Patient, { sourceKey: 'id', foreignKey: 'idUser' });
 Patient.belongsTo(User, { foreignKey: 'idUser' });
