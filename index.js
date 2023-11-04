@@ -1,12 +1,13 @@
 require("dotenv").config();
 const express = require("express");
+const swaggerUi = require('swagger-ui-express');
 const cors = require("cors");
 
 const connection = require("./src/database/index");
-
+import swaggerDocs from ".//swagger.json"
 const app = express();
-const swaggerUi = require('swagger-ui-express');
-const swaggerJSDoc = require('swagger-jsdoc');
+
+// const swaggerJSDoc = require('swagger-jsdoc');
 
 app.use(express.json());
 app.use(
@@ -16,22 +17,23 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+app.use("/api-docs",swaggerUi.serve, swaggerUi.setup(swaggerDocs) )
 
-const swaggerOptions = {
-  definition: {
-    openapi: '3.0.0',
-    info: {
-      title: 'Nome da Sua API',
-      version: '1.0.0',
-      description: 'Descrição da sua API',
-    },
-  },
-  apis: ['./src/routes/patient.js'],
-};
+// const swaggerOptions = {
+//   definition: {
+//     openapi: '3.0.0',
+//     info: {
+//       title: 'Nome da Sua API',
+//       version: '1.0.0',
+//       description: 'Descrição da sua API',
+//     },
+//   },
+//   apis: ['./src/routes/patient.js'],
+// };
 
-const swaggerSpec = swaggerJSDoc(swaggerOptions);
+// const swaggerSpec = swaggerJSDoc(swaggerOptions);
 
-app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
