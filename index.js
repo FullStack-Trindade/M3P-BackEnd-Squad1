@@ -1,42 +1,14 @@
 require("dotenv").config();
 const express = require("express");
+const swaggerUi = require('swagger-ui-express');
 const cors = require("cors");
 
 const connection = require("./src/database/index");
-
-//Autenticação
-const Login = require("./src/controllers/session/login");
-//const validateToken = require("./src/middlewares/validateToken");
-const authRoutes = require('./src/routes/auth');
-
-const patientRoutes = require("./src/routes/patient");
-
-//Usuário
-const postUser = require('./src/controllers/user/postUser')
-const delUser = require('./src/controllers/user/delUser')
-const getUser = require('./src/controllers/user/getUser')
-const putUser = require('./src/controllers/user/putUser')
-const searchUserByCpf = require("./src/controllers/user/searchUserByCpfEmail");
-
-//Exame
-const createExam = require("./src/controllers/exams/createExams");
-const readExam = require("./src/controllers/exams/readExams");
-const updateExam = require("./src/controllers/exams/updateExams");
-const deleteExam = require("./src/controllers/exams/deleteExams"); 
-
-//Consultas
-const appointmentRoutes = require("./src/routes/appointment");
-
-//Prontuários
-const patientRecordRoutes = require('./src/routes/patientRecord');
-
-//Midleware
-const validaUsuario = require("./src/middlewares/validaUsuario");
-const validatePutUser = require("./src/middlewares/validatePutUser");
-const validateExam = require("./src/middlewares/validate-exams.request");
-const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
-
+import swaggerDocs from ".//swagger.json"
 const app = express();
+
+// const swaggerJSDoc = require('swagger-jsdoc');
+
 app.use(express.json());
 app.use(
   cors({
@@ -45,20 +17,71 @@ app.use(
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
-//Paciente
-app.post("/api/pacientes", validatePatientRequest, createPatient);
-app.put("/api/pacientes/:id", validatePatientRequest, updatePatient);
-app.get("/api/pacientes", patientList);
-app.get("/api/pacientes/:id", searchPatients);
-app.delete("/api/pacientes/:id", deletePatient);
+app.use("/api-docs",swaggerUi.serve, swaggerUi.setup(swaggerDocs) )
+
+// const swaggerOptions = {
+//   definition: {
+//     openapi: '3.0.0',
+//     info: {
+//       title: 'Nome da Sua API',
+//       version: '1.0.0',
+//       description: 'Descrição da sua API',
+//     },
+//   },
+//   apis: ['./src/routes/patient.js'],
+// };
+
+// const swaggerSpec = swaggerJSDoc(swaggerOptions);
+
+// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+//Autenticação
+const Login = require("./src/controllers/session/login");
+const authRoutes = require('./src/routes/auth');
+//const validateToken = require("./src/middlewares/validateToken");
+
+
+const loginRoute = require('./src/routes/login');
+//const authRoutes = require('./src/routes/auth');
+const patientRoutes = require("./src/routes/patient");
+
+// Medicamentos
+
+const medicationRoutes = require("./src/routes/medication");
 
 //Usuário
-app.post("/api/usuarioss", validaUsuario, postUser);
-app.put("/api/usuarios/:id", validatePutUser, putUser);
-app.get("/api/usuarios", getUser);
-app.post("/api/usuarios/search", searchUserByCpf);
-app.delete("/api/usuarios/:id", delUser);
-app.post('/api/usuarios/login', Login);
+const userRoutes = require("./src/routes/user");
+
+//Exame
+const createExam = require("./src/controllers/exams/createExams");
+const readExam = require("./src/controllers/exams/readExams");
+const updateExam = require("./src/controllers/exams/updateExams");
+const deleteExam = require("./src/controllers/exams/deleteExams");
+
+//Consultas
+const appointmentRoutes = require("./src/routes/appointment");
+
+//Prontuários
+const patientRecordRoutes = require("./src/routes/patientRecord");
+
+const validateExam = require("./src/middlewares/validate-exams.request");
+const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
+
+//Login
+app.use(loginRoute);
+
+//Auth
+app.use(authRoutes);
+
+//Paciente
+app.use(patientRoutes);
+
+// MEDICAMENTOS
+app.use(medicationRoutes);
+
+//Usuário
+app.use(userRoutes);
+
 
 //Exame
 app.post("/api/exames", validateExam, createExam);
@@ -72,13 +95,7 @@ app.use(appointmentRoutes);
 //Prontuários
 app.use(patientRecordRoutes);
 
-const startServer = () => {
-  app.listen(process.env.SERVER_PORT, () => {
-    console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
-  });
-};
-
-const connect = async() => {
+const connect = async () => {
   try {
     await connection.authenticate();
     console.log("Conexão com banco de dados bem sucedida");
@@ -88,5 +105,5 @@ const connect = async() => {
   }
 };
 
-connect()
+connect();
 connection.sync({ alter: true });
