@@ -16,10 +16,10 @@ const Exercise = connection.define('exercise',{
         allowNull: false,
     },
 
-    id_nurse: {
+/*     id_nurse: {
         type: Sequelize.INTEGER,
         allowNull: false,
-    },
+    }, */
 
     seriesName: {
         type: Sequelize.STRING,
@@ -37,7 +37,7 @@ const Exercise = connection.define('exercise',{
     },
 
     typeExercise:{
-        type:Sequelize.ENUM("RESISTÊNCIA AERÓBITCA","RESISTÊNCIA MUSCULAR", "FEXIBILIDADE", "FORÇA", "AGILIDADE", "OUTROS"),
+        type:Sequelize.ENUM("RESISTÊNCIA AERÓBICA","RESISTÊNCIA MUSCULAR", "FEXIBILIDADE", "FORÇA", "AGILIDADE", "OUTROS"),
         allowNull: false,
     },
 
