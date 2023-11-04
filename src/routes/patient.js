@@ -16,7 +16,17 @@ const searchPatientByIdUser = require("../controllers/patients/searchPatientById
 
 // // ROUTES
 const patientRoutes = new Router();
-
+/**
+ * @swagger
+ * /api/exemplo:
+ *   get:
+ *     summary: Retorna uma lista de exemplos.
+ *     responses:
+ *       200:
+ *         description: Sucesso - Retorna uma lista de exemplos.
+ *       500:
+ *         description: Erro do servidor - Não foi possível obter a lista de exemplos.
+ */
 patientRoutes
   .post("/api/pacientes", validatePatientRequest, createPatient)
   .put("/api/pacientes/:id", validatePatientUpdate, updatePatient)
