@@ -35,20 +35,16 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 //Autenticação
-const Login = require("./src/controllers/session/login");
 const authRoutes = require('./src/routes/auth');
-//const validateToken = require("./src/middlewares/validateToken");
-
-
 const loginRoute = require('./src/routes/login');
-//const authRoutes = require('./src/routes/auth');
+
+//Pacientes
 const patientRoutes = require("./src/routes/patient");
 
 // Medicamentos
-
 const medicationRoutes = require("./src/routes/medication");
 
-//Usuário
+//Usuários
 const userRoutes = require("./src/routes/user");
 
 //Exame
@@ -63,6 +59,10 @@ const appointmentRoutes = require("./src/routes/appointment");
 //Prontuários
 const patientRecordRoutes = require("./src/routes/patientRecord");
 
+//Dietas
+const dietRoutes = require("./src/routes/diet");
+
+//Midleware
 const validateExam = require("./src/middlewares/validate-exams.request");
 const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
 
@@ -84,17 +84,16 @@ app.use(loginRoute);
 //Auth
 app.use(authRoutes);
 
-//Paciente
+//Pacientes
 app.use(patientRoutes);
 
-// MEDICAMENTOS
+//Medicamentos
 app.use(medicationRoutes);
 
-//Usuário
+//Usuários
 app.use(userRoutes);
 
-
-//Exame
+//Exames
 app.post("/api/exames", validateExam, createExam);
 app.put("/api/exames/:id", validateExamUpdate, updateExam);
 app.get("/api/exames", readExam);
@@ -105,6 +104,9 @@ app.use(appointmentRoutes);
 
 //Prontuários
 app.use(patientRecordRoutes);
+
+//Dietas
+app.use(dietRoutes);
 
 const startServer = () => {
   app.listen(process.env.SERVER_PORT, () => {
