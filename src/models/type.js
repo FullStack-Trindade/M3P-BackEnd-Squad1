@@ -9,7 +9,7 @@ const Type = connection.define('type', {
   descricao: {
     type: Sequelize.STRING,
     allowNull: false
-  }
+  },
 });
 
 connection.sync().then(() => {

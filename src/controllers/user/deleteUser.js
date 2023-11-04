@@ -1,6 +1,6 @@
 const User = require('../../models/user')
 
-const delUser = async (request, response) => {
+const deleteUser = async (request, response) => {
 
     try {
         const result = await User.findByPk(request.params.id)
@@ -24,4 +24,4 @@ const delUser = async (request, response) => {
 
 }
 
-module.exports = delUser
+module.exports = deleteUser
