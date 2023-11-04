@@ -1,6 +1,5 @@
 require("dotenv").config();
 const express = require("express");
-const swaggerUi = require('swagger-ui-express');
 const cors = require("cors");
 
 const connection = require("./src/database/index");
@@ -65,7 +64,7 @@ const appointmentRoutes = require("./src/routes/appointment");
 const patientRecordRoutes = require("./src/routes/patientRecord");
 
 const validateExam = require("./src/middlewares/validate-exams.request");
-const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
+const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
 
 const app = express();
 app.use(express.json());
@@ -77,6 +76,12 @@ app.use(
   })
 );
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+//Login
+app.use(loginRoute);
+
+//Auth
 app.use(authRoutes);
 
 //Paciente
@@ -107,7 +112,7 @@ const startServer = () => {
   });
 };
 
-const connect = async() => {
+const connect = async () => {
   try {
     await connection.authenticate();
     console.log("Conexão com banco de dados bem sucedida");
