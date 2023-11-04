@@ -14,8 +14,16 @@ async function sendNewPassword (req, res) {
                 }
             })
 
+            if (!passwordResetToken) {
+                return res.status(400).json({ message: 'Token de recuperação de senha inválido' });
+            }
+
             const isValid = await bcrypt.compare(token, passwordResetToken.token);
 
+            if (!isValid) {
+                return res.status(400).json({ message: 'Token de recuperação de senha inválido' });
+            }
+            
             const hash = await bcrypt.hash(password, Number(bcryptSalt));
 
             const user = await User.findOne({ 
