@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 
 const Token = require('../../models/token');
+const User = require('../../models/user');
 
 async function sendNewPassword (req, res) {
     try {
@@ -11,9 +12,13 @@ async function sendNewPassword (req, res) {
                 }
             })
 
-        const isValid = await bcrypt.compare(token, passwordResetToken.token);
+            const isValid = await bcrypt.compare(token, passwordResetToken.token);
 
-
+            const user = await User.findOne({ 
+                where: {
+                    id: id_user 
+                }
+            }); 
         }
     } catch (error) {
         return res.status(500).json({ message: 'Requisição não pode ser executada' });
