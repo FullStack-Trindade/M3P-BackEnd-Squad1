@@ -11,7 +11,7 @@ const authRoutes = require('./src/routes/auth');
 
 
 const loginRoute = require('./src/routes/login');
-const authRoutes = require('./src/routes/auth');
+//const authRoutes = require('./src/routes/auth');
 const patientRoutes = require("./src/routes/patient");
 
 // Medicamentos
