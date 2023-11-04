@@ -1,8 +1,6 @@
 const connection = require('../database/index');
 const { Sequelize} = require('sequelize');
 
-// const Patient = require('./patient')
-
 const Exam = connection.define('exam', {
     id: {
         type: Sequelize.INTEGER,
@@ -67,7 +65,5 @@ const Exam = connection.define('exam', {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
 });
-
-    // Exame.bleongsTo(Patient, {foreignKey:"id_patient"})
 
 module.exports = Exam;

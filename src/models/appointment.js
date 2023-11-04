@@ -1,9 +1,6 @@
 const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
 
-// const Patient = require('./patient');
-// const User = require('./user');
-
 const Appointment = connection.define('appointment', {
     id: {
         type: Sequelize.INTEGER,
@@ -75,8 +72,5 @@ const Appointment = connection.define('appointment', {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
 });
-
-// Appointment.belongsTo(Patient, {/*  sourcekey: 'id',  */foreignKey: 'id_patient'});
-// Appointment.belongsTo(User, { sourcekey: 'id', foreignKey: 'id_doctor'});
 
 module.exports = Appointment;
