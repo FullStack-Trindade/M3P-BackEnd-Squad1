@@ -1,9 +1,9 @@
 const User = require('../../models/user')
 const bcrypt = require('bcrypt')
 
-const postUser = async (request, response)=>{
+const createUser = async (request, response)=>{
 
-  
+      
     try {
         const password = await bcrypt.hash(request.body.password, 10)
         const getUsuario = await User.findOne({
@@ -27,6 +27,7 @@ const postUser = async (request, response)=>{
         const cadastro = {
             name: request.body.name,
             gender: request.body.gender,
+            phone:request.body.phone,
             cpf: request.body.cpf,
             email: request.body.email,
             password: password,
@@ -34,13 +35,13 @@ const postUser = async (request, response)=>{
         }
     
         const novoCadastro = await User.create(cadastro)
+       
         if(novoCadastro) {
-            return response.status(201).json({
-                msg: `Cadastro do usuário ${cadastro.name} realizado com sucesso`
-            })
+            return response.status(201).json(novoCadastro
+            )
         }else{
             return response.status(400).json({
-                msg: "Não foi possível realizar o cadastro"
+                msg: "Não foi possível realizar o cadastro de usuário"
             })
         }
       
@@ -52,4 +53,4 @@ const postUser = async (request, response)=>{
    
 }
 
-module.exports = postUser
+module.exports = createUser
