@@ -17,6 +17,10 @@ async function resetPasswordRequest (req, res) {
                 }
             });
             
+            if (!user) {
+                return res.status(400).json({ message: 'Usuário não possui cadastro' });
+            }
+            
             let token = await Token.findOne({ 
                 where: {
                     id_user: user.id
