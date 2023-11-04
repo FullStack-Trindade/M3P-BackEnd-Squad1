@@ -69,6 +69,9 @@ const appointmentRoutes = require("./src/routes/appointment");
 //Prontuários
 const patientRecordRoutes = require("./src/routes/patientRecord");
 
+//middlewares
+const validateExercise = require("./src/middlewares/validate-exercise");
+
 const validateExam = require("./src/middlewares/validate-exams.request");
 const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
 
