@@ -6,7 +6,7 @@ const Token = require('../../models/token');
 const sendEmail = require('../../utils/email/sendEmail');
 
 const bcryptSalt = process.env.BCRYPT_SALT;
-const port = process.env.SERVER_PORT;
+const CLIENT_URL = process.env.CLIENT_URL;
 
 async function resetPasswordRequest (req, res) {
     try {
@@ -38,7 +38,7 @@ async function resetPasswordRequest (req, res) {
                 token: hash,
             }).save();
 
-            const link = `localhost:${ port }/resetarSenha?token=${ resetToken }&id=${ user.id }`;
+            const link = `${ CLIENT_URL }/resetarSenha?token=${ resetToken }&id=${ user.id }`;
         
             sendEmail(
                 user.email, 
