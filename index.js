@@ -4,36 +4,36 @@ const swaggerUi = require('swagger-ui-express');
 const cors = require("cors");
 
 const connection = require("./src/database/index");
-import swaggerDocs from ".//swagger.json"
-const app = express();
 
-// const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-app.use(express.json());
-app.use(
-  cors({
-    origin: "*",
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
-app.use("/api-docs",swaggerUi.serve, swaggerUi.setup(swaggerDocs) )
 
-// const swaggerOptions = {
-//   definition: {
-//     openapi: '3.0.0',
-//     info: {
-//       title: 'Nome da Sua API',
-//       version: '1.0.0',
-//       description: 'Descrição da sua API',
-//     },
-//   },
-//   apis: ['./src/routes/patient.js'],
-// };
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Express API for JSONPlaceholder',
+    version: '1.0.0',
+    description:
+      'This is a REST API application made with Express. It retrieves data from JSONPlaceholder.',
+    license: {
+      name: 'Licensed Under MIT',
+      url: 'https://spdx.org/licenses/MIT.html',
+    },
+    contact: {
+      name: 'JSONPlaceholder',
+      url: 'https://jsonplaceholder.typicode.com',
+    },
+  }
 
-// const swaggerSpec = swaggerJSDoc(swaggerOptions);
+};
 
-// app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+const options = {
+  swaggerDefinition,
+  apis: ['./src/routes/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
 
 //Autenticação
 const Login = require("./src/controllers/session/login");
@@ -65,12 +65,18 @@ const appointmentRoutes = require("./src/routes/appointment");
 const patientRecordRoutes = require("./src/routes/patientRecord");
 
 const validateExam = require("./src/middlewares/validate-exams.request");
-const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
+const validateExamUpdate = require('./src/middlewares/validate-examsUpdate');
 
-//Login
-app.use(loginRoute);
+const app = express();
+app.use(express.json());
+app.use(
+  cors({
+    origin: "*",
+    credentials: true,
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
-//Auth
 app.use(authRoutes);
 
 //Paciente
@@ -95,7 +101,13 @@ app.use(appointmentRoutes);
 //Prontuários
 app.use(patientRecordRoutes);
 
-const connect = async () => {
+const startServer = () => {
+  app.listen(process.env.SERVER_PORT, () => {
+    console.log(`Servidor rodando na porta ${process.env.SERVER_PORT}`);
+  });
+};
+
+const connect = async() => {
   try {
     await connection.authenticate();
     console.log("Conexão com banco de dados bem sucedida");
