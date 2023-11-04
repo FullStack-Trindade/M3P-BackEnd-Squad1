@@ -37,7 +37,7 @@ async function sendNewPassword (req, res) {
             await user.update(
                 { 
                     password: hash,
-                    updated_at: dayjs().subtract(3, "hour").format("YYYY-MM-DD HH:mm:ss"),
+                    updated_at: dayjs().subtract(3,'hour'),
                 }
             ). then(updatedUser => console.log(JSON.stringify(updatedUser, null, 2)));
 
