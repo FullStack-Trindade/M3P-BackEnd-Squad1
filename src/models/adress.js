@@ -1,5 +1,25 @@
+// const connection = require("../database/index");
+// const { Sequelize } = require("sequelize");
+
+// const Adress = connection.define("adress", {
+//   id: {
+//     type: Sequelize.INTEGER,
+//     autoIncrement: true,
+//     primaryKey: true,
+//   },
+
+//   adress: {
+//     type: Sequelize.JSONB,
+//     allowNull: false,
+//   },
+// });
+
+// module.exports = Adress;
+
 const connection = require("../database/index");
 const { Sequelize } = require("sequelize");
+
+const Patient = require('./patient');
 
 const Adress = connection.define("adress", {
   id: {
@@ -41,13 +61,15 @@ const Adress = connection.define("adress", {
     type: 'TIMESTAMP',
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-},
-updated_at: {
+  },
+  updated_at: {
     type: 'TIMESTAMP',
     allowNull: false,
     defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
-}
+  }
 });
 
-module.exports = Adress;
+Adress.hasOne(Patient, { sourceKey: 'id', foreignKey: 'adress' });
+Patient.belongsTo(Adress, { foreignKey: 'adress', as: 'adress_id' });
 
+module.exports = Adress;
