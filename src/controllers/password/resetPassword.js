@@ -37,6 +37,10 @@ async function sendNewPassword (req, res) {
                 { name: user.name },
                 './template/resetPassword.handlebars'
             );
+
+            await passwordResetToken.destroy();
+        
+            return true;
         }
     } catch (error) {
         return res.status(500).json({ message: 'Requisição não pode ser executada' });
