@@ -1,9 +1,11 @@
 const bcrypt = require('bcrypt');
-const bcryptSalt = process.env.BCRYPT_SALT;
+const dayjs = require('dayjs');
 
 const Token = require('../../models/token');
 const User = require('../../models/user');
 const sendEmail = require('../../utils/email/sendEmail');
+
+const bcryptSalt = process.env.BCRYPT_SALT;
 
 async function sendNewPassword (req, res) {
     try {
