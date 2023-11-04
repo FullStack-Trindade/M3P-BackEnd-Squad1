@@ -3,6 +3,7 @@ const bcryptSalt = process.env.BCRYPT_SALT;
 
 const Token = require('../../models/token');
 const User = require('../../models/user');
+const sendEmail = require('../../utils/email/sendEmail');
 
 async function sendNewPassword (req, res) {
     try {
@@ -29,6 +30,13 @@ async function sendNewPassword (req, res) {
                     updated_at: dayjs().subtract(3, "hour").format("YYYY-MM-DD HH:mm:ss"),
                 }
             ). then(updatedUser => console.log(JSON.stringify(updatedUser, null, 2)));
+
+            sendEmail(
+                user.email,
+                'Recuperação de senha bem sucedida',
+                { name: user.name },
+                './template/resetPassword.handlebars'
+            );
         }
     } catch (error) {
         return res.status(500).json({ message: 'Requisição não pode ser executada' });
