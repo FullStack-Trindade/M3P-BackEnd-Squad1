@@ -20,7 +20,7 @@ async function resetPasswordRequest (req, res) {
             if (!user) {
                 return res.status(400).json({ message: 'Usuário não possui cadastro' });
             }
-            
+
             let token = await Token.findOne({ 
                 where: {
                     id_user: user.id
@@ -49,6 +49,14 @@ async function resetPasswordRequest (req, res) {
         
             return link;
         }
+
+        const resetRequest = await requestFunction(req.body.email);
+
+        return res.status(200).json({
+            link: resetRequest,
+            message: 'Confira seu e-mail para recuperar sua senha'        
+        });
+        
     } catch (error) {
         return res.status(500).json({ message: 'Requisição não pode ser executada' });
     }
