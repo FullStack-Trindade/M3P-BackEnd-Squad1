@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 const Token = require('../../models/token');
 
 async function sendNewPassword (req, res) {
@@ -8,6 +10,9 @@ async function sendNewPassword (req, res) {
                     id_user: id_user 
                 }
             })
+
+        const isValid = await bcrypt.compare(token, passwordResetToken.token);
+
 
         }
     } catch (error) {
