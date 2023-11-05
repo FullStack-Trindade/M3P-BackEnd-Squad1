@@ -11,8 +11,6 @@ async function updateExam(request, response) {
 
     try {
         const {
-            id_patient,
-            id_doctor,
             nameExam,    
             dateExam,
             hourExam,

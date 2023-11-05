@@ -11,8 +11,6 @@ async function updateExercise(request, response) {
 
     try {
         const {
-            id_patient,
-            id_nurse,
             seriesName,
             dateExercise,
             hourExercise,
