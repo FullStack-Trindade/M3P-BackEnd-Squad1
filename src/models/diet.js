@@ -1,7 +1,7 @@
 const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
 
-const Appointment = connection.define('appointment', {
+const Diet = connection.define('diet', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -23,37 +23,40 @@ const Appointment = connection.define('appointment', {
         allowNull: false,
         onUpdate: 'CASCADE',
         references: {
-            model: { tableName: 'users', key: 'id' }
-        }
+            model: { tableName: "users", key: "id" },
+        },
     },
-    appointment_reason: {
-        type: Sequelize.STRING(64),
+    diet_name: {
+        type: Sequelize.STRING(100),
         allowNull: false,
         notEmpty: true
     },
-    appointment_date: {
+    diet_date: {
         type: Sequelize.DATEONLY,
         allowNull: false,
         notEmpty: true
     },
-    appointment_hour: {
+    diet_hour: {
         type: Sequelize.TIME,
         allowNull: false,
         notEmpty: true
     },
-    problem_description: {
-        type: Sequelize.STRING(1024),
+    diet_type: {
+        type: Sequelize.ENUM(
+            'CETOGÊNICA',
+            'DASH',
+            'DUKAN',
+            'LOW CARB',
+            'MEDITERRÂNEA',
+            'PALEOLÍTICA',
+            'OUTRA'
+        ),
         allowNull: false,
         notEmpty: true
     },
-    medication_prescribed: {
+    diet_description: {
         type: Sequelize.STRING(1024),
         allowNull: true
-    },
-    dosage_precautions: {
-        type: Sequelize.STRING(256),
-        allowNull: false,
-        defaultValue: 'Medicação não receitada.'
     },
     status: {
         type: Sequelize.BOOLEAN,
@@ -73,4 +76,4 @@ const Appointment = connection.define('appointment', {
     }
 });
 
-module.exports = Appointment;
+module.exports = Diet;
