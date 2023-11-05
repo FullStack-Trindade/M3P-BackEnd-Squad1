@@ -34,7 +34,7 @@ const Medication = connection.define("medication", {
     allowNull: false,
   },
   typeMedication: {
-    type: Sequelize.ENUM("CAPSULA", "COMPRIMIDO", "LIQUIDO", "GEL", "INJECAO"),
+    type: Sequelize.ENUM("CAPSULA", "COMPRIMIDO", "LIQUIDO","CREME", "GEL","INALACAO", "INJECAO","SPRAY"),
   },
   amountMedication: {
     type: Sequelize.INTEGER,
