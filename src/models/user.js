@@ -73,7 +73,7 @@ User.hasOne(Patient, { sourceKey: 'id', foreignKey: 'idUser' });
 Patient.belongsTo(User, { foreignKey: 'idUser' });
 
 User.hasOne(Token, { sourceKey: 'id', foreignKey: 'id_user' });
-Patient.belongsTo(User, { foreignKey: 'id_user' });
+Token.belongsTo(User, { foreignKey: 'id_user' });
 
 User.hasOne(Patient, { sourceKey: 'id', foreignKey: 'idUser' });
 Patient.belongsTo(User, { foreignKey: 'idUser' });
