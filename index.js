@@ -7,7 +7,6 @@ const connection = require("./src/database/index");
 const swaggerJSDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
@@ -36,6 +35,7 @@ const swaggerSpec = swaggerJSDoc(options);
 
 //Autenticação
 const authRoutes = require('./src/routes/auth');
+const passwordRoutes = require("./src/routes/password");
 const loginRoute = require('./src/routes/login');
 
 //Pacientes
@@ -47,7 +47,7 @@ const medicationRoutes = require("./src/routes/medication");
 //Usuários
 const userRoutes = require("./src/routes/user");
 
-//Exame
+//Exames
 const examRoutes = require("./src/routes/exam");
 
 //Exercicio
@@ -80,6 +80,9 @@ app.use(loginRoute);
 //Auth
 app.use(authRoutes);
 
+//Senha
+app.use(passwordRoutes);
+
 //Pacientes
 app.use(patientRoutes);
 
@@ -88,7 +91,6 @@ app.use(medicationRoutes);
 
 //Usuários
 app.use(userRoutes);
-
 
 //Exame
 app.use(examRoutes);

@@ -1,9 +1,6 @@
 const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
 
-const User = require('./user');
-const Patient = require('./patient');
-
 const Diet = connection.define('diet', {
     id: {
         type: Sequelize.INTEGER,
@@ -16,12 +13,18 @@ const Diet = connection.define('diet', {
     id_patient: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        references: {
+            model: { tableName: 'patients', key: 'id' }
+        }
     },
     id_doctor: {
         type: Sequelize.INTEGER,
         allowNull: false,
-        onUpdate: 'CASCADE'
+        onUpdate: 'CASCADE',
+        references: {
+            model: { tableName: "users", key: "id" },
+        },
     },
     diet_name: {
         type: Sequelize.STRING(100),
@@ -72,8 +75,5 @@ const Diet = connection.define('diet', {
         defaultValue: Sequelize.literal('CURRENT_TIMESTAMP')
     }
 });
-
-Diet.belongsTo(User, { /* sourcekey: 'id', */ foreignKey: 'id_doctor'});
-Diet.belongsTo(Patient, {/*  sourcekey: 'id',  */foreignKey: 'id_patient'});
 
 module.exports = Diet;
