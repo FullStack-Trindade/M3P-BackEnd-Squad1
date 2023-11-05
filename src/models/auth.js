@@ -1,7 +1,8 @@
-const connection = require('./../database/index');
 const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
 
-const Auth = connection.define('auth', {
+const Auth = sequelize.define('auths', {
     id_user: {
         type: Sequelize.INTEGER,
         allowNull: false,
