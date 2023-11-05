@@ -19,6 +19,8 @@ const examRoutes = new Router();
  * @swagger
  * /api/exames:
  *   post:
+ *     tags:
+ *       - Exames
  *     summary: Cadastro de um novo Exame
  *     description: Cria um novo exame.
  *     requestBody:
@@ -58,12 +60,10 @@ const examRoutes = new Router();
  *         description: Requisição inválida.
  *       '500':
  *         description: Erro ao gerar a resposta.
- */
-
-/**
- * @swagger
- * /api/exames/{id}:
+ *
  *   put:
+ *     tags:
+ *       - Exames
  *     summary: Atualiza um Exame pelo Identificador
  *     description: Atualiza os detalhes de um exame existente.
  *     parameters:
@@ -109,12 +109,10 @@ const examRoutes = new Router();
  *         description: Requisição inválida.
  *       '500':
  *         description: Erro ao gerar a resposta.
- */
-
-/**
- * @swagger
- * /api/exames:
+ *
  *   get:
+ *     tags:
+ *       - Exames
  *     summary: Retorna exames pelo Usuário
  *     description: Retorna exames com base no nome do usuário.
  *     parameters:
@@ -129,12 +127,10 @@ const examRoutes = new Router();
  *         description: Requisição inválida.
  *       '500':
  *         description: Erro ao gerar a resposta.
- */
-
-/**
- * @swagger
- * /api/exames/{id}:
+ *
  *   delete:
+ *     tags:
+ *       - Exames
  *     summary: Deleta Exame pelo Identificador
  *     description: Deleta um exame com base no identificador.
  *     parameters:
