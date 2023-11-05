@@ -3,7 +3,10 @@ const connection = require('../config/database');
 const sequelize = new Sequelize(connection);
 
 const Appointment = require('./appointment');
+const Diet = require('./diet');
 const Exam = require('./exam');
+const Exercise = require('./exercise');
+const Medication = require('./medication');
 
 const Patient = sequelize.define("patients", {
   id: {
@@ -98,5 +101,14 @@ Appointment.belongsTo(Patient, { foreignKey: 'id_patient' });
 
 Patient.hasMany(Exam, { sourceKey: 'id', foreignKey: 'id_patient' });
 Exam.belongsTo(Patient, { foreignKey: 'id_patient' });
+
+Patient.hasMany(Exercise, { sourceKey: 'id', foreignKey: 'id_patient' });
+Exercise.belongsTo(Patient, { foreignKey: 'id_patient' });
+
+Patient.hasMany(Diet, { sourceKey: 'id', foreignKey: 'id_patient' });
+Diet.belongsTo(Patient, { foreignKey: 'id_patient' });
+
+Patient.hasMany(Medication, { sourceKey: 'id', foreignKey: 'id_patient' });
+Medication.belongsTo(Patient, { foreignKey: 'id_patient' });
 
 module.exports = Patient;

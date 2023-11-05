@@ -56,4 +56,3 @@ Adress.hasOne(Patient, { sourceKey: 'id', foreignKey: 'adressId' });
 Patient.belongsTo(Adress, { foreignKey: 'adressId' });
 
 module.exports = Adress;
-

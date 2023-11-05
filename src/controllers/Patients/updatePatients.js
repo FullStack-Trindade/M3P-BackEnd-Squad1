@@ -4,7 +4,6 @@ const Adress = require("../../models/adress");
 const Patient = require("../../models/patient");
 
 async function updatePatient(request, response) {
-  
   try {
     const patientInDatabase = await Patient.findByPk(request.params.id);
 
@@ -15,13 +14,13 @@ async function updatePatient(request, response) {
     }
 
     if (
-      request.body.rg !== undefined && patientInDatabase.rg !== request.body.rg ||
-      request.body.orgaoExpedidor !== undefined && patientInDatabase.orgaoExpedidor !== request.body.orgaoExpedidor 
-      
+      (request.body.rg && patientInDatabase.rg !== request.body.rg) ||
+      (request.body.orgaoExpedidor &&
+        patientInDatabase.orgaoExpedidor !== request.body.orgaoExpedidor)
     ) {
       return response
         .status(400)
-        .json({ message: "O campo RG não pode ser modificado" });
+        .json({ message: "O campo RG e/ou Órgão não pode ser modificado" });
     }
 
     patientInDatabase.birth = request.body.birth || patientInDatabase.birth;

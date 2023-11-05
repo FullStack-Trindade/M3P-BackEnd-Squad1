@@ -4,7 +4,11 @@ const sequelize = new Sequelize(connection);
 
 const Patient = require('./patient');
 const Appointment = require('./appointment');
+const Diet = require('./diet');
 const Exam = require('./exam');
+const Exercise = require('./exercise');
+const Medication = require('./medication');
+const Token = require('./token');
 
 const User = sequelize.define('users', {
     id: {
@@ -22,6 +26,10 @@ const User = sequelize.define('users', {
         values: ['MASCULINO', 'FEMININO', 'NAO_INFORMADO']
     },
     cpf: {
+        type: Sequelize.STRING,
+        allowNull: false
+    },
+    phone: {
         type: Sequelize.STRING,
         allowNull: false
     },
@@ -64,10 +72,25 @@ const User = sequelize.define('users', {
 User.hasOne(Patient, { sourceKey: 'id', foreignKey: 'idUser' });
 Patient.belongsTo(User, { foreignKey: 'idUser' });
 
+User.hasOne(Token, { sourceKey: 'id', foreignKey: 'id_user' });
+Patient.belongsTo(User, { foreignKey: 'id_user' });
+
+User.hasOne(Patient, { sourceKey: 'id', foreignKey: 'idUser' });
+Patient.belongsTo(User, { foreignKey: 'idUser' });
+
 User.hasMany(Appointment, { sourceKey: 'id', foreignKey: 'id_doctor' });
 Appointment.belongsTo(User, { foreignKey: 'id_doctor' });
 
 User.hasMany(Exam, { sourceKey: 'id', foreignKey: 'id_doctor' });
 Exam.belongsTo(User, { foreignKey: 'id_doctor' });
 
-module.exports = User;
+User.hasMany(Exercise, { sourceKey: 'id', foreignKey: 'id_nurse' });
+Exercise.belongsTo(User, { foreignKey: 'id_nurse' });
+
+User.hasMany(Diet, { sourceKey: 'id', foreignKey: 'id_doctor' });
+Diet.belongsTo(User, { foreignKey: 'id_doctor' });
+
+User.hasMany(Medication, { sourceKey: 'id', foreignKey: 'id_nurse' });
+Medication.belongsTo(User, { foreignKey: 'id_nurse' });
+
+module.exports = User; 

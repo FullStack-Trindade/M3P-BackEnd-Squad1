@@ -24,8 +24,8 @@ async function createExam(request, response) {
         where: {
             id_patient: exam.id_patient,
             nameExam: exam.nameExam,
-            dateExam: exam.dateExam
-
+            dateExam: exam.dateExam,
+            hourExam: exam.hourExam
         },
     });
 
