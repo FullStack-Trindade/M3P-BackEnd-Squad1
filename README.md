@@ -11,7 +11,7 @@ O objetivo desta aplicação é criar uma API Rest para:
 - Registrar atendimentos médicos, incluindo consultas e exames.
 - Registrar atendimentos de enfermeiros, incluindo dietas, exercícios e medicamentos.
 
-Este projeto é parte de uma colaboração com o Frontend (https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1), criando um sistema completo.
+Este projeto também possui um repositório [Frontend](https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1), criando um sistema completo.
 
 A aplicação foi desenvolvida como projeto de conclusão do Módulo 3 do Curso de Capacitação Dev FullStack oferecido pelo Lab365 / Senai - SC.
 
