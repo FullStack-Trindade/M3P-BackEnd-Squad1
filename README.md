@@ -1,4 +1,22 @@
-# MEDI TECH PRO
+<div align="center">
+<h1> MEDI TECH PRO</h1>
+
+<div align="center">
+
+![code](https://img.shields.io/badge/Code-JavaScript-F7DF1E.svg)
+[![made-with-react](https://img.shields.io/badge/Made%20with-React%20v18.2.0-087EA4.svg)](https://react.dev/)
+[![made-with-vite](https://img.shields.io/badge/Made%20with-Vite%204.4.5-747BFF.svg)](https://vitejs.dev/)
+[![made-with-styled-components](https://img.shields.io/badge/Made%20with-Styled%20Components%205.3.11-BF4F74.svg)](https://ant.design/)
+
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
+[![GitHub stars](https://img.shields.io/github/stars/FullStack-Trindade/M3P-BackEnd-Squad1.svg?style=social&label=Star&maxAge=2592000)](https://github.com/FullStack-Trindade/M3P-BackEnd-Squad1/watchers)
+[![GitHub watchers](https://img.shields.io/github/watchers/FullStack-Trindade/M3P-BackEnd-Squad1.svg?style=social&label=Watch&maxAge=2592000)](https://github.com/FullStack-Trindade/M3P-BackEnd-Squad1/watchers)
+[![GitHub forks](https://img.shields.io/github/forks/FullStack-Trindade/M3P-BackEnd-Squad1.svg?style=social&label=Fork&maxAge=2592000)](https://github.com/FullStack-Trindade/M3P-BackEnd-Squad1/forks)
+
+</div>
+
+</div>
 
 Este é um projeto Express para uma aplicação do sistema hospitalar MEDI TECH PRO, que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.
 
@@ -14,7 +32,6 @@ O objetivo desta aplicação é criar uma API Rest para:
 Este projeto também possui um repositório [Frontend](https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1), criando um sistema completo.
 
 A aplicação foi desenvolvida como projeto de conclusão do Módulo 3 do Curso de Capacitação Dev FullStack oferecido pelo Lab365 / Senai - SC.
-
 
 ## ⚙️ Funcionalidades
 
