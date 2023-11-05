@@ -1,7 +1,8 @@
-const connection = require("../database/index");
-const { Sequelize } = require("sequelize");
+const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
 
-const Medication = connection.define("medication", {
+const Medication = sequelize.define("medications", {
   id: {
     type: Sequelize.INTEGER,
     autoIncrement: true,
