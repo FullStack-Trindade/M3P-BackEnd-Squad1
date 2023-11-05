@@ -35,20 +35,16 @@ const options = {
 const swaggerSpec = swaggerJSDoc(options);
 
 //Autenticação
-const Login = require("./src/controllers/session/login");
 const authRoutes = require('./src/routes/auth');
-//const validateToken = require("./src/middlewares/validateToken");
-
-
 const loginRoute = require('./src/routes/login');
-//const authRoutes = require('./src/routes/auth');
+
+//Pacientes
 const patientRoutes = require("./src/routes/patient");
 
 // Medicamentos
-
 const medicationRoutes = require("./src/routes/medication");
 
-//Usuário
+//Usuários
 const userRoutes = require("./src/routes/user");
 
 //Exame
@@ -63,6 +59,8 @@ const appointmentRoutes = require("./src/routes/appointment");
 //Prontuários
 const patientRecordRoutes = require("./src/routes/patientRecord");
 
+//Dietas
+const dietRoutes = require("./src/routes/diet");
 
 const app = express();
 app.use(express.json());
@@ -82,19 +80,20 @@ app.use(loginRoute);
 //Auth
 app.use(authRoutes);
 
-//Paciente
+//Pacientes
 app.use(patientRoutes);
 
-// MEDICAMENTOS
+//Medicamentos
 app.use(medicationRoutes);
 
-//Usuário
+//Usuários
 app.use(userRoutes);
 
-//Exames
+
+//Exame
 app.use(examRoutes);
 
-//Exercicio
+//Exercicios
 app.use(exerciseRoutes);
 
 //Consultas
@@ -102,6 +101,9 @@ app.use(appointmentRoutes);
 
 //Prontuários
 app.use(patientRecordRoutes);
+
+//Dietas
+app.use(dietRoutes);
 
 const startServer = () => {
   app.listen(process.env.SERVER_PORT, () => {
