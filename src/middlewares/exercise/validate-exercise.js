@@ -21,7 +21,7 @@ const validation = yup.object().shape({
           "FLEXIBILIDADE",
           "FORÇA",
           "AGILIDADE",
-          "OUTRO",
+          "OUTROS",
         ],
         "Selecione um tipo de exercicio."
       ),

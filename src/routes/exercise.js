@@ -38,7 +38,7 @@ const exerciseRoutes = new Router();
  *                 type: string
  *               tipo:
  *                 type: string
- *                 enum: ["Resistência Aeróbica", "Resistência Muscular", "Flexibilidade", "Força", "Agilidade", "Outro"]
+ *                 enum: ["Resistência Aeróbica", "Resistência Muscular", "Flexibilidade", "Força", "Agilidade", "Outros"]
  *               quantidadePorSemana:
  *                 type: number
  *                 minimum: 0.01
@@ -81,7 +81,7 @@ const exerciseRoutes = new Router();
  *                 type: string
  *               tipo:
  *                 type: string
- *                 enum: ["Resistência Aeróbica", "Resistência Muscular", "Flexibilidade", "Força", "Agilidade", "Outro"]
+ *                 enum: ["Resistência Aeróbica", "Resistência Muscular", "Flexibilidade", "Força", "Agilidade", "Outros"]
  *               quantidadePorSemana:
  *                 type: number
  *                 minimum: 0.01
