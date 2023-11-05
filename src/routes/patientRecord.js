@@ -26,7 +26,7 @@ const patientRecordRoutes = new Router();
  */
 /**
  * @swagger
- * /api/prontuarios:
+ * /api/prontuarios/:id?name=name:
  *   get:
  *     tags:
  *       - Prontuários
