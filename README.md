@@ -126,7 +126,7 @@ src
 
 ## 🗃️ Diagrama de Classes
 
-![MEDITECHPRO](public/Diagrama de Classes M3.drawio.png)
+<img src="./public/Diagrama de Classes M3.drawio.png" alt="Medi Tech Pro">
 
 ## ✏️ Aprendizados da Equipe
 
