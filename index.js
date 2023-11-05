@@ -10,20 +10,34 @@ const swaggerUi = require('swagger-ui-express');
 const swaggerDefinition = {
   openapi: '3.0.0',
   info: {
-    title: 'Express API for JSONPlaceholder',
-    version: '1.0.0',
+    title: 'Sistema Hospitalar MEDI TECH PRO',
+    version: '1.5.0',
     description:
-      'This is a REST API application made with Express. It retrieves data from JSONPlaceholder.',
+      'Esta é uma API REST construída com o Express para um sistema hospitalar que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.',
     license: {
-      name: 'Licensed Under MIT',
+      name: 'MIT License',
       url: 'https://spdx.org/licenses/MIT.html',
     },
     contact: {
-      name: 'JSONPlaceholder',
-      url: 'https://jsonplaceholder.typicode.com',
+      name: 'LAB 365',
+      url: 'https://lab365.tech/',
     },
-  }
-
+  },
+  servers: [
+      {
+      url: 'http://localhost:3000',
+      description: 'Servidor de Desenvolvimento (local)',
+    },
+  ],
+  components: {
+    securitySchemes: {
+      BearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
 };
 
 const options = {
