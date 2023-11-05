@@ -91,6 +91,7 @@ Para o desenvolvimento deste projeto e realização de testes de API foi utiliza
 
 ## 🌲 Estrutura
 
+```
 public
 │ 
 src
@@ -120,6 +121,8 @@ src
 └───utils
     └───email
         └───template
+
+```
 
 ## 🗃️ Diagrama de Classes
 
