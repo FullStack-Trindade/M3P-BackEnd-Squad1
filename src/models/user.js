@@ -4,8 +4,9 @@ const Type = require('./type')
 
 const Patient = require('./patient');
 const Appointment = require('./appointment');
-const Exam = require('./exam');
 const Diet = require('./diet');
+const Exam = require('./exam');
+const Exercise = require('./exercise');
 const Medication = require('./medication');
 const Token = require('./token');
 
@@ -82,10 +83,13 @@ Appointment.belongsTo(User, { foreignKey: 'id_doctor' });
 User.hasMany(Exam, { sourceKey: 'id', foreignKey: 'id_doctor' });
 Exam.belongsTo(User, { foreignKey: 'id_doctor' });
 
+User.hasMany(Exercise, { sourceKey: 'id', foreignKey: 'id_nurse' });
+Exercise.belongsTo(User, { foreignKey: 'id_nurse' });
+
 User.hasMany(Diet, { sourceKey: 'id', foreignKey: 'id_doctor' });
 Diet.belongsTo(User, { foreignKey: 'id_doctor' });
 
-User.hasMany(Medication, { sourceKey: 'id', foreignKey: 'id_doctor' });
-Medication.belongsTo(User, { foreignKey: 'id_doctor' });
+User.hasMany(Medication, { sourceKey: 'id', foreignKey: 'id_nurse' });
+Medication.belongsTo(User, { foreignKey: 'id_nurse' });
 
 module.exports = User; 
