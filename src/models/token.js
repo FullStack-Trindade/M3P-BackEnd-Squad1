@@ -1,7 +1,8 @@
-const {Sequelize} = require('sequelize');
-const connection = require('../database')
+const { Sequelize } = require('sequelize');
+const connection = require('../config/database');
+const sequelize = new Sequelize(connection);
 
-const Token = connection.define('token', {
+const Token = sequelize.define('tokens', {
     id: {
         type: Sequelize.INTEGER,
         autoIncrement: true,
@@ -11,7 +12,7 @@ const Token = connection.define('token', {
         type: Sequelize.INTEGER,
         required: true,
         references: {
-            model: { tablename: 'users', key: 'id' }
+            model: { tableName: 'users', key: 'id' }
         }
     },
     token: {
