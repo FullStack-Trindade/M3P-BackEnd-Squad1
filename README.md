@@ -1,43 +1,46 @@
-
 # MEDI TECH PRO
 
-Este é um projeto Express para uma aplicação do sistema hospitalar MEDI TECH PRO. A aplicação gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.
-
+Este é um projeto Express para uma aplicação do sistema hospitalar MEDI TECH PRO, que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.
 
 ## 🎯 Contexto
 
- A MEDI TECH, empresa líder no segmento tecnológico para gestão hospitalar, foi selecionada em edital e recebeu um aporte financeiro para aprimorar seu produto principal, tornando-o capaz de ser utilizado em postos de saúde e clínicas particulares por todo o país.
- 
- O objetivo desta aplicação é a criação de uma API Rest:
- - Faça registros e manutenção dos cadastros de médicos, enfermeiros e pacientes.
- - Faça os registros de atendimentos dos médicos, contendo informações sobre consultas e exames.
- - Faça o registro de atendimentos dos enfermeiro, contendo informações sobre dietas, exercícios e medicamentos.
+A MEDI TECH, líder no setor de tecnologia para gestão hospitalar, recebeu um aporte financeiro para aprimorar seu principal produto, tornando-o disponível em postos de saúde e clínicas particulares em todo o país.
 
- Esse projeto foi realizado em conjunto com o Frontend (https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1), simulando um produto completo.
+O objetivo desta aplicação é criar uma API Rest para:
+- Registrar e gerenciar médicos, enfermeiros e pacientes.
+- Registrar atendimentos médicos, incluindo consultas e exames.
+- Registrar atendimentos de enfermeiros, incluindo dietas, exercícios e medicamentos.
 
- Essa aplicação foi criada como projeto de conclusão do Módulo 3 Curso de Capacitação Dev FullStack oferecido pelo Lab365 / Senai - SC.
+Este projeto é parte de uma colaboração com o Frontend (https://github.com/FullStack-Trindade/M3P-FrontEnd-Squad1), criando um sistema completo.
+
+A aplicação foi desenvolvida como projeto de conclusão do Módulo 3 do Curso de Capacitação Dev FullStack oferecido pelo Lab365 / Senai - SC.
+
 
 ## ⚙️ Funcionalidades
 
-As APIs disponibilizam informações a respeito de:
+A API oferece informações sobre:
 
-- Autenticação de Usuário
-- Usuários
-- Pacientes
-- Consultas
-- Exames
-- Prontuários
-- Exercícios
-- Dietas
-- Medicamentos
+- Autenticação de Usuário.
+- Usuários.
+- Pacientes.
+- Consultas.
+- Exames.
+- Prontuários.
+- Exercícios.
+- Dietas.
+- Medicamentos.
 
-Para mais detalhes, consulte a sessão "Documentação da API" deste documento.
+Para mais detalhes, consulte a seção "Documentação da API" deste documento.
 
 ## 🛠️ Tecnologias
+
+Principais tecnologias
 
 - [Ecma Script/ Java Script](https://www.ecma-international.org)
 - [NodeJs](https://nodejs.org)
 - [Postgrees](https://www.postgresql.org)
+
+Bibliotecas de Node.js:
 
 - [Corsjs](https://www.npmjs.com/package/bcrypt) - Biblioteca para hashing de senhas.
 - [Corsjs](https://www.npmjs.com/package/cors)-Middleware para habilitar o suporte a CORS.
@@ -50,13 +53,13 @@ Para mais detalhes, consulte a sessão "Documentação da API" deste documento.
 - [Swagger - UI Express](https://swagger.io)-  Interface de usuário Swagger para Express.
 - [Yup](https://www.npmjs.com/package/yup) - Biblioteca para validação de esquemas. 
 
-** Variáveis de Ambiente
+**Variáveis de Ambiente:**
 
-Para rodar esse projeto, você deve renomear o arquivo ".env.example" para ".env" e alterar as variáveis antes de rodar localmente.
+Para executar o projeto, renomeie o arquivo `.env.example` para `.env` e configure as variáveis conforme necessário.
 
 ## 💻 Rodando localmente
 
-Com o node.js(v16) instalado. Siga os passos abaixo:
+Certifique-se de ter o Node.js (v16) instalado. Siga as etapas abaixo:
 
 Clone o projeto
 
@@ -81,13 +84,13 @@ Inicie o servidor
 ```bash
   npm start
 ```
-Pronto! Agora verifique no seu terminal se a mensagem "Conexão com banco de dados bem sucedida" e "Servidor rodando na porta <SUA_PORTA>" está aparecendo.
+Verifique se o servidor está rodando em http://localhost:<SUA_PORTA>.
 
 ## 🗂️ Documentação da API
 
 A documentação completa dos endpoints da API está disponível no Swagger. Acesse http://localhost:<SUA_PORTA>/docs para explorar a documentação interativa.
 
-Para o desenvolvimento deste projeto e realização de testes de API foi utilizado o [Insomnia](https://insomnia.rest/download).
+Para o desenvolvimento e teste da API, utilizamos Insomnia.
 
 ## 🌲 Estrutura
 
@@ -125,6 +128,8 @@ src
 ```
 
 ## 🗃️ Diagrama de Classes
+
+Abaixo segue o diagrama de classes e o relacionamento entre as tabelas criadas neste projeto.
 
 <img src="./public/Diagrama de Classes M3.drawio.png" alt="Medi Tech Pro">
 
