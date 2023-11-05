@@ -22,7 +22,7 @@ const validation = yup.object().shape({
     // )
     .required("CPF é obrigatório.")
     .min(11, "O CPF deve conter ao menos 11 caracteres")
-    .max(11, "O CPF deve conter no máximo 11 caracteres"),
+    .max(14, "O CPF deve conter no máximo 14 caracteres"),
   phone: yup
     .string("Telefone deve ser uma string")
     .matches(
