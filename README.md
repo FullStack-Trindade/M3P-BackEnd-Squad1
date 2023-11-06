@@ -1,5 +1,5 @@
 <div align="center">
-<h1> MEDI TECH PRO</h1>
+<h1> SYSTEM CARE</h1>
 
 <div align="center">
 
@@ -18,11 +18,11 @@
 
 </div>
 
-Este é um projeto Express para uma aplicação do sistema hospitalar MEDI TECH PRO, que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.
+Este é um projeto Express para uma aplicação do sistema hospitalar SYSTEM CARE, que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.
 
 ## 🎯 Contexto
 
-A MEDI TECH, líder no setor de tecnologia para gestão hospitalar, recebeu um aporte financeiro para aprimorar seu principal produto, tornando-o disponível em postos de saúde e clínicas particulares em todo o país.
+A SYSTEM CARE, líder no setor de tecnologia para gestão hospitalar, recebeu um aporte financeiro para aprimorar seu principal produto, tornando-o disponível em postos de saúde e clínicas particulares em todo o país.
 
 O objetivo desta aplicação é criar uma API Rest para:
 - Registrar e gerenciar médicos, enfermeiros e pacientes.
@@ -148,7 +148,7 @@ src
 
 Abaixo segue o diagrama de classes e o relacionamento entre as tabelas criadas neste projeto.
 
-<img src="./public/Diagrama de Classes M3.drawio.png" alt="Medi Tech Pro">
+<img src="./public/Diagrama de Classes M3.drawio.png" alt="SYSTEM CARE">
 
 ## ✏️ Aprendizados da Equipe
 
