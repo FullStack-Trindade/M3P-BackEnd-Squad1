@@ -24,7 +24,7 @@ async function searchUserByCpf(request, response) {
       }
 
       if (!userExists) {
-        response.status(200).json(null);
+        response.status(400).json(null);
       } else {
         response.status(200).json(userExists);
       }
