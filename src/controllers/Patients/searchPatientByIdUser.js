@@ -19,5 +19,4 @@ async function searchPatientByIdUser(request, response) {
       .json({ message: "Erro 500 - Verifique sua solicitação" });
   }
 }
-
 module.exports = searchPatientByIdUser;
