@@ -4,19 +4,68 @@ const cors = require("cors");
 
 const connection = require("./src/database/index");
 
-//Autenticação
-//const validateToken = require("./src/middlewares/validateToken");
+const swaggerJSDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
 
-const loginRoute = require('./src/routes/login');
+const swaggerDefinition = {
+  openapi: '3.0.0',
+  info: {
+    title: 'Sistema Hospitalar MEDI TECH PRO',
+    version: '1.5.0',
+    description:
+      'Esta é uma API REST construída com o Express para um sistema hospitalar que gerencia o cadastro de pacientes, médicos, enfermeiros e o registro de consultas, exames, dietas, exercícios e medicamentos.',
+    license: {
+      name: 'MIT License',
+      url: 'https://spdx.org/licenses/MIT.html',
+    },
+    contact: {
+      name: 'LAB 365',
+      url: 'https://lab365.tech/',
+    },
+  },
+  servers: [
+      {
+      url: 'http://localhost:3000',
+      description: 'Servidor de Desenvolvimento (local)',
+    },
+  ],
+  components: {
+    securitySchemes: {
+      BearerAuth: {
+        type: 'http',
+        scheme: 'bearer',
+        bearerFormat: 'JWT',
+      },
+    },
+  },
+};
+
+const options = {
+  swaggerDefinition,
+  apis: ['./src/routes/*.js'],
+};
+
+const swaggerSpec = swaggerJSDoc(options);
+
+//Autenticação
 const authRoutes = require('./src/routes/auth');
+const passwordRoutes = require("./src/routes/password");
+const loginRoute = require('./src/routes/login');
+
+//Pacientes
 const patientRoutes = require("./src/routes/patient");
+
+// Medicamentos
+const medicationRoutes = require("./src/routes/medication");
+
+//Usuários
 const userRoutes = require("./src/routes/user");
 
-//Exame
-const createExam = require("./src/controllers/exams/createExams");
-const readExam = require("./src/controllers/exams/readExams");
-const updateExam = require("./src/controllers/exams/updateExams");
-const deleteExam = require("./src/controllers/exams/deleteExams");
+//Exames
+const examRoutes = require("./src/routes/exam");
+
+//Exercicio
+const exerciseRoutes = require("./src/routes/exercise");
 
 //Consultas
 const appointmentRoutes = require("./src/routes/appointment");
@@ -24,8 +73,8 @@ const appointmentRoutes = require("./src/routes/appointment");
 //Prontuários
 const patientRecordRoutes = require("./src/routes/patientRecord");
 
-const validateExam = require("./src/middlewares/validate-exams.request");
-const validateExamUpdate = require("./src/middlewares/validate-examsUpdate");
+//Dietas
+const dietRoutes = require("./src/routes/diet");
 
 const app = express();
 app.use(express.json());
@@ -37,29 +86,40 @@ app.use(
   })
 );
 
+app.use('/docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 //Login
 app.use(loginRoute);
 
 //Auth
 app.use(authRoutes);
 
-//Paciente
+//Senha
+app.use(passwordRoutes);
+
+//Pacientes
 app.use(patientRoutes);
 
-//Usuário
+//Medicamentos
+app.use(medicationRoutes);
+
+//Usuários
 app.use(userRoutes);
 
 //Exame
-app.post("/api/exames", validateExam, createExam);
-app.put("/api/exames/:id", validateExamUpdate, updateExam);
-app.get("/api/exames", readExam);
-app.delete("/api/exames/:id", deleteExam);
+app.use(examRoutes);
+
+//Exercicios
+app.use(exerciseRoutes);
 
 //Consultas
 app.use(appointmentRoutes);
 
 //Prontuários
 app.use(patientRecordRoutes);
+
+//Dietas
+app.use(dietRoutes);
 
 const startServer = () => {
   app.listen(process.env.SERVER_PORT, () => {

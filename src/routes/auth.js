@@ -10,6 +10,7 @@ const deleteAuth = require('../controllers/auth/deleteAuth');
 // ROUTES
 const authRoutes = new Router();
 
+
 authRoutes
     .post('/api/auth', createAuth)
     .get('/api/auth', getAuth)

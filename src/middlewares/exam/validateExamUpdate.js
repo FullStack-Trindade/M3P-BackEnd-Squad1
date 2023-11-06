@@ -34,7 +34,7 @@ const validation = yup.object().shape({
     .required("O campo resultado do exame é obrigatório"),
 });
 
-function validateExam(request, response, next) {
+function validateExamUpdate(request, response, next) {
   try {
     validation.validateSync(request.body);
     next();
@@ -43,4 +43,4 @@ function validateExam(request, response, next) {
   }
 }
 
-module.exports = validateExam;
+module.exports = validateExamUpdate;
