@@ -58,9 +58,8 @@ const validation = yup.object().shape({
   healthInsurance: yup.string(),
   insuranceNumber: yup.string(),
   insuranceVality: yup
-    .date()
-    .min(new Date(), "Validade do seguro de saúde deve ser válida"),
-  adress: enderecoSchema,
+    .string(),
+   adress: enderecoSchema,
 });
 
 function validatePatientRequest(request, response, next) {

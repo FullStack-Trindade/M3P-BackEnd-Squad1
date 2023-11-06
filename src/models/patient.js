@@ -68,7 +68,7 @@ const Patient = connection.define("patient", {
   },
   insuranceVality: {
     type: Sequelize.STRING,
-    allowNull: false,
+    allowNull: true
   },
   adress: {
     type: Sequelize.INTEGER,
