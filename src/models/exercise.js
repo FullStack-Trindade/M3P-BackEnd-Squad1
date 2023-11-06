@@ -34,7 +34,7 @@ const Exercise = connection.define('exercise',{
         allowNull: false,
     },
     typeExercise:{
-        type:Sequelize.ENUM("RESISTÊNCIA AERÓBICA","RESISTÊNCIA MUSCULAR", "FEXIBILIDADE", "FORÇA", "AGILIDADE", "OUTROS"),
+        type:Sequelize.ENUM("RESISTÊNCIA AERÓBICA","RESISTÊNCIA MUSCULAR", "FLEXIBILIDADE", "FORÇA", "AGILIDADE", "OUTROS"),
         allowNull: false,
     },
     amountWeek: {
