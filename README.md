@@ -155,8 +155,10 @@ Abaixo segue o diagrama de classes e o relacionamento entre as tabelas criadas n
 - Criação de API Rest utilizando Express.JS;
 - Exploração Banco de Dados Relacional Postgree, utilizando Sequelize;
 - Lidar com reras de negócios complexas;
-- Integração com Frontend;
-- Trabalho em equipe e gitflow;
+- Trabalhar em chamadas pensando no Frontend;
+- Trabalho em equipe
+- Gitflow
+- Desenvolvimento Ágil de Aplicativo
 
 ## 🚀 Melhorias Futuras
 
